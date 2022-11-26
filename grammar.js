@@ -14,9 +14,9 @@ module.exports = grammar({
 
     rules: {
 
-	/////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
 	// Main building blocks: manuscript, block, paragraph, inline
-	/////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
 	source_file: $ => seq(
 	    field('tag', alias(':manuscript:', $.manuscript)),
 	    field('meta', optional($.blockmeta)),
@@ -54,10 +54,17 @@ module.exports = grammar({
                 prec(0, $.text))),
 	    '::')),
 
-	/////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
 	// Special blocks and inlines
-	/////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	// Special blocks/inlines look just like normal blocks/inlines except that they
+	// have some special parsing rule.  For example, $foo$ has the same meaning as
+	// :math:foo::.
+
 	specialblock: $ => choice(
+
+	    // Sections have a special opening using hashtags, but their content is
+	    // parsed just like any other block's.
 	    seq(
 		field('tag', alias(/# /, $.section)),
 		field('title', $.text),
@@ -85,6 +92,10 @@ module.exports = grammar({
 		    prec(1, $.block),
 		    prec(0, $.paragraph))),
 		'::'),
+
+	    // Math and code blocks have special open and close delimiters ($$) and
+	    // (```) respesctively AND their content is taken as-is, i.e. they do not
+	    // support recursive parsing.
 	    seq(field('tag', alias(token(/\$\$/), $.mathblock)),
 		field('meta', optional($.blockmeta)),
 		alias($.asis_two_dollars_text, $.asis_text),
@@ -101,12 +112,17 @@ module.exports = grammar({
 		field('meta', optional($.blockmeta)),
 		alias($.asis_halmos_text, $.asis_text),
 		'::'),
+
+	    // Algorithms have standard open and close delimiters and have as-is
+	    // (i.e. not recursive) content.
 	    seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
 		field('meta', optional($.blockmeta)),
 		alias($.asis_halmos_text, $.asis_text),
 		'::')),
 
 	specialinline: $ => choice(
+	    // Math and code inlines have special open and close delimimters ($) and (`)
+	    // respectively AND as-is content.
 	    seq(field('tag', alias(token(/\$/), $.math)),
 		field('meta', optional($.inlinemeta)),
 		alias($.asis_dollar_text, $.asis_text),
@@ -123,6 +139,9 @@ module.exports = grammar({
 		field('meta', optional($.inlinemeta)),
 		alias($.asis_halmos_text, $.asis_text),
 		'::'),
+
+	    // Special spans have special open and close delimiters and support
+	    // recursive parsing.  Note *foo* is equivalent to :span:{:strong:}foo::.
 	    prec.right(
 		seq(field('tag', alias(token(/\*/), $.spanstrong)),
 		    repeat(choice(
@@ -136,7 +155,22 @@ module.exports = grammar({
 			prec(2, $.specialinline),
 			prec(1, $.inline),
 			prec(0, $.text))),
-		    token('/')))
+		    token('/'))),
+
+	    // References, citations, and URLs have standard delimiters but their
+	    // content is parsed in a special way.
+	    seq(field('tag', alias(token(':ref:'), $.ref)),
+		field('target', alias(token(/[^,:]+/), $.text)),
+		optional(seq(',', field('reftext', $.text))),
+		'::'),
+	    // seq(field('tag', alias(token(':url:'), $.url)),
+	    // 	field('target', ???),
+	    // 	optional(seq(',', field('reftext', $.text))),
+	    // 	'::'),
+	    // seq(field('tag', alias(token(':cite:'), $.cite)),
+	    // 	field('target', ???),
+	    // 	optional(seq(',', field('reftext', $.text))),
+	    // 	'::')),
 	),
 
 	/////////////////////////////////////////////////////////////

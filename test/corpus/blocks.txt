@@ -1539,3 +1539,157 @@ Bo*ld*.
       tag: (spanstrong)
       (text))
     (text)))
+
+
+================================================================================
+Reference
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref:lbl::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Reference with space
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref: lbl ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Reference with reftext
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref:lbl,the section::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text))
+    (text)))
+
+
+================================================================================
+Reference with reftext with space
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref: lbl , the section ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text))
+    (text)))

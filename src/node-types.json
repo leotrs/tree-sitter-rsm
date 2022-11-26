@@ -583,6 +583,16 @@
           }
         ]
       },
+      "reftext": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      },
       "tag": {
         "multiple": false,
         "required": true,
@@ -596,11 +606,25 @@
             "named": true
           },
           {
+            "type": "ref",
+            "named": true
+          },
+          {
             "type": "spanemphas",
             "named": true
           },
           {
             "type": "spanstrong",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "text",
             "named": true
           }
         ]
@@ -755,6 +779,10 @@
   },
   {
     "type": "proposition",
+    "named": true
+  },
+  {
+    "type": "ref",
     "named": true
   },
   {

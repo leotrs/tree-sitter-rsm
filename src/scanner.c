@@ -94,8 +94,13 @@ void tree_sitter_RSM_external_scanner_deserialize(void *p, const char *buffer, u
   state->num_tokens_found_without_consuming_chars = count;
 }
 
+void debug_log(const char *msg) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+  printf("--> %s\n", msg);
+}
+
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
-  printf("--> trying PARAGRAPH_END\n");
+  debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n") or in the Halmos of the enclosing
   // block "::".  In the latter case, make sure to use makr_end() so we do not consume
   // the Halmos (it will be consumed by the enclosing block).
@@ -103,10 +108,10 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     lexer->advance(lexer, false);
     if (lexer->lookahead == '\n') {
 	lexer->result_symbol = PARAGRAPH_END;
-	printf("--> SUCCESS\n");
+	debug_log("SUCCESS");
 	return true;
     } else {
-      printf("--> FAILURE\n");
+      debug_log("FAILURE");
       return false;
     }
   }
@@ -117,14 +122,14 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
       lexer->result_symbol = PARAGRAPH_END;
       struct ScannerState *state = (struct ScannerState *)payload;
       state->num_tokens_found_without_consuming_chars++;
-      printf("--> SUCCESS\n");
+      debug_log("SUCCESS");
       return true;
     } else {
-      printf("--> FAILURE\n");
+      debug_log("FAILURE");
       return false;
     }
   }
-  printf("--> FAILURE\n");
+  debug_log("FAILURE");
   return false;
 }
 
@@ -135,34 +140,34 @@ void skip_whitespace(TSLexer *lexer) {
 }
 
 bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
-    printf("--> trying TEXT\n");
-    skip_whitespace(lexer);
+  debug_log("trying TEXT");
+  skip_whitespace(lexer);
 
-    int count = 0;
-    while (lexer->lookahead != ':'     // cannot start at delimiter
-	   && lexer->lookahead != '\n' // cannot start at newline
-	   && lexer->lookahead != '$'  // math region
-	   && lexer->lookahead != '`'  // code region
-	   && lexer->lookahead != '*'  // strong region
-	   && lexer->lookahead != '/'  // emphas region
-	   && lexer->lookahead != '\0' // EOF
-	   && lexer->lookahead != '#'  // section header
-	   ) {
-      count++;
-      lexer->advance(lexer, false);
-    }
-    if (count > 0) {
-      lexer->result_symbol = TEXT;
-      printf("--> SUCCESS\n");
-      return true;
-    } else {
-      printf("--> FAILURE\n");
-      return false;
-    }
+  int count = 0;
+  while (lexer->lookahead != ':'     // cannot start at delimiter
+	 && lexer->lookahead != '\n' // cannot start at newline
+	 && lexer->lookahead != '$'  // math region
+	 && lexer->lookahead != '`'  // code region
+	 && lexer->lookahead != '*'  // strong region
+	 && lexer->lookahead != '/'  // emphas region
+	 && lexer->lookahead != '\0' // EOF
+	 && lexer->lookahead != '#'  // section header
+	  ) {
+     count++;
+     lexer->advance(lexer, false);
+   }
+   if (count > 0) {
+     lexer->result_symbol = TEXT;
+     debug_log("SUCCESS");
+     return true;
+   } else {
+     debug_log("FAILURE");
+     return false;
+   }
 }
 
 bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
-  printf("--> trying ASIS_TEXT\n");
+  debug_log("trying ASIS_TEXT\n");
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
   // their block forms :mathblock: and :codeblock:.  It cannot start with an open brace
@@ -186,10 +191,10 @@ bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
 bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '$')) {
     lexer->result_symbol = ASIS_DOLLAR_TEXT;
-    printf("--> SUCCESS\n");
+    debug_log("SUCCESS");
     return true;
   } else {
-    printf("--> FAILURE\n");
+    debug_log("FAILURE");
     return false;
   }
 }
@@ -197,10 +202,10 @@ bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
 bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '`')) {
     lexer->result_symbol = ASIS_BACKTICK_TEXT;
-    printf("--> SUCCESS\n");
+    debug_log("SUCCESS");
     return true;
   } else {
-    printf("--> FAILURE\n");
+    debug_log("FAILURE");
     return false;
   }
 }
@@ -224,7 +229,7 @@ bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
       if (lexer->lookahead == ':') {
 	count++;
 	lexer->advance(lexer, false);
-	printf("--> SUCCESS\n");
+	debug_log("SUCCESS");
 	lexer->result_symbol = ASIS_HALMOS_TEXT;
 	return true;
       }
@@ -232,7 +237,7 @@ bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
     count++;
     lexer->advance(lexer, false);
   }
-  printf("--> FAILURE\n");
+  debug_log("FAILURE");
   return false;
 }
 
@@ -255,7 +260,7 @@ bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
       if (lexer->lookahead == '$') {
 	count++;
 	lexer->advance(lexer, false);
-	printf("--> SUCCESS\n");
+	debug_log("SUCCESS");
 	lexer->result_symbol = ASIS_TWO_DOLLARS_TEXT;
 	return true;
       }
@@ -263,7 +268,7 @@ bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
     count++;
     lexer->advance(lexer, false);
   }
-  printf("--> FAILURE\n");
+  debug_log("FAILURE");
   return false;
 }
 
@@ -287,7 +292,7 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
 	count++;
 	lexer->advance(lexer, false);
 	if (lexer->lookahead == '`') {
-	  printf("--> SUCCESS\n");
+	  debug_log("SUCCESS");
 	  lexer->result_symbol = ASIS_THREE_BACKTICKS_TEXT;
 	  return true;
 	}
@@ -296,11 +301,13 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
     count++;
     lexer->advance(lexer, false);
   }
-  printf("--> FAILURE\n");
+  debug_log("FAILURE");
   return false;
 }
 
 void show_beginning_debug_message(const bool *valid_symbols) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+
   printf("--> external scanner looking for: ");
   if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
     printf("UPTO_BRACE_OR_COMMA_TEXT ");
@@ -330,6 +337,7 @@ void show_beginning_debug_message(const bool *valid_symbols) {
 }
 
 void show_lookahead(TSLexer *lexer) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
   if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
     printf("--> lookahead: '%c'\n", lexer->lookahead);
   } else {
@@ -381,16 +389,16 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (valid_symbols[TEXT]) {
     scan_arbitrary_text(payload, lexer);
   } else if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    printf("--> trying UPTO_BRACE_OR_COMMA_TEXT\n");
+    debug_log("trying UPTO_BRACE_OR_COMMA_TEXT");
     while (lexer->lookahead != ':' && lexer->lookahead != '\n' && lexer->lookahead != '}' && lexer->lookahead != ',' && lexer->lookahead != '\0') {
       lexer->advance(lexer, false);
     }
     if (lexer->lookahead == ',' || lexer->lookahead == '}') {
       lexer->result_symbol = UPTO_BRACE_OR_COMMA_TEXT;
-      printf("--> SUCCESS\n");
+      debug_log("SUCCESS");
       return true;
     } else {
-      printf("--> FAILURE\n");
+      debug_log("FAILURE");
       return false;
     }
   }
