@@ -102,14 +102,14 @@ void debug_log(const char *msg) {
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n") or in the Halmos of the enclosing
-  // block "::".  In the latter case, make sure to use makr_end() so we do not consume
-  // the Halmos (it will be consumed by the enclosing block).
+  // block ("::").  In the latter case, make sure to use mark_end() to not consume the
+  // Halmos, as it will be consumed by the enclosing block.
   if (lexer->lookahead == '\n') {
     lexer->advance(lexer, false);
     if (lexer->lookahead == '\n') {
-	lexer->result_symbol = PARAGRAPH_END;
-	debug_log("SUCCESS");
-	return true;
+      lexer->result_symbol = PARAGRAPH_END;
+      debug_log("SUCCESS");
+      return true;
     } else {
       debug_log("FAILURE");
       return false;
@@ -152,18 +152,18 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	 && lexer->lookahead != '/'  // emphas region
 	 && lexer->lookahead != '\0' // EOF
 	 && lexer->lookahead != '#'  // section header
-	  ) {
-     count++;
-     lexer->advance(lexer, false);
-   }
-   if (count > 0) {
-     lexer->result_symbol = TEXT;
-     debug_log("SUCCESS");
-     return true;
-   } else {
-     debug_log("FAILURE");
-     return false;
-   }
+	 ) {
+    count++;
+    lexer->advance(lexer, false);
+  }
+  if (count > 0) {
+    lexer->result_symbol = TEXT;
+    debug_log("SUCCESS");
+    return true;
+  } else {
+    debug_log("FAILURE");
+    return false;
+  }
 }
 
 bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
