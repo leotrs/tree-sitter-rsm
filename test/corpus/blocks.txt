@@ -925,11 +925,11 @@ Enumerate
     tag: (blocktag
       (enumerate))
     (paragraph
-      tag: (item)
-      (text))
+      (item
+        (text)))
     (paragraph
-      tag: (item)
-      (text))))
+      (item
+        (text)))))
 
 
 ================================================================================
@@ -952,8 +952,8 @@ Enumerate no space before Halmos
     tag: (blocktag
       (enumerate))
     (paragraph
-      tag: (item)
-      (text))))
+      (item
+        (text)))))
 
 
 ================================================================================
@@ -980,23 +980,23 @@ Enumerate items with label
     tag: (blocktag
       (enumerate))
     (paragraph
-      tag: (item)
-      meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
-      (text))
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))
     (paragraph
-      tag: (item)
-      meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
-      (text))))
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))))
 
 
 ================================================================================
@@ -1693,3 +1693,155 @@ Reference with reftext with space
       target: (text)
       reftext: (text))
     (text)))
+
+
+================================================================================
+Table
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+
+  :tr: :td:foo:: :td:bar:: ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (tr
+          (td
+            (text))
+          (td
+            (text)))))))
+
+
+================================================================================
+Table with header
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+  :tbody:
+    :tr: :td:foo:: :td:bar:: ::
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (tr
+          (td
+            (text))
+          (td
+            (text))))
+      body: (tbody
+        (tr
+          (td
+            (text))
+          (td
+            (text)))
+        (tr
+          (td
+            (text))
+          (td
+            (text)))))))
+
+
+================================================================================
+Table with math in header
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+
+    :tr: :td: $X$ :: :td: $Y$ :: :td: $Z$ :: ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (tr
+          (td
+            (specialinline
+              tag: (math)
+              (asis_text)))
+          (td
+            (specialinline
+              tag: (math)
+              (asis_text)))
+          (td
+            (specialinline
+              tag: (math)
+              (asis_text))))))))
+
+
+================================================================================
+Table with caption
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+  :caption: This is a caption.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (tr
+          (td
+            (text))
+          (td
+            (text))))
+      caption: (caption
+        (text)))))

@@ -40,7 +40,7 @@ bool looking_for_paragraph_end_only(const bool *valid_symbols) {
     if (i == PARAGRAPH_END) {
       result = result && valid_symbols[i];
     } else {
-    result = result && !valid_symbols[i];
+      result = result && !valid_symbols[i];
     }
   }
   return result;
@@ -61,15 +61,15 @@ bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
 }
 
 struct ScannerState {
-    uint32_t num_tokens_found_without_consuming_chars;
+  uint32_t num_tokens_found_without_consuming_chars;
 };
 
 void *tree_sitter_RSM_external_scanner_create() {
-    return calloc(0, sizeof(struct ScannerState));
+  return calloc(0, sizeof(struct ScannerState));
 }
 
 void tree_sitter_RSM_external_scanner_destroy(void *p) {
-    free(p);
+  free(p);
 }
 
 unsigned tree_sitter_RSM_external_scanner_serialize(void *p, char *buffer) {

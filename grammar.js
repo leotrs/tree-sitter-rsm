@@ -33,17 +33,15 @@ module.exports = grammar({
 	    '::')),
 
 	paragraph: $ => choice(
-	    seq(
-		field('tag', alias(':item:', $.item)),
-		optional(field('meta', $.inlinemeta)),
-		repeat1(choice($.specialinline, $.inline, $.text)),
-		alias($.paragraph_end, 'paragraph_end')),
+	    $.item,
+	    $.caption,
 	    seq(
 		optional(seq(
 		    field('tag', ':paragraph:'),
 		    field('meta', $.inlinemeta))),
 		repeat1(choice($.specialinline, $.inline, $.text)),
-		alias($.paragraph_end, 'paragraph_end'))),
+		alias($.paragraph_end, 'paragraph_end')
+	    )),
 
 	inline: $ => prec(0, seq(
 	    field('tag', $.inlinetag),
@@ -55,13 +53,14 @@ module.exports = grammar({
 	    '::')),
 
 	////////////////////////////////////////////////////////////////////////
-	// Special blocks and inlines
+	// Special blocks, paragraphs, and inlines
 	////////////////////////////////////////////////////////////////////////
 	// Special blocks/inlines look just like normal blocks/inlines except that they
 	// have some special parsing rule.  For example, $foo$ has the same meaning as
 	// :math:foo::.
 
 	specialblock: $ => choice(
+	    $.table,
 
 	    // Sections have a special opening using hashtags, but their content is
 	    // parsed just like any other block's.
@@ -119,6 +118,21 @@ module.exports = grammar({
 		field('meta', optional($.blockmeta)),
 		alias($.asis_halmos_text, $.asis_text),
 		'::')),
+
+	// Special paragraphs are not grouped inside a single $.specialparagraph rule
+	// because they can only appear in certain places, and each is referred to
+	// individually as $.caption and $.item and never collectively.
+	caption: $ => seq(
+	    token(':caption:'),
+	    optional(field('meta', $.inlinemeta)),
+	    repeat1(choice($.specialinline, $.inline, $.text)),
+	    alias($.paragraph_end, 'paragraph_end')),
+
+	item: $ => seq(
+	    token(':item:'),
+	    optional(field('meta', $.inlinemeta)),
+	    repeat1(choice($.specialinline, $.inline, $.text)),
+	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
 	    // Math and code inlines have special open and close delimimters ($) and (`)
@@ -223,11 +237,38 @@ module.exports = grammar({
                     '}')))),
 
 	/////////////////////////////////////////////////////////////
+	// Tables
+	/////////////////////////////////////////////////////////////
+	table: $ => seq(
+	    ':table:',
+	    field('head', optional($.thead)),
+	    field('body', optional($.tbody)),
+	    field('caption', optional($.caption)),
+	    '::'),
+
+	thead: $ => seq(':thead:', repeat1($.tr), '::'),
+
+	tbody: $ => seq(':tbody:', repeat1($.tr), '::'),
+
+	tr: $ => seq(':tr:', repeat1($.td), '::'),
+
+	td: $ => seq(
+	    field('tag', token(':td:')),
+	    field('meta', optional($.inlinemeta)),
+	    repeat(choice(
+		prec(2, $.specialinline),
+                prec(1, $.inline),
+                prec(0, $.text))),
+	    '::'),
+
+	/////////////////////////////////////////////////////////////
 	// Tag choices
 	/////////////////////////////////////////////////////////////
 	inlinetag: $ => choice(
 	    alias(':span:', $.span),
 	    alias(':claim:', $.claim),
+	    // alias(':tr:', $.tr),
+	    // alias(':td:', $.td),
 	),
 
 	blocktag: $ => choice(
@@ -246,6 +287,9 @@ module.exports = grammar({
 	    alias(':subsubsection:', $.subsubsection),
 	    alias(':subsubsubsection:', $.subsubsubsection),
 	    alias(':step:', $.step),
+	    // alias(':table:', $.table),
+	    // alias(':tbody:', $.tbody),
+	    // alias(':thead:', $.thead),
 	    alias(':theorem:', $.theorem),
 	),
 
