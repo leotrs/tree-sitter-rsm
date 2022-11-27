@@ -1442,8 +1442,13 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "upto_brace_or_comma_text"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "upto_brace_or_comma_text"
+                    },
+                    "named": true,
+                    "value": "metavalue_list_item"
                   },
                   {
                     "type": "STRING",
@@ -1453,8 +1458,13 @@
               }
             },
             {
-              "type": "SYMBOL",
-              "name": "upto_brace_or_comma_text"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "upto_brace_or_comma_text"
+              },
+              "named": true,
+              "value": "metavalue_list_item"
             },
             {
               "type": "STRING",
@@ -1463,8 +1473,13 @@
           ]
         },
         {
-          "type": "PATTERN",
-          "value": "[^\\S\\r\\n]*[^:{\\s]+\\n"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "text"
+          },
+          "named": true,
+          "value": "metavalue_list_item"
         }
       ]
     },

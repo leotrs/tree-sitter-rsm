@@ -221,10 +221,10 @@ module.exports = grammar({
 
         metavalue_list: $ => choice(
 	    seq('{',
-                repeat1(seq($.upto_brace_or_comma_text, ',')),
-                $.upto_brace_or_comma_text,
+                repeat1(seq(alias($.upto_brace_or_comma_text, $.metavalue_list_item), ',')),
+                alias($.upto_brace_or_comma_text, $.metavalue_list_item),
                 '}'),
-	    (/[^\S\r\n]*[^:{\s]+\n/)
+	    alias($.text, $.metavalue_list_item)
         ),
 
 	metavalue_list_inline: $ => seq(

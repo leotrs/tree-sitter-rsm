@@ -428,10 +428,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "upto_brace_or_comma_text",
+          "type": "metavalue_list_item",
           "named": true
         }
       ]
@@ -985,6 +985,10 @@
   },
   {
     "type": "mathblock",
+    "named": true
+  },
+  {
+    "type": "metavalue_list_item",
     "named": true
   },
   {
