@@ -13,7 +13,7 @@ module.exports = grammar({
     ],
 
     rules: {
-
+	
 	////////////////////////////////////////////////////////////////////////
 	// Main building blocks: manuscript, block, paragraph, inline
 	////////////////////////////////////////////////////////////////////////
@@ -40,8 +40,7 @@ module.exports = grammar({
 		    field('tag', ':paragraph:'),
 		    field('meta', $.inlinemeta))),
 		repeat1(choice($.specialinline, $.inline, $.text)),
-		alias($.paragraph_end, 'paragraph_end')
-	    )),
+		alias($.paragraph_end, 'paragraph_end'))),
 
 	inline: $ => prec(0, seq(
 	    field('tag', $.inlinetag),
@@ -267,8 +266,6 @@ module.exports = grammar({
 	inlinetag: $ => choice(
 	    alias(':span:', $.span),
 	    alias(':claim:', $.claim),
-	    // alias(':tr:', $.tr),
-	    // alias(':td:', $.td),
 	),
 
 	blocktag: $ => choice(
@@ -287,9 +284,6 @@ module.exports = grammar({
 	    alias(':subsubsection:', $.subsubsection),
 	    alias(':subsubsubsection:', $.subsubsubsection),
 	    alias(':step:', $.step),
-	    // alias(':table:', $.table),
-	    // alias(':tbody:', $.tbody),
-	    // alias(':thead:', $.thead),
 	    alias(':theorem:', $.theorem),
 	),
 

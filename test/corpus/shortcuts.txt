@@ -1,0 +1,446 @@
+================================================================================
+Inline math with shortcut
+================================================================================
+
+:manuscript:
+
+$X$.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (math)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Inline code with shortcut
+================================================================================
+
+:manuscript:
+
+`X`.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (code)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Block code with shortcut
+================================================================================
+
+:manuscript:
+
+```
+  comp = [abs(x) for x in range(10)]
+```
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (codeblock)
+    (asis_text)))
+
+
+================================================================================
+Block code with shortcut and meta
+================================================================================
+
+:manuscript:
+
+```
+  :label: some-code
+  :types: python
+
+  comp = [abs(x) for x in range(10)]
+
+```
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (codeblock)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_list
+          (types))
+        (metavalue_list)))
+    (asis_text)))
+
+
+================================================================================
+Math code with shortcut
+================================================================================
+
+:manuscript:
+
+$$
+  \int_a^bu\frac{d^2v}{dx^2}\,dx
+  =\left.u\frac{dv}{dx}\right|_a^b
+  -\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
+$$
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (mathblock)
+    (asis_text)))
+
+
+================================================================================
+Math code with shortcut and meta
+================================================================================
+
+:manuscript:
+
+$$
+  :label: some-math
+  :types: foo
+
+  \int_a^bu\frac{d^2v}{dx^2}\,dx
+  =\left.u\frac{dv}{dx}\right|_a^b
+  -\int_a^b\frac{du}{dx}\frac{dv}{dx}\,dx.
+
+$$
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (mathblock)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_list
+          (types))
+        (metavalue_list)))
+    (asis_text)))
+
+
+================================================================================
+Math inside claim with shortcut
+================================================================================
+
+:manuscript:
+
+:claim: $2+2=4$ ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (claim))
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Math inside claim with shortcut no space
+================================================================================
+
+:manuscript:
+
+:claim:$2+2=4$::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (claim))
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Section with shortcut
+================================================================================
+
+:manuscript:
+
+# Title
+
+Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    (paragraph
+      (text))))
+
+
+================================================================================
+Section with shortcut and meta
+================================================================================
+
+:manuscript:
+
+# Title
+  :label: sec
+  :nonum:
+
+Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_bool
+          (nonum))))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Subsection with shortcut
+================================================================================
+
+:manuscript:
+
+:section:
+
+## Title
+
+Foo.
+
+::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (section))
+    (specialblock
+      tag: (subsection)
+      title: (text)
+      (paragraph
+        (text)))))
+
+
+================================================================================
+Section with shortcut and meta
+================================================================================
+
+:manuscript:
+
+:section:
+
+## Title
+  :label: sub
+  :nonum:
+
+Foo.
+
+::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (section))
+    (specialblock
+      tag: (subsection)
+      title: (text)
+      meta: (blockmeta
+        (blockmetapair
+          (metatag_text
+            (label))
+          (metavalue_text))
+        (blockmetapair
+          (metatag_bool
+            (nonum))))
+      (paragraph
+        (text)))))
+
+
+================================================================================
+Span strong with shortcut
+================================================================================
+
+:manuscript:
+
+*shortcut*.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (spanstrong)
+      (text))
+    (text)))
+
+
+================================================================================
+Span emphas with shortcut
+================================================================================
+
+:manuscript:
+
+/shortcut/.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (spanemphas)
+      (text))
+    (text)))
+
+
+================================================================================
+Span strong and emphas with shortcut
+================================================================================
+
+:manuscript:
+
+*/shortcut/*.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (spanstrong)
+      (specialinline
+      tag: (spanemphas)
+        (text)))
+    (text)))
+
+
+================================================================================
+Span strong and emphas with shortcut reversed
+================================================================================
+
+:manuscript:
+
+/*shortcut*/.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (spanemphas)
+      (specialinline
+      tag: (spanstrong)
+        (text)))
+    (text)))
+
+
+================================================================================
+Strong half word with shortcut
+================================================================================
+
+:manuscript:
+
+Bo*ld*.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (specialinline
+      tag: (spanstrong)
+      (text))
+    (text)))

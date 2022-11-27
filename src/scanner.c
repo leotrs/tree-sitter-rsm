@@ -99,6 +99,17 @@ void debug_log(const char *msg) {
   printf("--> %s\n", msg);
 }
 
+bool success(TSLexer *lexer, enum TokenType type) {
+  lexer->result_symbol = type;
+  debug_log("SUCCESS");
+  return true;
+}
+
+bool failure(TSLexer *lexer) {
+  debug_log("FAILURE");
+  return false;
+}
+
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n") or in the Halmos of the enclosing
@@ -107,30 +118,24 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   if (lexer->lookahead == '\n') {
     lexer->advance(lexer, false);
     if (lexer->lookahead == '\n') {
-      lexer->result_symbol = PARAGRAPH_END;
-      debug_log("SUCCESS");
-      return true;
+      return success(lexer, PARAGRAPH_END);
     } else {
-      debug_log("FAILURE");
-      return false;
+      return failure(lexer);
+
     }
   }
   else if (lexer->lookahead == ':') {
     lexer->mark_end(lexer);
     lexer->advance(lexer, false);
     if (lexer->lookahead == ':') {
-      lexer->result_symbol = PARAGRAPH_END;
-      struct ScannerState *state = (struct ScannerState *)payload;
-      state->num_tokens_found_without_consuming_chars++;
-      debug_log("SUCCESS");
-      return true;
+      /* struct ScannerState *state = (struct ScannerState *)payload; */
+      /* state->num_tokens_found_without_consuming_chars++; */
+      return success(lexer, PARAGRAPH_END);
     } else {
-      debug_log("FAILURE");
-      return false;
+      return failure(lexer);
     }
   }
-  debug_log("FAILURE");
-  return false;
+  return failure(lexer);
 }
 
 void skip_whitespace(TSLexer *lexer) {
@@ -144,25 +149,31 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   skip_whitespace(lexer);
 
   int count = 0;
-  while (lexer->lookahead != ':'     // cannot start at delimiter
-	 && lexer->lookahead != '\n' // cannot start at newline
-	 && lexer->lookahead != '$'  // math region
-	 && lexer->lookahead != '`'  // code region
-	 && lexer->lookahead != '*'  // strong region
-	 && lexer->lookahead != '/'  // emphas region
-	 && lexer->lookahead != '\0' // EOF
-	 && lexer->lookahead != '#'  // section header
+  bool escape_next = false;
+  while (
+	 escape_next ||
+	 (
+	  lexer->lookahead != ':'  // delimiter
+	  && lexer->lookahead != '\n' // newline
+	  && lexer->lookahead != '{'  // inline meta
+	  && lexer->lookahead != '}'  // inline meta
+	  && lexer->lookahead != '$'  // math region
+	  && lexer->lookahead != '`'  // code region
+	  && lexer->lookahead != '*'  // strong region
+	  && lexer->lookahead != '/'  // emphas region
+	  && lexer->lookahead != '#'  // section header
+	  && lexer->lookahead != '%'  // comment
+	  && lexer->lookahead != '\0' // EOF
+	  )
 	 ) {
     count++;
+    escape_next = lexer->lookahead == '\\';
     lexer->advance(lexer, false);
   }
   if (count > 0) {
-    lexer->result_symbol = TEXT;
-    debug_log("SUCCESS");
-    return true;
+    return success(lexer, TEXT);
   } else {
-    debug_log("FAILURE");
-    return false;
+    return failure(lexer);
   }
 }
 
@@ -190,23 +201,17 @@ bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
 
 bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '$')) {
-    lexer->result_symbol = ASIS_DOLLAR_TEXT;
-    debug_log("SUCCESS");
-    return true;
+    return success(lexer, ASIS_DOLLAR_TEXT);
   } else {
-    debug_log("FAILURE");
-    return false;
+    return failure(lexer);
   }
 }
 
 bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '`')) {
-    lexer->result_symbol = ASIS_BACKTICK_TEXT;
-    debug_log("SUCCESS");
-    return true;
+    return success(lexer, ASIS_BACKTICK_TEXT);
   } else {
-    debug_log("FAILURE");
-    return false;
+    return failure(lexer);
   }
 }
 
@@ -229,16 +234,13 @@ bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
       if (lexer->lookahead == ':') {
 	count++;
 	lexer->advance(lexer, false);
-	debug_log("SUCCESS");
-	lexer->result_symbol = ASIS_HALMOS_TEXT;
-	return true;
+	return success(lexer, ASIS_HALMOS_TEXT);
       }
     }
     count++;
     lexer->advance(lexer, false);
   }
-  debug_log("FAILURE");
-  return false;
+  return failure(lexer);
 }
 
 bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
@@ -260,16 +262,13 @@ bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
       if (lexer->lookahead == '$') {
 	count++;
 	lexer->advance(lexer, false);
-	debug_log("SUCCESS");
-	lexer->result_symbol = ASIS_TWO_DOLLARS_TEXT;
-	return true;
+	return success(lexer, ASIS_TWO_DOLLARS_TEXT);
       }
     }
     count++;
     lexer->advance(lexer, false);
   }
-  debug_log("FAILURE");
-  return false;
+  return failure(lexer);
 }
 
 bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
@@ -292,17 +291,14 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
 	count++;
 	lexer->advance(lexer, false);
 	if (lexer->lookahead == '`') {
-	  debug_log("SUCCESS");
-	  lexer->result_symbol = ASIS_THREE_BACKTICKS_TEXT;
-	  return true;
+	  return success(lexer, ASIS_THREE_BACKTICKS_TEXT);
 	}
       }
     }
     count++;
     lexer->advance(lexer, false);
   }
-  debug_log("FAILURE");
-  return false;
+  return failure(lexer);
 }
 
 void show_beginning_debug_message(const bool *valid_symbols) {
@@ -384,24 +380,23 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
     }
   }
 
-  skip_whitespace(lexer);
-
-  if (valid_symbols[TEXT]) {
-    scan_arbitrary_text(payload, lexer);
-  } else if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
+  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
+    skip_whitespace(lexer);
     debug_log("trying UPTO_BRACE_OR_COMMA_TEXT");
     while (lexer->lookahead != ':' && lexer->lookahead != '\n' && lexer->lookahead != '}' && lexer->lookahead != ',' && lexer->lookahead != '\0') {
       lexer->advance(lexer, false);
     }
     if (lexer->lookahead == ',' || lexer->lookahead == '}') {
-      lexer->result_symbol = UPTO_BRACE_OR_COMMA_TEXT;
-      debug_log("SUCCESS");
-      return true;
+      return success(lexer, UPTO_BRACE_OR_COMMA_TEXT);
     } else {
-      debug_log("FAILURE");
-      return false;
+      return failure(lexer);
     }
   }
 
-  return false;
+  if (valid_symbols[TEXT]) {
+    return scan_arbitrary_text(payload, lexer);
+  }
+
+  debug_log("Reached the bottom!");
+  return failure(lexer);
 }
