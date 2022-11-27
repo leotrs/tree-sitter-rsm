@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 enum TokenType {
-  UPTO_BRACE_OR_COMMA_TEXT,
+  UPTO_BRACE_OR_COMMA_TEXT = 0,
   ASIS_DOLLAR_TEXT,
   ASIS_TWO_DOLLARS_TEXT,
   ASIS_BACKTICK_TEXT,
@@ -25,73 +25,75 @@ bool looking_for(const bool *valid_symbols, enum TokenType type) {
 }
 
 bool looking_for_everything(const bool *valid_symbols) {
-  bool result = true;
   for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (!valid_symbols[i]) {
-      result = false;
+      return false;
     }
   }
-  return result;
+  return true;
 }
 
 bool looking_for_paragraph_end_only(const bool *valid_symbols) {
-  bool result = true;
   for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (i == PARAGRAPH_END) {
-      result = result && valid_symbols[i];
-    } else {
-      result = result && !valid_symbols[i];
+      continue;
+    }
+    if (valid_symbols[i]) {
+      return false;
     }
   }
-  return result;
+  return valid_symbols[PARAGRAPH_END];
 }
 
 bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   bool result = false;
+  if (!valid_symbols[PARAGRAPH_END]) {
+    return false;
+  }
   for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (i == PARAGRAPH_END) {
       continue;
-    } else {
-      if (valid_symbols[i]) {
-	result = true;
-      }
+    }
+    if (valid_symbols[i]) {
+      return true;
     }
   }
-  return result && valid_symbols[PARAGRAPH_END];
+  return false;
 }
 
-struct ScannerState {
-  uint32_t num_tokens_found_without_consuming_chars;
-};
+/* struct ScannerState { */
+/*   uint32_t num_tokens_found_without_consuming_chars; */
+/* }; */
 
 void *tree_sitter_RSM_external_scanner_create() {
-  return calloc(0, sizeof(struct ScannerState));
+  /* return calloc(0, sizeof(struct ScannerState)); */
+  return NULL;
 }
 
 void tree_sitter_RSM_external_scanner_destroy(void *p) {
-  free(p);
+  /* free(p); */
 }
 
 unsigned tree_sitter_RSM_external_scanner_serialize(void *p, char *buffer) {
-  struct ScannerState *state = (struct ScannerState *)p;
-  uint32_t count = state->num_tokens_found_without_consuming_chars;
-  buffer[0] = (count >> 24) & 0xff;
-  buffer[1] = (count >> 16) & 0xff;
-  buffer[2] = (count >> 8) & 0xff;
-  buffer[3] = (count) & 0xff;
-  return 4;
+  /* struct ScannerState *state = (struct ScannerState *)p; */
+  /* uint32_t count = state->num_tokens_found_without_consuming_chars; */
+  /* buffer[0] = (count >> 24) & 0xff; */
+  /* buffer[1] = (count >> 16) & 0xff; */
+  /* buffer[2] = (count >> 8) & 0xff; */
+  /* buffer[3] = (count) & 0xff; */
+  return 0;
 }
 
 void tree_sitter_RSM_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
-  if (n < 4) {return;}
-  uint32_t count = (
-		    (((uint32_t) buffer[0]) << 24) |
-		    (((uint32_t) buffer[1]) << 16) |
-		    (((uint32_t) buffer[2]) << 8) |
-		    (((uint32_t) buffer[3]))
-		    );
-  struct ScannerState *state = (struct ScannerState *)p;
-  state->num_tokens_found_without_consuming_chars = count;
+  /* if (n < 4) {return;} */
+  /* uint32_t count = ( */
+  /* 		    (((uint32_t) buffer[0]) << 24) | */
+  /* 		    (((uint32_t) buffer[1]) << 16) | */
+  /* 		    (((uint32_t) buffer[2]) << 8) | */
+  /* 		    (((uint32_t) buffer[3])) */
+  /* 		    ); */
+  /* struct ScannerState *state = (struct ScannerState *)p; */
+  /* state->num_tokens_found_without_consuming_chars = count; */
 }
 
 void debug_log(const char *msg) {
@@ -116,7 +118,7 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   // block ("::").  In the latter case, make sure to use mark_end() to not consume the
   // Halmos, as it will be consumed by the enclosing block.
   if (lexer->lookahead == '\n') {
-    lexer->advance(lexer, false);
+    lexer->advance(lexer, true);
     if (lexer->lookahead == '\n') {
       return success(lexer, PARAGRAPH_END);
     } else {
@@ -383,7 +385,13 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
     skip_whitespace(lexer);
     debug_log("trying UPTO_BRACE_OR_COMMA_TEXT");
-    while (lexer->lookahead != ':' && lexer->lookahead != '\n' && lexer->lookahead != '}' && lexer->lookahead != ',' && lexer->lookahead != '\0') {
+    while (
+	   lexer->lookahead != ':'
+	   && lexer->lookahead != '\n'
+	   && lexer->lookahead != '}'
+	   && lexer->lookahead != ','
+	   && lexer->lookahead != '\0'
+	   ) {
       lexer->advance(lexer, false);
     }
     if (lexer->lookahead == ',' || lexer->lookahead == '}') {

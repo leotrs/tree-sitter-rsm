@@ -453,6 +453,11 @@
     }
   },
   {
+    "type": "metavalue_text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "metavalue_text_inline",
     "named": true,
     "fields": {},
@@ -983,10 +988,6 @@
     "named": true
   },
   {
-    "type": "metavalue_text",
-    "named": true
-  },
-  {
     "type": "name",
     "named": true
   },
@@ -1061,6 +1062,10 @@
   {
     "type": "text",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "theorem",

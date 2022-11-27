@@ -1409,8 +1409,13 @@
       ]
     },
     "metavalue_text": {
-      "type": "PATTERN",
-      "value": "[^\\S\\r\\n]*[^:\\n]+?\\n"
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "text"
+      },
+      "named": false,
+      "value": "text"
     },
     "metavalue_text_inline": {
       "type": "SEQ",

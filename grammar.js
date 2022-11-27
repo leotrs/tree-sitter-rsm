@@ -13,7 +13,7 @@ module.exports = grammar({
     ],
 
     rules: {
-	
+
 	////////////////////////////////////////////////////////////////////////
 	// Main building blocks: manuscript, block, paragraph, inline
 	////////////////////////////////////////////////////////////////////////
@@ -214,7 +214,8 @@ module.exports = grammar({
 	/////////////////////////////////////////////////////////////
 	// Meta pair types
 	/////////////////////////////////////////////////////////////
-	metavalue_text: $ => (/[^\S\r\n]*[^:\n]+?\n/),
+	// metavalue_text: $ => (/[^\S\r\n]*[^:\n]+?\n/),
+	metavalue_text: $ => alias($.text, 'text'),
 
 	metavalue_text_inline: $ => seq($.upto_brace_or_comma_text),
 
