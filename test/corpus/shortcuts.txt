@@ -41,7 +41,7 @@ Inline code with shortcut
 
 
 ================================================================================
-Block code with shortcut
+Code block with shortcut
 ================================================================================
 
 :manuscript:
@@ -62,7 +62,7 @@ Block code with shortcut
 
 
 ================================================================================
-Block code with shortcut and meta
+Code block with shortcut and meta
 ================================================================================
 
 :manuscript:
@@ -91,12 +91,13 @@ Block code with shortcut and meta
       (blockmetapair
         (metatag_list
           (types))
-        (metavalue_list)))
+        (metavalue_list
+	  (metavalue_list_item))))
     (asis_text)))
 
 
 ================================================================================
-Math code with shortcut
+Math block with shortcut
 ================================================================================
 
 :manuscript:
@@ -119,7 +120,7 @@ $$
 
 
 ================================================================================
-Math code with shortcut and meta
+Math block with shortcut and meta
 ================================================================================
 
 :manuscript:
@@ -150,7 +151,8 @@ $$
       (blockmetapair
         (metatag_list
           (types))
-        (metavalue_list)))
+        (metavalue_list
+	  (metavalue_list_item))))
     (asis_text)))
 
 
