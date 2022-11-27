@@ -148,7 +148,10 @@ void skip_whitespace(TSLexer *lexer) {
 
 bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   debug_log("trying TEXT");
-  skip_whitespace(lexer);
+  /* skip_whitespace(lexer); */
+  while (lexer->lookahead == '\n') {
+    lexer->advance(lexer, true);
+  }
 
   int count = 0;
   bool escape_next = false;
@@ -168,7 +171,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	  && lexer->lookahead != '\0' // EOF
 	  )
 	 ) {
-    count++;
+    if (!iswspace(lexer->lookahead)) count++;
     escape_next = lexer->lookahead == '\\';
     lexer->advance(lexer, false);
   }
