@@ -455,6 +455,10 @@
           "named": true
         },
         {
+          "type": "reftext",
+          "named": true
+        },
+        {
           "type": "title",
           "named": true
         }
@@ -736,6 +740,10 @@
             "named": true
           },
           {
+            "type": "previous",
+            "named": true
+          },
+          {
             "type": "ref",
             "named": true
           },
@@ -813,6 +821,16 @@
         "types": [
           {
             "type": "thead",
+            "named": true
+          }
+        ]
+      },
+      "meta": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "blockmeta",
             "named": true
           }
         ]
@@ -1065,6 +1083,10 @@
     "named": true
   },
   {
+    "type": "previous",
+    "named": true
+  },
+  {
     "type": "proof",
     "named": true
   },
@@ -1074,6 +1096,10 @@
   },
   {
     "type": "ref",
+    "named": true
+  },
+  {
+    "type": "reftext",
     "named": true
   },
   {
@@ -1123,6 +1149,10 @@
   {
     "type": "subsubsubsection",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",

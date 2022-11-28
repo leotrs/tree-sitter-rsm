@@ -170,10 +170,14 @@ module.exports = grammar({
 			prec(0, $.text))),
 		    token('/'))),
 
-	    // References, citations, and URLs have standard delimiters but their
-	    // content is parsed in a special way.
+	    // References (including 'previous'), citations, and URLs have standard
+	    // delimiters but their content is parsed in a special way.
 	    seq(field('tag', alias(token(':ref:'), $.ref)),
 		field('target', alias(token(/[^,:]+/), $.text)),
+		optional(seq(',', field('reftext', $.text))),
+		'::'),
+	    seq(field('tag', alias(token(':previous:'), $.previous)),
+		field('target', alias(token(/[0-9]+/), $.text)),
 		optional(seq(',', field('reftext', $.text))),
 		'::'),
 	    // seq(field('tag', alias(token(':url:'), $.url)),
@@ -245,6 +249,7 @@ module.exports = grammar({
 	/////////////////////////////////////////////////////////////
 	table: $ => seq(
 	    ':table:',
+	    field('meta', optional($.blockmeta)),
 	    field('head', optional($.thead)),
 	    field('body', optional($.tbody)),
 	    field('caption', optional($.caption)),
@@ -299,6 +304,7 @@ module.exports = grammar({
 	    alias(':email:', $.email),
 	    alias(':label:', $.label),
 	    alias(':name:', $.name),
+	    alias(':reftext:', $.reftext),
 	    alias(':title:', $.title),
 	),
 

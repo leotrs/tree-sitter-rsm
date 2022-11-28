@@ -112,6 +112,12 @@ bool failure(TSLexer *lexer) {
   return false;
 }
 
+void skip_whitespace(TSLexer *lexer) {
+  while (iswspace(lexer->lookahead)) {
+    lexer->advance(lexer, true);
+  }
+}
+
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n") or in the Halmos of the enclosing
@@ -122,8 +128,15 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     if (lexer->lookahead == '\n') {
       return success(lexer, PARAGRAPH_END);
     } else {
+      skip_whitespace(lexer);
+      if (lexer->lookahead == ':') {
+	lexer->mark_end(lexer);
+	lexer->advance(lexer, false);
+	if (lexer->lookahead == ':') {
+	  return success(lexer, PARAGRAPH_END);
+	}
+      }
       return failure(lexer);
-
     }
   }
   else if (lexer->lookahead == ':') {
@@ -138,12 +151,6 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     }
   }
   return failure(lexer);
-}
-
-void skip_whitespace(TSLexer *lexer) {
-  while (iswspace(lexer->lookahead)) {
-    lexer->advance(lexer, true);
-  }
 }
 
 bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
