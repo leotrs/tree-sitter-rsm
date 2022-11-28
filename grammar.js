@@ -25,7 +25,8 @@ module.exports = grammar({
 	    field('tag', alias(':manuscript:', $.manuscript)),
 	    field('meta', optional($.blockmeta)),
 	    repeat(choice($.specialblock, $.block, $.paragraph)),
-	    '::'),
+	    '::',
+	    optional($.bibtex)),
 
 	block: $ => prec(1, seq(
 	    field('tag', $.blocktag),
@@ -64,6 +65,10 @@ module.exports = grammar({
 
 	specialblock: $ => choice(
 	    $.table,
+
+	    // The bibliography tag is unique in that in can never have any content or
+	    // meta
+	    seq(field('tag', alias(':bibliography:', 'bibliography')), '::'),
 
 	    // Sections have a special opening using hashtags, but their content is
 	    // parsed just like any other block's.
@@ -188,10 +193,10 @@ module.exports = grammar({
 	    // 	field('target', ???),
 	    // 	optional(seq(',', field('reftext', $.text))),
 	    // 	'::'),
-	    // seq(field('tag', alias(token(':cite:'), $.cite)),
-	    // 	field('target', ???),
-	    // 	optional(seq(',', field('reftext', $.text))),
-	    // 	'::')),
+	    seq(field('tag', alias(token(':cite:'), $.cite)),
+		field('targetlabels', alias(token(/[^:]+/), $.text)),
+		optional(seq(',', field('reftext', $.text))),
+		'::'),
 	),
 
 	/////////////////////////////////////////////////////////////
@@ -273,6 +278,29 @@ module.exports = grammar({
                 prec(1, $.inline),
                 prec(0, $.text))),
 	    '::'),
+
+	/////////////////////////////////////////////////////////////
+	// Bibliography stuff
+	/////////////////////////////////////////////////////////////
+	bibtex: $ => seq(':bibtex:', repeat($.bibitem), '::'),
+
+	bibitem: $ => seq(
+	    '@',
+	    field('kind', alias(token(/book|article/), $.kind)),
+	    '{',
+	    field('label', alias(token(/[^,]+?/), $.label)),
+	    ',',
+	    choice(
+		$.bibitempair,
+		seq(repeat1(seq($.bibitempair, ',')), $.bibitempair, optional(','))),
+	    '}'),
+
+	bibitempair: $ => seq(
+	    alias(/title|author|year|publisher|journal|volume|number|doi/, $.key),
+	    '=',
+	    '{',
+	    alias(/[^}]+?/, $.value),
+	    '}'),
 
 	/////////////////////////////////////////////////////////////
 	// Tag choices

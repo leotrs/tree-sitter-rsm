@@ -1,5 +1,75 @@
 [
   {
+    "type": "bibitem",
+    "named": true,
+    "fields": {
+      "kind": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "kind",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "label",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bibitempair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bibitempair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "key",
+          "named": true
+        },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bibtex",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "bibitem",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "block",
     "named": true,
     "fields": {
@@ -607,6 +677,10 @@
       "required": false,
       "types": [
         {
+          "type": "bibtex",
+          "named": true
+        },
+        {
           "type": "block",
           "named": true
         },
@@ -642,6 +716,10 @@
           {
             "type": "algorithm",
             "named": true
+          },
+          {
+            "type": "bibliography",
+            "named": false
           },
           {
             "type": "codeblock",
@@ -732,6 +810,10 @@
         "required": true,
         "types": [
           {
+            "type": "cite",
+            "named": true
+          },
+          {
             "type": "code",
             "named": true
           },
@@ -758,6 +840,16 @@
         ]
       },
       "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "text",
+            "named": true
+          }
+        ]
+      },
+      "targetlabels": {
         "multiple": false,
         "required": false,
         "types": [
@@ -943,6 +1035,10 @@
     "named": false
   },
   {
+    "type": ":bibtex:",
+    "named": false
+  },
+  {
     "type": ":caption:",
     "named": false
   },
@@ -975,6 +1071,14 @@
     "named": false
   },
   {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "MSC",
     "named": true
   },
@@ -996,6 +1100,14 @@
   },
   {
     "type": "author",
+    "named": true
+  },
+  {
+    "type": "bibliography",
+    "named": false
+  },
+  {
+    "type": "cite",
     "named": true
   },
   {
@@ -1043,7 +1155,15 @@
     "named": true
   },
   {
+    "type": "key",
+    "named": true
+  },
+  {
     "type": "keywords",
+    "named": true
+  },
+  {
+    "type": "kind",
     "named": true
   },
   {
@@ -1156,10 +1276,6 @@
   },
   {
     "type": "text",
-    "named": false
-  },
-  {
-    "type": "text",
     "named": true
   },
   {
@@ -1180,6 +1296,10 @@
   },
   {
     "type": "upto_brace_or_comma_text",
+    "named": true
+  },
+  {
+    "type": "value",
     "named": true
   },
   {
