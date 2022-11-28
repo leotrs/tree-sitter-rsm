@@ -232,14 +232,13 @@ module.exports = grammar({
 	    alias($.text, $.metavalue_list_item)
         ),
 
-	metavalue_list_inline: $ => seq(
-            choice(
-                $.upto_brace_or_comma_text,
-                prec(1, seq(
-                    '{',
-                    repeat1(seq($.upto_brace_or_comma_text, ',')),
-                    $.upto_brace_or_comma_text,
-                    '}')))),
+	metavalue_list_inline: $ => choice(
+            seq('{',
+                repeat1(seq(alias($.upto_brace_or_comma_text, $.metavalue_list_item), ',')),
+                alias($.upto_brace_or_comma_text, $.metavalue_list_item),
+                '}'),
+	    alias($.upto_brace_or_comma_text, $.metavalue_list_item),
+	),
 
 	/////////////////////////////////////////////////////////////
 	// Tables
@@ -279,6 +278,7 @@ module.exports = grammar({
 	    alias(':author:', $.author),
 	    alias(':definition:', $.definition),
 	    alias(':enumerate:', $.enumerate),
+	    alias(':itemize:', $.itemize),
 	    alias(':lemma:', $.lemma),
 	    alias(':figure:', $.figure),
 	    alias(':p:', $.subproof),

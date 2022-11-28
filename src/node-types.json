@@ -126,6 +126,10 @@
           "named": true
         },
         {
+          "type": "itemize",
+          "named": true
+        },
+        {
           "type": "lemma",
           "named": true
         },
@@ -491,7 +495,7 @@
       "required": true,
       "types": [
         {
-          "type": "upto_brace_or_comma_text",
+          "type": "metavalue_list_item",
           "named": true
         }
       ]
@@ -1010,6 +1014,10 @@
   },
   {
     "type": "figure",
+    "named": true
+  },
+  {
+    "type": "itemize",
     "named": true
   },
   {

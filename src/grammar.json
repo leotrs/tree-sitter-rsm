@@ -1534,53 +1534,59 @@
       ]
     },
     "metavalue_list_inline": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "upto_brace_or_comma_text"
+              "type": "STRING",
+              "value": "{"
             },
             {
-              "type": "PREC",
-              "value": 1,
+              "type": "REPEAT1",
               "content": {
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "STRING",
-                    "value": "{"
-                  },
-                  {
-                    "type": "REPEAT1",
+                    "type": "ALIAS",
                     "content": {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "upto_brace_or_comma_text"
-                        },
-                        {
-                          "type": "STRING",
-                          "value": ","
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "upto_brace_or_comma_text"
+                      "type": "SYMBOL",
+                      "name": "upto_brace_or_comma_text"
+                    },
+                    "named": true,
+                    "value": "metavalue_list_item"
                   },
                   {
                     "type": "STRING",
-                    "value": "}"
+                    "value": ","
                   }
                 ]
               }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "upto_brace_or_comma_text"
+              },
+              "named": true,
+              "value": "metavalue_list_item"
+            },
+            {
+              "type": "STRING",
+              "value": "}"
             }
           ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "upto_brace_or_comma_text"
+          },
+          "named": true,
+          "value": "metavalue_list_item"
         }
       ]
     },
@@ -1834,6 +1840,15 @@
           },
           "named": true,
           "value": "enumerate"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":itemize:"
+          },
+          "named": true,
+          "value": "itemize"
         },
         {
           "type": "ALIAS",

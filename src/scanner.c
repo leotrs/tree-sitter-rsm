@@ -391,6 +391,7 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
     while (
 	   lexer->lookahead != ':'
 	   && lexer->lookahead != '\n'
+	   && lexer->lookahead != '{'
 	   && lexer->lookahead != '}'
 	   && lexer->lookahead != ','
 	   && lexer->lookahead != '\0'
