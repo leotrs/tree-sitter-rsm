@@ -203,18 +203,23 @@ module.exports = grammar({
 
 	inlinemetapair: $ => choice(
 	    seq($.metatag_text, $.metavalue_text_inline),
+	    seq($.metatag_any, $.metavalue_any_inline),
             seq($.metatag_list, $.metavalue_list_inline),
 	    $.metatag_bool),
 
 	blockmetapair: $ => choice(
 	    seq($.metatag_text, $.metavalue_text),
+	    seq($.metatag_any, $.metavalue_any),
             seq($.metatag_list, $.metavalue_list),
 	    $.metatag_bool),
 
 	/////////////////////////////////////////////////////////////
 	// Meta pair types
 	/////////////////////////////////////////////////////////////
-	// metavalue_text: $ => (/[^\S\r\n]*[^:\n]+?\n/),
+	metavalue_any: $ => alias(token(/[^\S\r\n]*.+?\n/), 'text'),
+
+	metavalue_any_inline: $ => alias(token(/[^\S\r\n]*[^,}\n]+?\n/), 'text'),
+
 	metavalue_text: $ => alias($.text, 'text'),
 
 	metavalue_text_inline: $ => seq($.upto_brace_or_comma_text),
@@ -275,6 +280,7 @@ module.exports = grammar({
 	    alias(':definition:', $.definition),
 	    alias(':enumerate:', $.enumerate),
 	    alias(':lemma:', $.lemma),
+	    alias(':figure:', $.figure),
 	    alias(':p:', $.subproof),
 	    alias(':proof:', $.proof),
 	    alias(':proposition:', $.proposition),
@@ -290,7 +296,6 @@ module.exports = grammar({
 
 	metatag_text: $ => choice(
 	    alias(':affiliation:', $.affiliation),
-	    alias(':date:', $.date),
 	    alias(':email:', $.email),
 	    alias(':label:', $.label),
 	    alias(':name:', $.name),
@@ -308,6 +313,11 @@ module.exports = grammar({
 	    alias(':MSC:', $.MSC),
 	    alias(':types:', $.types),
 	),
+
+	metatag_any: $ => choice(
+	    alias(':date:', $.date),
+	    alias(':path:', $.path),
+	)
 
     }
 });

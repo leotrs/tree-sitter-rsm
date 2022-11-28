@@ -67,6 +67,10 @@
       "required": true,
       "types": [
         {
+          "type": "metatag_any",
+          "named": true
+        },
+        {
           "type": "metatag_bool",
           "named": true
         },
@@ -76,6 +80,10 @@
         },
         {
           "type": "metatag_text",
+          "named": true
+        },
+        {
+          "type": "metavalue_any",
           "named": true
         },
         {
@@ -111,6 +119,10 @@
         },
         {
           "type": "enumerate",
+          "named": true
+        },
+        {
+          "type": "figure",
           "named": true
         },
         {
@@ -266,6 +278,10 @@
       "required": true,
       "types": [
         {
+          "type": "metatag_any",
+          "named": true
+        },
+        {
           "type": "metatag_bool",
           "named": true
         },
@@ -275,6 +291,10 @@
         },
         {
           "type": "metatag_text",
+          "named": true
+        },
+        {
+          "type": "metavalue_any_inline",
           "named": true
         },
         {
@@ -342,6 +362,25 @@
     }
   },
   {
+    "type": "metatag_any",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "date",
+          "named": true
+        },
+        {
+          "type": "path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "metatag_bool",
     "named": true,
     "fields": {},
@@ -400,10 +439,6 @@
           "named": true
         },
         {
-          "type": "date",
-          "named": true
-        },
-        {
           "type": "email",
           "named": true
         },
@@ -421,6 +456,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "metavalue_any",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "metavalue_any_inline",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "metavalue_list",
@@ -964,6 +1009,10 @@
     "named": true
   },
   {
+    "type": "figure",
+    "named": true
+  },
+  {
     "type": "keywords",
     "named": true
   },
@@ -1002,6 +1051,10 @@
   {
     "type": "paragraph_end",
     "named": false
+  },
+  {
+    "type": "path",
+    "named": true
   },
   {
     "type": "proof",
