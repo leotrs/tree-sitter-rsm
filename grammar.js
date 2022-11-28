@@ -12,8 +12,12 @@ module.exports = grammar({
 	$.paragraph_end,
     ],
 
-    rules: {
+    extras: $ => [
+	$.comment,
+	/\s/,
+    ],
 
+    rules: {
 	////////////////////////////////////////////////////////////////////////
 	// Main building blocks: manuscript, block, paragraph, inline
 	////////////////////////////////////////////////////////////////////////
@@ -323,7 +327,13 @@ module.exports = grammar({
 	metatag_any: $ => choice(
 	    alias(':date:', $.date),
 	    alias(':path:', $.path),
-	)
+	),
+
+	// It is important that comment appears at the end so that other rules will be
+	// given automatic precedence.  Note this is not possible by simply using prec()
+	// since the (/.*/) part of a comment will match anything and tree-sitter pays
+	// attentions to the length of matches to determine precedence.
+	comment: $ => token(seq('%', /.*/)),
 
     }
 });

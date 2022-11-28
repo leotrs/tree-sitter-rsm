@@ -1011,6 +1011,10 @@
     "named": true
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "date",
     "named": true
   },
