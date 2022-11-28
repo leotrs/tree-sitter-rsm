@@ -1389,6 +1389,72 @@
                   "type": "TOKEN",
                   "content": {
                     "type": "STRING",
+                    "value": ":url:"
+                  }
+                },
+                "named": true,
+                "value": "url"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "target",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "(https:\\/\\/|http:\\/\\/)?[^\\s,:]+?"
+                  }
+                },
+                "named": true,
+                "value": "text"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "reftext",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "text"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "::"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "tag",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "STRING",
                     "value": ":cite:"
                   }
                 },

@@ -836,6 +836,10 @@
           {
             "type": "spanstrong",
             "named": true
+          },
+          {
+            "type": "url",
+            "named": true
           }
         ]
       },
@@ -1296,6 +1300,10 @@
   },
   {
     "type": "upto_brace_or_comma_text",
+    "named": true
+  },
+  {
+    "type": "url",
     "named": true
   },
   {
