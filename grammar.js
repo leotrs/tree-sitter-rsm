@@ -143,6 +143,11 @@ module.exports = grammar({
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
+	    // Prev* are special because they have no content and no Halmos
+	    alias(token(':prev:'), $.prev),
+	    alias(token(':prev2:'), $.prev2),
+	    alias(token(':prev3:'), $.prev3),
+
 	    // Math and code inlines have special open and close delimimters ($) and (`)
 	    // respectively AND as-is content.
 	    seq(field('tag', alias(token(/\$/), $.math)),

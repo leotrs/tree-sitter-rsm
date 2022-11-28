@@ -165,7 +165,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   while (
 	 escape_next ||
 	 (
-	  lexer->lookahead != ':'  // delimiter
+	  lexer->lookahead != ':'     // delimiter
 	  && lexer->lookahead != '\n' // newline
 	  && lexer->lookahead != '{'  // inline meta
 	  && lexer->lookahead != '}'  // inline meta
