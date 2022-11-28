@@ -264,20 +264,29 @@ module.exports = grammar({
 	    field('caption', optional($.caption)),
 	    '::'),
 
-	thead: $ => seq(':thead:', repeat1($.tr), '::'),
+	thead: $ => seq(':thead:', repeat1(choice($.tr, $.trshort)), '::'),
 
-	tbody: $ => seq(':tbody:', repeat1($.tr), '::'),
+	tbody: $ => seq(':tbody:', repeat1(choice($.tr, $.trshort)), '::'),
 
 	tr: $ => seq(':tr:', repeat1($.td), '::'),
+
+	trshort: $ => prec(1,
+			   seq(':tr:',
+			       choice($.tdcontent, seq(repeat1(seq($.tdcontent, ':')), $.tdcontent)),
+			       '::')),
 
 	td: $ => seq(
 	    field('tag', token(':td:')),
 	    field('meta', optional($.inlinemeta)),
-	    repeat(choice(
-		prec(2, $.specialinline),
-                prec(1, $.inline),
-                prec(0, $.text))),
+	    $.tdcontent,
 	    '::'),
+
+	tdcontent: $ =>
+	    repeat1(choice(
+		prec(2, $.specialinline),
+		prec(1, $.inline),
+		prec(0, $.text))),
+
 
 	/////////////////////////////////////////////////////////////
 	// Bibliography stuff
