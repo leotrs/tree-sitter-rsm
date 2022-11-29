@@ -156,9 +156,9 @@ void skip_whitespace(TSLexer *lexer) {
 
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
-  // A paragraph may end in a blank line ("\n\n") or in the Halmos of the enclosing
+  // A paragraph may end in a blank line ("\n\n"), or in the Halmos of the enclosing
   // block ("::").  In the latter case, make sure to use mark_end() to not consume the
-  // Halmos, as it will be consumed by the enclosing block.
+  // Halmos, as it will be consumed elsewhere.
   if (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
     if (lexer->lookahead == '\n') {
@@ -399,7 +399,6 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
 bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   show_beginning_debug_message(valid_symbols);
   show_lookahead(lexer);
-  /* sleep(1); */
 
   if (looking_for_everything(valid_symbols)) {
     // Sometimes the parser freaks out and wants to see if there is *any* token at the
