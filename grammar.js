@@ -145,6 +145,15 @@ module.exports = grammar({
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
+	    // Turnstile characters start a span until a period is found
+	    prec(1,
+		 seq(field('tag', alias($.turnstile, $.claimshort)),
+		     repeat(choice(
+			 prec(2, $.specialinline),
+			 prec(1, $.inline),
+			 prec(0, $.text))),
+		     alias($.turnstile_end, 'turnstile_end'))),
+
 	    // Prev* are special because they have no content and no Halmos
 	    alias(token(':prev:'), $.prev),
 	    alias(token(':prev2:'), $.prev2),

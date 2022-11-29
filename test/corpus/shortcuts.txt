@@ -513,3 +513,75 @@ Paragraph starts with turnstile
       tag: (claimshort)
       (text))
     (text)))
+
+
+
+
+
+
+
+================================================================================
+Turnstile unicode
+================================================================================
+
+:manuscript:
+
+Foo ⊢ bar. Baz.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (specialinline
+      tag: (claimshort)
+      (text))
+    (text)))
+
+
+================================================================================
+Turnstile unicode with math inside
+================================================================================
+
+:manuscript:
+
+Foo ⊢ $2+2=4$. Baz.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (specialinline
+      tag: (claimshort)
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Paragraph starts with turnstile unicode
+================================================================================
+
+:manuscript:
+
+⊢ A claim.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (claimshort)
+      (text))
+    (text)))

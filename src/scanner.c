@@ -63,6 +63,49 @@ bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   return false;
 }
 
+void show_beginning_debug_message(const bool *valid_symbols) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+
+  printf("--> external scanner looking for: ");
+  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
+    printf("UPTO_BRACE_OR_COMMA_TEXT ");
+  }
+  if (valid_symbols[ASIS_DOLLAR_TEXT]) {
+    printf("ASIS_DOLLAR_TEXT ");
+  }
+  if (valid_symbols[ASIS_TWO_DOLLARS_TEXT]) {
+    printf("ASIS_TWO_DOLLARS_TEXT ");
+  }
+  if (valid_symbols[ASIS_BACKTICK_TEXT]) {
+    printf("ASIS_BACKTICK_TEXT ");
+  }
+  if (valid_symbols[ASIS_THREE_BACKTICKS_TEXT]) {
+    printf("ASIS_THREE_BACKTICKS_TEXT");
+  }
+  if (valid_symbols[ASIS_HALMOS_TEXT]) {
+    printf("ASIS_HALMOS_TEXT ");
+  }
+  if (valid_symbols[TURNSTILE]) {
+    printf("TURNSTILE ");
+  }
+  if (valid_symbols[TEXT]) {
+    printf("TEXT ");
+  }
+  if (valid_symbols[PARAGRAPH_END]) {
+    printf("PARAGRAPH_END ");
+  }
+  printf("\n");
+}
+
+void show_lookahead(TSLexer *lexer) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+  if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
+    printf("--> lookahead: '%c'\n", lexer->lookahead);
+  } else {
+    printf("--> lookahead: %d\n", lexer->lookahead);
+  }
+}
+
 struct ScannerState {
   bool within_turnstile;
 };
@@ -145,6 +188,10 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
 }
 
 bool at_turnstile(TSLexer *lexer) {
+  if (lexer->lookahead == 0x22A2) { // hex value of turnstile unicode char
+    return true;
+  }
+
   if (lexer->lookahead == '|') {
     lexer->mark_end(lexer);
     lexer->advance(lexer, false);
@@ -347,49 +394,6 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
     lexer->advance(lexer, false);
   }
   return failure(lexer);
-}
-
-void show_beginning_debug_message(const bool *valid_symbols) {
-  if (!getenv("TREE_SITTER_DEBUG")) { return; }
-
-  printf("--> external scanner looking for: ");
-  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    printf("UPTO_BRACE_OR_COMMA_TEXT ");
-  }
-  if (valid_symbols[ASIS_DOLLAR_TEXT]) {
-    printf("ASIS_DOLLAR_TEXT ");
-  }
-  if (valid_symbols[ASIS_TWO_DOLLARS_TEXT]) {
-    printf("ASIS_TWO_DOLLARS_TEXT ");
-  }
-  if (valid_symbols[ASIS_BACKTICK_TEXT]) {
-    printf("ASIS_BACKTICK_TEXT ");
-  }
-  if (valid_symbols[ASIS_THREE_BACKTICKS_TEXT]) {
-    printf("ASIS_THREE_BACKTICKS_TEXT");
-  }
-  if (valid_symbols[ASIS_HALMOS_TEXT]) {
-    printf("ASIS_HALMOS_TEXT ");
-  }
-  if (valid_symbols[TURNSTILE]) {
-    printf("TURNSTILE ");
-  }
-  if (valid_symbols[TEXT]) {
-    printf("TEXT ");
-  }
-  if (valid_symbols[PARAGRAPH_END]) {
-    printf("PARAGRAPH_END ");
-  }
-  printf("\n");
-}
-
-void show_lookahead(TSLexer *lexer) {
-  if (!getenv("TREE_SITTER_DEBUG")) { return; }
-  if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
-    printf("--> lookahead: '%c'\n", lexer->lookahead);
-  } else {
-    printf("--> lookahead: %d\n", lexer->lookahead);
-  }
 }
 
 bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
