@@ -807,10 +807,14 @@
       },
       "tag": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "cite",
+            "named": true
+          },
+          {
+            "type": "claimshort",
             "named": true
           },
           {
@@ -874,6 +878,18 @@
         },
         {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "prev",
+          "named": true
+        },
+        {
+          "type": "prev2",
+          "named": true
+        },
+        {
+          "type": "prev3",
           "named": true
         },
         {
@@ -1161,6 +1177,10 @@
     "named": true
   },
   {
+    "type": "claimshort",
+    "named": true
+  },
+  {
     "type": "code",
     "named": true
   },
@@ -1253,6 +1273,18 @@
     "named": true
   },
   {
+    "type": "prev",
+    "named": true
+  },
+  {
+    "type": "prev2",
+    "named": true
+  },
+  {
+    "type": "prev3",
+    "named": true
+  },
+  {
     "type": "previous",
     "named": true
   },
@@ -1335,6 +1367,10 @@
   {
     "type": "title",
     "named": true
+  },
+  {
+    "type": "turnstile_end",
+    "named": false
   },
   {
     "type": "types",

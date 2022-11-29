@@ -918,6 +918,105 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "turnstile"
+                  },
+                  "named": true,
+                  "value": "claimshort"
+                }
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PREC",
+                      "value": 2,
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "specialinline"
+                      }
+                    },
+                    {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "inline"
+                      }
+                    },
+                    {
+                      "type": "PREC",
+                      "value": 0,
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "text"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "turnstile_end"
+                },
+                "named": false,
+                "value": "turnstile_end"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": ":prev:"
+            }
+          },
+          "named": true,
+          "value": "prev"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": ":prev2:"
+            }
+          },
+          "named": true,
+          "value": "prev2"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "STRING",
+              "value": ":prev3:"
+            }
+          },
+          "named": true,
+          "value": "prev3"
+        },
+        {
           "type": "SEQ",
           "members": [
             {
@@ -2643,6 +2742,14 @@
     {
       "type": "SYMBOL",
       "name": "asis_halmos_text"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "turnstile"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "turnstile_end"
     },
     {
       "type": "SYMBOL",

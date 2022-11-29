@@ -8,6 +8,8 @@ module.exports = grammar({
 	$.asis_backtick_text,
 	$.asis_three_backticks_text,
 	$.asis_halmos_text,
+	$.turnstile,
+	$.turnstile_end,
 	$.text,
 	$.paragraph_end,
     ],

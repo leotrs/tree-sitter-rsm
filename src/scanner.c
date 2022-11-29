@@ -10,6 +10,8 @@ enum TokenType {
   ASIS_BACKTICK_TEXT,
   ASIS_THREE_BACKTICKS_TEXT,
   ASIS_HALMOS_TEXT,
+  TURNSTILE,
+  TURNSTILE_END,
   TEXT,
   PARAGRAPH_END,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
@@ -61,39 +63,30 @@ bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   return false;
 }
 
-/* struct ScannerState { */
-/*   uint32_t num_tokens_found_without_consuming_chars; */
-/* }; */
+struct ScannerState {
+  bool within_turnstile;
+};
 
 void *tree_sitter_RSM_external_scanner_create() {
-  /* return calloc(0, sizeof(struct ScannerState)); */
-  return NULL;
+  struct ScannerState *state = calloc(0, sizeof(struct ScannerState));
+  state->within_turnstile = false;
+  return state;
 }
 
 void tree_sitter_RSM_external_scanner_destroy(void *p) {
-  /* free(p); */
+  free(p);
 }
 
 unsigned tree_sitter_RSM_external_scanner_serialize(void *p, char *buffer) {
-  /* struct ScannerState *state = (struct ScannerState *)p; */
-  /* uint32_t count = state->num_tokens_found_without_consuming_chars; */
-  /* buffer[0] = (count >> 24) & 0xff; */
-  /* buffer[1] = (count >> 16) & 0xff; */
-  /* buffer[2] = (count >> 8) & 0xff; */
-  /* buffer[3] = (count) & 0xff; */
-  return 0;
+  struct ScannerState *state = (struct ScannerState *)p;
+  buffer[0] = state->within_turnstile;
+  return 1;
 }
 
 void tree_sitter_RSM_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
-  /* if (n < 4) {return;} */
-  /* uint32_t count = ( */
-  /* 		    (((uint32_t) buffer[0]) << 24) | */
-  /* 		    (((uint32_t) buffer[1]) << 16) | */
-  /* 		    (((uint32_t) buffer[2]) << 8) | */
-  /* 		    (((uint32_t) buffer[3])) */
-  /* 		    ); */
-  /* struct ScannerState *state = (struct ScannerState *)p; */
-  /* state->num_tokens_found_without_consuming_chars = count; */
+  if (n != 1) {return;}
+  struct ScannerState *state = (struct ScannerState *)p;
+  state->within_turnstile = buffer[0];
 }
 
 void debug_log(const char *msg) {
@@ -143,8 +136,6 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
     lexer->mark_end(lexer);
     lexer->advance(lexer, false);
     if (lexer->lookahead == ':') {
-      /* struct ScannerState *state = (struct ScannerState *)payload; */
-      /* state->num_tokens_found_without_consuming_chars++; */
       return success(lexer, PARAGRAPH_END);
     } else {
       return failure(lexer);
@@ -153,11 +144,50 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
-  debug_log("trying TEXT");
-  /* skip_whitespace(lexer); */
+bool at_turnstile(TSLexer *lexer) {
+  if (lexer->lookahead == '|') {
+    lexer->mark_end(lexer);
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '-') {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile) {
+  struct ScannerState *state = (struct ScannerState *)payload;
+
+  if (look_for_turnstile) {
+    debug_log("trying TEXT or TURNSTILE");
+  } else {
+    debug_log("trying TEXT");
+  }
+  if (state->within_turnstile) {
+    debug_log("(we are within a turnstile)");
+  }
+
+  // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   while (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
+  }
+
+  if (at_turnstile(lexer)) {
+    debug_log("found turnstile at beginning, stopping");
+    lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+    if (look_for_turnstile) {
+      state->within_turnstile = true;
+      return success(lexer, TURNSTILE);
+    } else {
+      return failure(lexer);	// only looking for text but found turnstile
+    }
+  }
+
+  if (state->within_turnstile && lexer->lookahead == '.') {
+    lexer->mark_end(lexer);
+    state->within_turnstile = false;
+    return success(lexer, TURNSTILE_END);
   }
 
   int count = 0;
@@ -176,12 +206,18 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	  && lexer->lookahead != '#'  // section header
 	  && lexer->lookahead != '%'  // comment
 	  && lexer->lookahead != '\0' // EOF
+	  && (!state->within_turnstile || lexer->lookahead != '.')
 	  )
 	 ) {
+    if (at_turnstile(lexer)) {
+      debug_log("found turnstile, stopping");
+      break;
+    }
     if (!iswspace(lexer->lookahead)) count++;
     escape_next = lexer->lookahead == '\\';
     lexer->advance(lexer, false);
   }
+
   if (count > 0) {
     return success(lexer, TEXT);
   } else {
@@ -335,6 +371,9 @@ void show_beginning_debug_message(const bool *valid_symbols) {
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
     printf("ASIS_HALMOS_TEXT ");
   }
+  if (valid_symbols[TURNSTILE]) {
+    printf("TURNSTILE ");
+  }
   if (valid_symbols[TEXT]) {
     printf("TEXT ");
   }
@@ -361,7 +400,7 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (looking_for_everything(valid_symbols)) {
     // Sometimes the parser freaks out and wants to see if there is *any* token at the
     // current point.  In this case, just look for arbitrary TEXT.
-    return scan_arbitrary_text(payload, lexer);
+    return scan_arbitrary_text(payload, lexer, true);
   }
 
   if (valid_symbols[ASIS_DOLLAR_TEXT]) {
@@ -388,7 +427,7 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
     if (lexer->lookahead == ':') {
       return scan_paragraph_end(payload, lexer);
     } else {
-      return scan_paragraph_end(payload, lexer) || scan_arbitrary_text(payload, lexer);
+      return scan_paragraph_end(payload, lexer) || scan_arbitrary_text(payload, lexer, valid_symbols[TURNSTILE]);
     }
   }
 
@@ -413,7 +452,7 @@ bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (valid_symbols[TEXT]) {
-    return scan_arbitrary_text(payload, lexer);
+    return scan_arbitrary_text(payload, lexer, valid_symbols[TURNSTILE]);
   }
 
   debug_log("Reached the bottom!");
