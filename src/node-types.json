@@ -395,6 +395,14 @@
           "named": true
         },
         {
+          "type": "draft",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
           "type": "span",
           "named": true
         }
@@ -1201,6 +1209,10 @@
     "named": true
   },
   {
+    "type": "draft",
+    "named": true
+  },
+  {
     "type": "email",
     "named": true
   },
@@ -1262,6 +1274,10 @@
   },
   {
     "type": "nonum",
+    "named": true
+  },
+  {
+    "type": "note",
     "named": true
   },
   {
@@ -1351,6 +1367,10 @@
   {
     "type": "subsubsubsection",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",

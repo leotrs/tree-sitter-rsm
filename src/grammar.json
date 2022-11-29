@@ -2235,7 +2235,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "book|article"
+                "value": "book|article|software"
               }
             },
             "named": true,
@@ -2325,7 +2325,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "title|author|year|publisher|journal|volume|number|doi"
+            "value": "title|author|year|publisher|journal|volume|number|doi|url|edition"
           },
           "named": true,
           "value": "key"
@@ -2360,19 +2360,37 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":span:"
+            "value": ":claim:"
           },
           "named": true,
-          "value": "span"
+          "value": "claim"
         },
         {
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":claim:"
+            "value": ":draft:"
           },
           "named": true,
-          "value": "claim"
+          "value": "draft"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":note:"
+          },
+          "named": true,
+          "value": "note"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":span:"
+          },
+          "named": true,
+          "value": "span"
         }
       ]
     },

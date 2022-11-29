@@ -311,7 +311,7 @@ module.exports = grammar({
 
 	bibitem: $ => seq(
 	    '@',
-	    field('kind', alias(token(/book|article/), $.kind)),
+	    field('kind', alias(token(/book|article|software/), $.kind)),
 	    '{',
 	    field('label', alias(token(/[^,]+?/), $.label)),
 	    ',',
@@ -321,7 +321,7 @@ module.exports = grammar({
 	    '}'),
 
 	bibitempair: $ => seq(
-	    alias(/title|author|year|publisher|journal|volume|number|doi/, $.key),
+	    alias(/title|author|year|publisher|journal|volume|number|doi|url|edition/, $.key),
 	    '=',
 	    '{',
 	    alias(/[^}]+?/, $.value),
@@ -331,8 +331,10 @@ module.exports = grammar({
 	// Tag choices
 	/////////////////////////////////////////////////////////////
 	inlinetag: $ => choice(
-	    alias(':span:', $.span),
 	    alias(':claim:', $.claim),
+	    alias(':draft:', $.draft),
+	    alias(':note:', $.note),
+	    alias(':span:', $.span),
 	),
 
 	blocktag: $ => choice(
