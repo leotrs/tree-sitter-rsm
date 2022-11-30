@@ -293,6 +293,15 @@
           "name": "table"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":appendix:"
+          },
+          "named": true,
+          "value": "appendix"
+        },
+        {
           "type": "SEQ",
           "members": [
             {

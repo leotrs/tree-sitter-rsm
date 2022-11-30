@@ -1614,3 +1614,33 @@ Claimshort within item with meta
             tag: (math)
             (asis_text)))
         (text)))))
+
+
+================================================================================
+Appendix
+================================================================================
+
+:manuscript:
+
+# Foo
+::
+
+:appendix:
+
+# Bar
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text))
+  (specialblock
+    (appendix))
+  (specialblock
+    tag: (section)
+    title: (text)))

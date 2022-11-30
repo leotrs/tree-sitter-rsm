@@ -68,6 +68,9 @@ module.exports = grammar({
 	specialblock: $ => choice(
 	    $.table,
 
+	    // The appendix is a 'stamp': it has no content and needs no Halmos
+	    alias(':appendix:', $.appendix),
+
 	    // The bibliography tag is unique in that in can never have any content or
 	    // meta
 	    seq(field('tag', alias(':bibliography:', 'bibliography')), '::'),
