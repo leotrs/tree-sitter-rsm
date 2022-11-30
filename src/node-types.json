@@ -458,6 +458,10 @@
         {
           "type": "path",
           "named": true
+        },
+        {
+          "type": "scale",
+          "named": true
         }
       ]
     }
@@ -1333,6 +1337,10 @@
     "named": true
   },
   {
+    "type": "scale",
+    "named": true
+  },
+  {
     "type": "section",
     "named": true
   },
@@ -1383,6 +1391,10 @@
   {
     "type": "text",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "theorem",

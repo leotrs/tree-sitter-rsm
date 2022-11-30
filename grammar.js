@@ -385,6 +385,7 @@ module.exports = grammar({
 	metatag_any: $ => choice(
 	    alias(':date:', $.date),
 	    alias(':path:', $.path),
+            alias(':scale:', $.scale),
 	),
 
 	// It is important that comment appears at the end so that other rules will be

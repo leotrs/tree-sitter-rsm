@@ -2713,6 +2713,15 @@
           },
           "named": true,
           "value": "path"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":scale:"
+          },
+          "named": true,
+          "value": "scale"
         }
       ]
     },
