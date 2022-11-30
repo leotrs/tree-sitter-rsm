@@ -88,6 +88,9 @@ void show_beginning_debug_message(const bool *valid_symbols) {
   if (valid_symbols[TURNSTILE]) {
     printf("TURNSTILE ");
   }
+  if (valid_symbols[TURNSTILE_END]) {
+    printf("TURNSTILE_END ");
+  }
   if (valid_symbols[TEXT]) {
     printf("TEXT ");
   }
@@ -206,7 +209,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile)
   struct ScannerState *state = (struct ScannerState *)payload;
 
   if (look_for_turnstile) {
-    debug_log("trying TEXT or TURNSTILE");
+    debug_log("trying TEXT or TURNSTILE or TURNSTILE_END");
   } else {
     debug_log("trying TEXT");
   }
@@ -234,6 +237,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile)
   if (state->within_turnstile && lexer->lookahead == '.') {
     lexer->mark_end(lexer);
     state->within_turnstile = false;
+    debug_log("found end of turnstile");
     return success(lexer, TURNSTILE_END);
   }
 
@@ -253,6 +257,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile)
 	  && lexer->lookahead != '#'  // section header
 	  && lexer->lookahead != '%'  // comment
 	  && lexer->lookahead != '\0' // EOF
+	  // stop before a period, but only if inside a turnstile
 	  && (!state->within_turnstile || lexer->lookahead != '.')
 	  )
 	 ) {

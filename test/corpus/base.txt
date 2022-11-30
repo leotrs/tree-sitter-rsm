@@ -1561,3 +1561,56 @@ Cite with multiple targets
     (specialinline
       tag: (cite)
       targetlabels: (text))))
+
+
+================================================================================
+Cite with multiple targets
+================================================================================
+
+:manuscript:
+
+:enumerate:
+
+  :item: {:label: one} ⊢ $2+2=4$.
+
+  :item: {:label: two} ⊢ $3+3=6$.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (enumerate))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (specialinline
+          tag: (claimshort)
+          (specialinline
+            tag: (math)
+            (asis_text)))
+        (text)))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (specialinline
+          tag: (claimshort)
+          (specialinline
+            tag: (math)
+            (asis_text)))
+        (text)))))
