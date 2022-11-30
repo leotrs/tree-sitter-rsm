@@ -1,0 +1,1563 @@
+================================================================================
+Empty manuscript with newline
+================================================================================
+
+:manuscript:
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript))
+
+
+================================================================================
+Empty manuscript with space
+================================================================================
+
+:manuscript: ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript))
+
+
+================================================================================
+Empty manuscript with nothing
+================================================================================
+
+:manuscript:::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript))
+
+
+================================================================================
+Manuscript with one paragraph with newline
+================================================================================
+
+:manuscript:
+
+Lorem ipsum.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Manuscript with one paragraph with space
+================================================================================
+
+:manuscript:
+
+Lorem ipsum. ::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Manuscript with one paragraph with nothing
+================================================================================
+
+:manuscript:
+
+Lorem ipsum.::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Manuscript with title and paragraph
+================================================================================
+
+:manuscript:
+  :title: My Title
+
+Lorem ipsum.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  meta: (blockmeta
+    (blockmetapair
+      (metatag_text
+        (title))
+      (metavalue_text)))
+  (paragraph
+    (text)))
+
+
+================================================================================
+Manuscript with title
+================================================================================
+
+:manuscript:
+  :title: My Title
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  meta: (blockmeta
+    (blockmetapair
+      (metatag_text
+        (title))
+      (metavalue_text))))
+
+
+================================================================================
+Manuscript with title and meta
+================================================================================
+
+:manuscript:
+  :label: mylbl
+  :title: My Title
+  :date: 2022-03-29
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  meta: (blockmeta
+    (blockmetapair
+      (metatag_text
+        (label))
+      (metavalue_text))
+    (blockmetapair
+      (metatag_text
+        (title))
+      (metavalue_text))
+    (blockmetapair
+      (metatag_any
+        (date))
+      (metavalue_any))))
+
+
+================================================================================
+Section
+================================================================================
+
+:manuscript:
+
+:section:
+
+  Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (section))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Section with title
+================================================================================
+
+:manuscript:
+
+:section:
+  :title: Section title
+
+  Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (section))
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (title))
+        (metavalue_text)))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Section with meta
+================================================================================
+
+:manuscript:
+
+:section:
+  :title: Section title
+  :types: {t1, t2}
+
+  Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (section))
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (title))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_list
+          (types))
+        (metavalue_list
+          (metavalue_list_item)
+          (metavalue_list_item))))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Author and abstract
+================================================================================
+
+:manuscript:
+:label: mylbl
+:title: The Perron non-backtracking eigenvalue after node addition
+:date: 2022-03-29
+
+:author:
+  :name: Leo Torres
+  :affiliation: Max Planck Institute for Mathematics in the Sciences
+  :email: leo@leotrs.com
+::
+
+:abstract:
+  :keywords: {spectral graph theory, non-backtracking, interlacing}
+  :MSC: {05C50, 05C82, 15A18, 15B99}
+
+  Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
+  ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
+  ipsum. Lorem ipsum.
+
+  Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
+  ipsum. Lorem ipsum.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  meta: (blockmeta
+    (blockmetapair
+      (metatag_text
+        (label))
+      (metavalue_text))
+    (blockmetapair
+      (metatag_text
+        (title))
+      (metavalue_text))
+    (blockmetapair
+      (metatag_any
+        (date))
+      (metavalue_any)))
+  (block
+    tag: (blocktag
+      (author))
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (name))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_text
+          (affiliation))
+        (metavalue_text))
+      (blockmetapair
+        (metatag_text
+          (email))
+        (metavalue_text))))
+  (block
+    tag: (blocktag
+      (abstract))
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_list
+          (keywords))
+        (metavalue_list
+          (metavalue_list_item)
+          (metavalue_list_item)
+          (metavalue_list_item)))
+      (blockmetapair
+        (metatag_list
+          (MSC))
+        (metavalue_list
+          (metavalue_list_item)
+          (metavalue_list_item)
+          (metavalue_list_item)
+          (metavalue_list_item))))
+    (paragraph
+      (text)
+      (text)
+      (text))
+    (paragraph
+      (text)
+      (text))))
+
+
+================================================================================
+Inline meta no space
+================================================================================
+
+:manuscript:
+
+Foo :claim: {:label:lbl} bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta space before
+================================================================================
+
+:manuscript:
+
+Foo :claim: { :label:lbl} bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta space after
+================================================================================
+
+:manuscript:
+
+Foo :claim: {:label:lbl } bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta space between
+================================================================================
+
+:manuscript:
+
+Foo :claim: {:label: lbl} bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta space all
+================================================================================
+
+:manuscript:
+
+Foo :claim: { :label: lbl } bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta no space after tag
+================================================================================
+
+:manuscript:
+
+Foo :claim:{:label: lbl} bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline meta no space after meta
+================================================================================
+
+:manuscript:
+
+Foo :claim: {:label: lbl}bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text))
+    (text)))
+
+
+================================================================================
+Inline math no shortcut
+================================================================================
+
+:manuscript:
+
+:math:X::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (math)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Inline code no shortcut
+================================================================================
+
+:manuscript:
+
+:code:X::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (code)
+      (asis_text))
+    (text)))
+
+
+================================================================================
+Block code no shortcut
+================================================================================
+
+:manuscript:
+
+:codeblock:
+  comp = [abs(x) for x in range(10)]
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (codeblock)
+    (asis_text)))
+
+
+================================================================================
+Block code no shortcut and meta
+================================================================================
+
+:manuscript:
+
+:codeblock:
+  :label: some-code
+  :types: python
+
+  comp = [abs(x) for x in range(10)]
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (codeblock)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+	  (label))
+	  (metavalue_text))
+      (blockmetapair
+        (metatag_list
+	  (types))
+	(metavalue_list
+	  (metavalue_list_item))))
+    (asis_text)))
+
+
+================================================================================
+Math inside claim
+================================================================================
+
+:manuscript:
+
+:claim: :math:2+2=4:: ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (claim))
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Math inside claim no space
+================================================================================
+
+:manuscript:
+
+:claim::math:2+2=4::::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (claim))
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Claim with meta and math
+================================================================================
+
+:manuscript:
+
+:claim: {:label: lbl} all $X$ are $Y$::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (claim))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_text
+            (label))
+          (metavalue_text_inline
+            (upto_brace_or_comma_text))))
+      (text)
+      (specialinline
+        tag: (math)
+        (asis_text))
+      (text)
+      (specialinline
+        tag: (math)
+        (asis_text)))
+    (text)))
+
+
+================================================================================
+Enumerate
+================================================================================
+
+:manuscript:
+
+:enumerate:
+
+  :item: Foo.
+
+  :item: Bar.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (enumerate))
+    (paragraph
+      (item
+        (text)))
+    (paragraph
+      (item
+        (text)))))
+
+
+================================================================================
+Enumerate no space before Halmos
+================================================================================
+
+:manuscript:
+
+:enumerate:
+
+  :item: Foo.::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (enumerate))
+    (paragraph
+      (item
+        (text)))))
+
+
+================================================================================
+Enumerate items with label
+================================================================================
+
+:manuscript:
+
+:enumerate:
+
+  :item: {:label: one} Foo.
+
+  :item: {:label: two} Bar.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (enumerate))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))))
+
+
+================================================================================
+Itemize
+================================================================================
+
+:manuscript:
+
+:itemize:
+
+  :item: Foo.
+
+  :item: Bar.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (itemize))
+    (paragraph
+      (item
+        (text)))
+    (paragraph
+      (item
+        (text)))))
+
+
+================================================================================
+Itemize no space before Halmos
+================================================================================
+
+:manuscript:
+
+:itemize:
+
+  :item: Foo.::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (itemize))
+    (paragraph
+      (item
+        (text)))))
+
+
+================================================================================
+Itemize items with label
+================================================================================
+
+:manuscript:
+
+:itemize:
+
+  :item: {:label: one} Foo.
+
+  :item: {:label: two} Bar.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (itemize))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))
+    (paragraph
+      (item
+        meta: (inlinemeta
+          (inlinemetapair
+            (metatag_text
+              (label))
+            (metavalue_text_inline
+              (upto_brace_or_comma_text))))
+        (text)))))
+
+================================================================================
+Proof with no steps
+================================================================================
+
+:manuscript:
+
+:proof:
+
+  By some axiom.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (proof))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Proof with one step
+================================================================================
+
+:manuscript:
+
+:proof:
+
+  :step: Axiom. ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (proof))
+    (block
+      tag: (blocktag
+        (step))
+      (paragraph
+        (text)))))
+
+
+
+================================================================================
+Proof with three steps
+================================================================================
+
+:manuscript:
+
+:theorem:
+
+  Socrates is mortal.
+
+::
+
+:proof:
+
+  :step: All men are mortal. ::
+
+  :step: Socrates is a man. ::
+
+  :step: QED ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (theorem))
+    (paragraph
+      (text)))
+  (block
+    tag: (blocktag
+      (proof))
+    (block
+      tag: (blocktag
+        (step))
+      (paragraph
+        (text)))
+    (block
+      tag: (blocktag
+        (step))
+      (paragraph
+        (text)))
+    (block
+      tag: (blocktag
+        (step))
+      (paragraph
+        (text)))))
+
+
+================================================================================
+Proof with sub-step and sub-proof
+================================================================================
+
+:manuscript:
+
+:proof:
+
+  :step: Top level step.
+
+    :step: Sub-step.
+
+      :p: Sub-proof.::
+
+    ::
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (proof))
+    (block
+      tag: (blocktag
+        (step))
+      (paragraph
+        (text))
+      (block
+        tag: (blocktag
+          (step))
+        (paragraph
+          (text))
+        (block
+          tag: (blocktag
+            (subproof))
+          (paragraph
+            (text)))))))
+
+
+================================================================================
+Span strong
+================================================================================
+
+:manuscript:
+
+:span: {:strong:}shortcut::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (span))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_bool
+            (strong))))
+      (text))
+    (text)))
+
+
+================================================================================
+Span emphas
+================================================================================
+
+:manuscript:
+
+:span: {:emphas:}shortcut::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (span))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_bool
+            (emphas))))
+      (text))
+    (text)))
+
+
+================================================================================
+Span strong and emphas
+================================================================================
+
+:manuscript:
+
+:span: {:strong:, :emphas:}shortcut::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (span))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_bool
+            (strong)))
+	(inlinemetapair
+          (metatag_bool
+            (emphas))))
+      (text))
+    (text)))
+
+
+================================================================================
+Strong half word
+================================================================================
+
+:manuscript:
+
+Bo:span:{:strong:}ld::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (span))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_bool
+            (strong))))
+      (text))
+    (text)))
+
+
+================================================================================
+Reference
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref:lbl::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Reference with space
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref: lbl ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text))
+    (text)))
+
+
+================================================================================
+Reference with reftext
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref:lbl,the section::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text))
+    (text)))
+
+
+================================================================================
+Reference with reftext with space
+================================================================================
+
+:manuscript:
+
+# Foo
+  :label: lbl
+
+  Bar.
+
+::
+
+:ref: lbl , the section ::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_text
+          (label))
+        (metavalue_text)))
+    (paragraph
+      (text)))
+  (paragraph
+    (specialinline
+      tag: (ref)
+      target: (text)
+      reftext: (text))
+    (text)))
+
+
+================================================================================
+Escaped colon
+================================================================================
+
+:manuscript:
+
+Foo\: bar.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Escaped colon inside span
+================================================================================
+
+:manuscript:
+
+:span: Foo\: bar::.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (inline
+      tag: (inlinetag
+        (span))
+      (text))
+    (text)))
+
+
+================================================================================
+ERROR: unclosed strong region
+================================================================================
+
+:manuscript:
+
+Bo*ld.
+
+::
+
+--------------------------------------------------------------------------------
+
+(ERROR
+  (manuscript)
+    (text)
+    (spanstrong)
+    (text))
+
+
+================================================================================
+Escaped star
+================================================================================
+
+:manuscript:
+
+Bo\*ld.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)))
+
+
+================================================================================
+Figure
+================================================================================
+
+:manuscript:
+
+:figure:
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+    (figure))))
+
+
+================================================================================
+Figure with meta and caption
+================================================================================
+
+:manuscript:
+
+:figure:
+  :path: assets/example.png
+
+  :caption: This is the figure caption.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (blocktag
+      (figure))
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_any
+          (path))
+        (metavalue_any)))
+    (paragraph
+      (caption
+        (text)))))
+
+
+================================================================================
+ERROR: item in the wrong place
+================================================================================
+
+:manuscript:
+
+# Some section
+
+Lorem ipsum :item: Foo bar.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (section)
+    title: (text)
+    (paragraph
+      (text)
+      (ERROR)
+      (text)))
+  (MISSING "::"))
+
+
+================================================================================
+List meta pair inside inline meta region
+================================================================================
+
+:manuscript:
+
+Foo :span: {:types: {t1, t2}} bar :: baz.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text)
+    (inline
+      tag: (inlinetag
+        (span))
+      meta: (inlinemeta
+        (inlinemetapair
+          (metatag_list
+            (types))
+          (metavalue_list_inline
+            (metavalue_list_item)
+            (metavalue_list_item))))
+      (text))
+    (text)))
+
+
+================================================================================
+Cite
+================================================================================
+
+:manuscript:
+
+:cite:foo::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (cite)
+      targetlabels: (text))))
+
+
+================================================================================
+Cite with multiple targets
+================================================================================
+
+:manuscript:
+
+:cite:foo,bar::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (specialinline
+      tag: (cite)
+      targetlabels: (text))))

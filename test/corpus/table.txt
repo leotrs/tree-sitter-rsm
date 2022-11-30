@@ -1,0 +1,315 @@
+================================================================================
+Table
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+
+  :tr: :td:foo:: :td:bar:: ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (tr
+          (td
+	    (tdcontent
+              (text)))
+          (td
+	    (tdcontent
+              (text))))))))
+
+
+================================================================================
+Table with header
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+  :tbody:
+    :tr: :td:foo:: :td:bar:: ::
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (tr
+          (td
+	    (tdcontent
+              (text)))
+          (td
+	    (tdcontent
+              (text)))))
+      body: (tbody
+        (tr
+          (td
+	    (tdcontent
+              (text)))
+          (td
+	    (tdcontent
+              (text))))
+        (tr
+          (td
+	    (tdcontent
+              (text)))
+          (td
+	    (tdcontent
+              (text))))))))
+
+
+================================================================================
+Table with math in header
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+
+    :tr: :td: $X$ :: :td: $Y$ :: :td: $Z$ :: ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (tr
+          (td
+	    (tdcontent
+              (specialinline
+                tag: (math)
+                (asis_text))))
+          (td
+	    (tdcontent
+              (specialinline
+                tag: (math)
+                (asis_text))))
+          (td
+	    (tdcontent
+              (specialinline
+                tag: (math)
+                (asis_text)))))))))
+
+
+================================================================================
+Table with caption
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+    :tr: :td:foo:: :td:bar:: ::
+  ::
+
+  :caption: This is a caption.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (tr
+          (td
+	    (tdcontent
+              (text)))
+          (td
+	    (tdcontent
+              (text)))))
+      caption: (caption
+        (text)))))
+
+
+================================================================================
+Table with shortcut
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+
+  :tr: foo : bar ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (trshort
+          (tdcontent
+            (text))
+          (tdcontent
+            (text)))))))
+
+
+================================================================================
+Table with header with shortcut
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+    :tr: foo : bar ::
+  ::
+
+  :tbody:
+    :tr: foo : bar ::
+    :tr: foo : bar ::
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (trshort
+          (tdcontent
+            (text))
+          (tdcontent
+            (text))))
+      body: (tbody
+        (trshort
+          (tdcontent
+            (text))
+          (tdcontent
+            (text)))
+        (trshort
+          (tdcontent
+            (text))
+          (tdcontent
+            (text)))))))
+
+
+================================================================================
+Table with math in header with shortcut
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :thead:
+
+    :tr: $X$ : $Y$ : $Z$ ::
+
+  ::
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      head: (thead
+        (trshort
+          (tdcontent
+            (specialinline
+              tag: (math)
+              (asis_text)))
+          (tdcontent
+            (specialinline
+              tag: (math)
+              (asis_text)))
+          (tdcontent
+            (specialinline
+              tag: (math)
+              (asis_text))))))))
+
+
+================================================================================
+Table with caption with shortcut
+================================================================================
+
+:manuscript:
+
+:table:
+
+  :tbody:
+    :tr: foo : bar ::
+  ::
+
+  :caption: This is a caption.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    (table
+      body: (tbody
+        (trshort
+          (tdcontent
+            (text))
+          (tdcontent
+            (text))))
+      caption: (caption
+        (text)))))
