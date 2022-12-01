@@ -71,9 +71,10 @@ module.exports = grammar({
 	    // The appendix is a 'stamp': it has no content and needs no Halmos
 	    alias(':appendix:', $.appendix),
 
-	    // The bibliography tag is unique in that in can never have any content or
-	    // meta
-	    seq(field('tag', alias(':bibliography:', 'bibliography')), '::'),
+	    // The following are NOT stamps because they could have meta, though they
+	    // cannot have content
+	    seq(field('tag', alias(':bibliography:', $.bibliography)), '::'),
+	    seq(field('tag', alias(':toc:', $.toc)), '::'),
 
 	    // Sections have a special opening using hashtags, but their content is
 	    // parsed just like any other block's.

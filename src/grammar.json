@@ -313,8 +313,30 @@
                   "type": "STRING",
                   "value": ":bibliography:"
                 },
-                "named": false,
+                "named": true,
                 "value": "bibliography"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "::"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "tag",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": ":toc:"
+                },
+                "named": true,
+                "value": "toc"
               }
             },
             {
