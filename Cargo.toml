@@ -1,10 +1,10 @@
 [package]
-name = "tree-sitter-RSM"
+name = "tree-sitter-rsm"
 description = "RSM grammar for the tree-sitter parsing library"
 version = "0.0.1"
-keywords = ["incremental", "parsing", "RSM"]
+keywords = ["incremental", "parsing", "rsm"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-RSM"
+repository = "https://github.com/tree-sitter/tree-sitter-rsm"
 edition = "2018"
 license = "MIT"
 

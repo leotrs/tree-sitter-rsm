@@ -113,23 +113,23 @@ struct ScannerState {
   bool within_turnstile;
 };
 
-void *tree_sitter_RSM_external_scanner_create() {
+void *tree_sitter_rsm_external_scanner_create() {
   struct ScannerState *state = calloc(0, sizeof(struct ScannerState));
   state->within_turnstile = false;
   return state;
 }
 
-void tree_sitter_RSM_external_scanner_destroy(void *p) {
+void tree_sitter_rsm_external_scanner_destroy(void *p) {
   free(p);
 }
 
-unsigned tree_sitter_RSM_external_scanner_serialize(void *p, char *buffer) {
+unsigned tree_sitter_rsm_external_scanner_serialize(void *p, char *buffer) {
   struct ScannerState *state = (struct ScannerState *)p;
   buffer[0] = state->within_turnstile;
   return 1;
 }
 
-void tree_sitter_RSM_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
+void tree_sitter_rsm_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
   if (n != 1) {return;}
   struct ScannerState *state = (struct ScannerState *)p;
   state->within_turnstile = buffer[0];
@@ -401,7 +401,7 @@ bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool tree_sitter_RSM_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
   show_beginning_debug_message(valid_symbols);
   show_lookahead(lexer);
 

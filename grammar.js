@@ -1,5 +1,5 @@
 module.exports = grammar({
-    name: 'RSM',
+    name: 'rsm',
 
     externals: $ => [
 	$.upto_brace_or_comma_text,

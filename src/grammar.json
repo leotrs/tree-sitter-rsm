@@ -1,5 +1,5 @@
 {
-  "name": "RSM",
+  "name": "rsm",
   "rules": {
     "source_file": {
       "type": "SEQ",
