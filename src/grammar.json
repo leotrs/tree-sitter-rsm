@@ -2450,6 +2450,15 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":claimblock:"
+          },
+          "named": true,
+          "value": "claimblock"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":definition:"
           },
           "named": true,

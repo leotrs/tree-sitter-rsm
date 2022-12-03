@@ -184,6 +184,10 @@
           "named": true
         },
         {
+          "type": "claimblock",
+          "named": true
+        },
+        {
           "type": "definition",
           "named": true
         },
@@ -1201,6 +1205,10 @@
     "named": true
   },
   {
+    "type": "claimblock",
+    "named": true
+  },
+  {
     "type": "claimshort",
     "named": true
   },
@@ -1387,6 +1395,10 @@
   {
     "type": "subsubsubsection",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",

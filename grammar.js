@@ -344,6 +344,7 @@ module.exports = grammar({
 	blocktag: $ => choice(
 	    alias(':abstract:', $.abstract),
 	    alias(':author:', $.author),
+	    alias(':claimblock:', $.claimblock),
 	    alias(':definition:', $.definition),
 	    alias(':enumerate:', $.enumerate),
 	    alias(':itemize:', $.itemize),
