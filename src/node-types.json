@@ -1282,7 +1282,15 @@
   },
   {
     "type": "math",
+    "named": false
+  },
+  {
+    "type": "math",
     "named": true
+  },
+  {
+    "type": "mathblock",
+    "named": false
   },
   {
     "type": "mathblock",
@@ -1403,10 +1411,6 @@
   {
     "type": "text",
     "named": true
-  },
-  {
-    "type": "text",
-    "named": false
   },
   {
     "type": "theorem",

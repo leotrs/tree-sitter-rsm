@@ -624,8 +624,13 @@
               "value": "asis_text"
             },
             {
-              "type": "PATTERN",
-              "value": "\\$\\$"
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\$\\$"
+              },
+              "named": false,
+              "value": "mathblock"
             }
           ]
         },
@@ -1092,8 +1097,13 @@
               "value": "asis_text"
             },
             {
-              "type": "PATTERN",
-              "value": "\\$"
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\$"
+              },
+              "named": false,
+              "value": "math"
             }
           ]
         },
