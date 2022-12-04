@@ -1,0 +1,6 @@
+[
+ (proof)
+ (step)
+ ()
+ ] @keyword
+":" @keyword
