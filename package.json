@@ -1,9 +1,18 @@
 {
-  "devDependencies": {
-    "tree-sitter-cli": "^0.19.5"
-  },
-  "main": "bindings/node",
-  "dependencies": {
-    "tree-sitter": "^0.20.1"
-  }
+    "devDependencies": {
+	"tree-sitter-cli": "^0.19.5"
+    },
+    "main": "bindings/node",
+    "dependencies": {
+	"tree-sitter": "^0.20.1"
+    },
+    "tree-sitter": [
+	{
+	    "scope": "source.rsm",
+	    "file-types": [
+		"rsm"
+	    ],
+	    "first-line-regex": ":manuscript:"
+	}
+    ]
 }
