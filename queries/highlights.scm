@@ -3,7 +3,6 @@
  (author)
  (abstract)
  (toc)
- ;; (section)
  (theorem)
  (lemma)
  (remark)
@@ -54,7 +53,8 @@
  (MSC)
  ] @metatag
 
-"::" @halmos
+(block ("::") @block-halmos)
+(inline ("::") @inline-halmos)
 
 ":" @colon
 
