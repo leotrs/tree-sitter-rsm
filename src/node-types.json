@@ -970,13 +970,34 @@
             "named": true
           }
         ]
+      },
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":table:",
+            "named": false
+          }
+        ]
       }
     }
   },
   {
     "type": "tbody",
     "named": true,
-    "fields": {},
+    "fields": {
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":tbody:",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1054,7 +1075,18 @@
   {
     "type": "thead",
     "named": true,
-    "fields": {},
+    "fields": {
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":thead:",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1073,7 +1105,18 @@
   {
     "type": "tr",
     "named": true,
-    "fields": {},
+    "fields": {
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":tr:",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1088,7 +1131,18 @@
   {
     "type": "trshort",
     "named": true,
-    "fields": {},
+    "fields": {
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": ":tr:",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,

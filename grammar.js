@@ -277,21 +277,21 @@ module.exports = grammar({
 	// Tables
 	/////////////////////////////////////////////////////////////
 	table: $ => seq(
-	    ':table:',
+	    field('tag', ':table:'),
 	    field('meta', optional($.blockmeta)),
 	    field('head', optional($.thead)),
 	    field('body', optional($.tbody)),
 	    field('caption', optional($.caption)),
 	    '::'),
 
-	thead: $ => seq(':thead:', repeat1(choice($.tr, $.trshort)), '::'),
+	thead: $ => seq(field('tag', ':thead:'), repeat1(choice($.tr, $.trshort)), '::'),
 
-	tbody: $ => seq(':tbody:', repeat1(choice($.tr, $.trshort)), '::'),
+	tbody: $ => seq(field('tag', ':tbody:'), repeat1(choice($.tr, $.trshort)), '::'),
 
-	tr: $ => seq(':tr:', repeat1($.td), '::'),
+	tr: $ => seq(field('tag', ':tr:'), repeat1($.td), '::'),
 
 	trshort: $ => prec(1,
-			   seq(':tr:',
+			   seq(field('tag', ':tr:'),
 			       choice($.tdcontent, seq(repeat1(seq($.tdcontent, ':')), $.tdcontent)),
 			       '::')),
 

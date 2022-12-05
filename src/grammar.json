@@ -1966,8 +1966,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ":table:"
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "STRING",
+            "value": ":table:"
+          }
         },
         {
           "type": "FIELD",
@@ -2043,8 +2047,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ":thead:"
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "STRING",
+            "value": ":thead:"
+          }
         },
         {
           "type": "REPEAT1",
@@ -2072,8 +2080,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ":tbody:"
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "STRING",
+            "value": ":tbody:"
+          }
         },
         {
           "type": "REPEAT1",
@@ -2101,8 +2113,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ":tr:"
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "STRING",
+            "value": ":tr:"
+          }
         },
         {
           "type": "REPEAT1",
@@ -2124,8 +2140,12 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "STRING",
-            "value": ":tr:"
+            "type": "FIELD",
+            "name": "tag",
+            "content": {
+              "type": "STRING",
+              "value": ":tr:"
+            }
           },
           {
             "type": "CHOICE",
