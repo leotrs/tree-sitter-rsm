@@ -1,5 +1,30 @@
+;; Labels
+(blockmeta
+ (blockmetapair
+  (metatag_text
+   (label))
+  (metavalue_text) @label))
+(inlinemeta
+ (inlinemetapair
+  (metatag_text
+   (label))
+  (metavalue_text_inline
+   (upto_brace_or_comma_text)) @label))
+(specialinline
+ tag: (ref)
+ target: (text) @label
+ reftext: (text))
+(specialinline
+ tag: (ref)
+ target: (text) @label)
+(specialinline
+ tag: (cite)
+ targetlabels: (text) @label)
+(bibitem
+ (label) @label)
+
+;; Tags
 [
- (manuscript)
  (author)
  (abstract)
  (toc)
@@ -12,17 +37,13 @@
  (subproof)
  (sketch)
  (bibliography)
- (bibtex)
  (figure)
  (claimblock)
  (algorithm)
  (enumerate)
  (itemize)
  (definition)
- (table)
- (tbody)
- (thead)
- ] @blocktag
+ ] @block-tag
 
 [
  (claim)
@@ -36,12 +57,14 @@
  (prev3)
  (previous)
  (url)
- ] @inlinetag
+ ] @inline-tag
 
 [
  (label)
  (types)
+ (title)
  (path)
+ (scale)
  (affiliation)
  (email)
  (name)
@@ -51,25 +74,81 @@
  (emphas)
  (keywords)
  (MSC)
- ] @metatag
+ ] @meta-tag
 
-(block ("::") @block-halmos)
-(inline ("::") @inline-halmos)
+(paragraph (":paragraph:") @inline-tag)
+(item (":item:") @inline-tag)
+(caption (":caption:") @inline-tag)
 
-":" @colon
+;; Special regions
+(asis_text) @asis
 
-[(mathblock) "mathblock"] @mathblock
+;; Bibliography stuff
+(bibtex (":bibtex:") @block-tag)
+(bibitem (kind) @block-tag)
+(bibitem (kind) @block-tag)
+(bibitempair
+ (key) @meta-tag
+ ("=") @special-delim
+ ("{") @special-delim
+ (value)
+ ("}") @special-delim)
+(bibtex ("::") @block-halmos)
 
-[(math) "math"] @math
+;; Table
+(table (":table:") @block-tag)
+(tbody (":tbody:") @block-tag)
+(thead (":thead:") @block-tag)
+(table ("::") @block-halmos)
+(tbody ("::") @block-halmos)
+(thead ("::") @block-halmos)
+(tr (":tr:") @inline-tag)
+(td (":td:") @inline-tag)
+(trshort (":tr:") @inline-tag)
+(tr ("::") @inline-halmos)
+(td ("::") @inline-halmos)
+(trshort ("::") @inline-halmos)
+(trshort (tdcontent) . (":") @trshort-colon . (tdcontent))
 
-;; (codeblock) @codeblock
-;; "codeblock" @codeblock
+;; Delimiters
+[(mathblock) "mathblock"] @special-delim
+[(math) "math"] @special-delim
+;; [(codeblock) "codeblock"] @special-delim
+;; [(code) "code"] @special-delim
+(inlinemeta ("{") @meta-delim)
+(inlinemeta ("}") @meta-delim)
+((specialinline
+  (claimshort) @inline-tag)
+ (text) @inline-halmos)
 
+;; Span properties
 (specialinline (spanemphas) (text)) @emphas
 (specialinline (spanstrong) (text)) @strong
 
+;; Sections
+(manuscript) @heading
 (specialblock
  tag: [(section) (subsection) (subsubsection)]
  title: (text) @heading)
-
 ((metatag_text (title)) (metavalue_text) @heading)
+(specialblock [(section) (subsection) (subsubsection)] @heading)
+
+;; Halmos
+(inline ("::") @inline-halmos)
+(specialinline ("::") @inline-halmos)
+
+(block ("::") @block-halmos)
+(specialblock [(section) (subsection) (subsubsection)] ("::") @heading-halmos .)
+(source_file ("::") @heading-halmos)
+
+;; Draft
+(inline
+ (inlinetag
+  (draft))
+ (text) @draft)
+
+;; Comments
+(comment) @comment
+
+;; Errors
+(ERROR) @error
