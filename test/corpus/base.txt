@@ -1662,3 +1662,33 @@ Table of Contents
   tag: (manuscript)
   (specialblock
     tag: (toc)))
+
+
+================================================================================
+Space after closing mathblock should be allowed
+================================================================================
+
+:manuscript:
+
+There is a single space after the closing double dollar sign, which makes the following
+paragraph freak out on the first letter for some reason.
+
+$$
+2+2
+$$ 
+
+x
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (mathblock)
+    (asis_text))
+  (paragraph
+    (text)))
+
+
