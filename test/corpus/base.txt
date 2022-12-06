@@ -1692,3 +1692,39 @@ x
     (text)))
 
 
+================================================================================
+Math block with isclaim meta
+================================================================================
+
+:manuscript:
+
+$$
+:isclaim:
+  2+2 = 4
+$$
+
+:mathblock:
+:isclaim:
+  2+2 = 4
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (specialblock
+    tag: (mathblock)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_bool
+          (isclaim))))
+    (asis_text))
+  (specialblock
+    tag: (mathblock)
+    meta: (blockmeta
+      (blockmetapair
+        (metatag_bool
+          (isclaim))))
+    (asis_text)))

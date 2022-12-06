@@ -149,7 +149,7 @@ module.exports = grammar({
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
-	    // Turnstile characters start a span until a period is found
+	    // Turnstile characters start a claim until a period is found
 	    prec(1,
 		 seq(field('tag', alias($.turnstile, $.claimshort)),
 		     repeat(choice(
@@ -158,7 +158,7 @@ module.exports = grammar({
 			 prec(0, $.text))),
 		     alias($.turnstile_end, 'turnstile_end'))),
 
-	    // Prev* are special because they have no content and no Halmos
+	    // Prev* are special bc they have no content and no Halmos (they are stamps)
 	    alias(token(':prev:'), $.prev),
 	    alias(token(':prev2:'), $.prev2),
 	    alias(token(':prev3:'), $.prev3),
@@ -344,7 +344,6 @@ module.exports = grammar({
 	blocktag: $ => choice(
 	    alias(':abstract:', $.abstract),
 	    alias(':author:', $.author),
-	    alias(':claimblock:', $.claimblock),
 	    alias(':definition:', $.definition),
 	    alias(':enumerate:', $.enumerate),
 	    alias(':itemize:', $.itemize),
@@ -376,6 +375,7 @@ module.exports = grammar({
 	    alias(':nonum:', $.nonum),
 	    alias(':strong:', $.strong),
 	    alias(':emphas:', $.emphas),
+            alias(':isclaim:', $.isclaim),
 	),
 
         metatag_list: $ => choice(

@@ -184,10 +184,6 @@
           "named": true
         },
         {
-          "type": "claimblock",
-          "named": true
-        },
-        {
           "type": "definition",
           "named": true
         },
@@ -480,6 +476,10 @@
       "types": [
         {
           "type": "emphas",
+          "named": true
+        },
+        {
+          "type": "isclaim",
           "named": true
         },
         {
@@ -1259,10 +1259,6 @@
     "named": true
   },
   {
-    "type": "claimblock",
-    "named": true
-  },
-  {
     "type": "claimshort",
     "named": true
   },
@@ -1304,6 +1300,10 @@
   },
   {
     "type": "figure",
+    "named": true
+  },
+  {
+    "type": "isclaim",
     "named": true
   },
   {
