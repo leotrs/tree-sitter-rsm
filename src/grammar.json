@@ -1662,8 +1662,13 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "inlinemetapair"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "inlinemetapair"
+              },
+              "named": true,
+              "value": "pair"
             },
             {
               "type": "SEQ",
@@ -1674,8 +1679,13 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "inlinemetapair"
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "inlinemetapair"
+                        },
+                        "named": true,
+                        "value": "pair"
                       },
                       {
                         "type": "STRING",
@@ -1685,8 +1695,13 @@
                   }
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "inlinemetapair"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "inlinemetapair"
+                  },
+                  "named": true,
+                  "value": "pair"
                 }
               ]
             }
@@ -1699,16 +1714,16 @@
       ]
     },
     "blockmeta": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "blockmetapair"
-          }
-        }
-      ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "ALIAS",
+        "content": {
+          "type": "SYMBOL",
+          "name": "pair"
+        },
+        "named": true,
+        "value": "pair"
+      }
     },
     "inlinemetapair": {
       "type": "CHOICE",
@@ -1718,11 +1733,16 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_text"
+              "name": "metakey_text"
             },
             {
-              "type": "SYMBOL",
-              "name": "metavalue_text_inline"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "metaval_text_inline"
+              },
+              "named": true,
+              "value": "metaval_text"
             }
           ]
         },
@@ -1731,11 +1751,16 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_any"
+              "name": "metakey_any"
             },
             {
-              "type": "SYMBOL",
-              "name": "metavalue_any_inline"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "metaval_any_inline"
+              },
+              "named": true,
+              "value": "metaval_any"
             }
           ]
         },
@@ -1744,21 +1769,26 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_list"
+              "name": "metakey_list"
             },
             {
-              "type": "SYMBOL",
-              "name": "metavalue_list_inline"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "metaval_list_inline"
+              },
+              "named": true,
+              "value": "metaval_list"
             }
           ]
         },
         {
           "type": "SYMBOL",
-          "name": "metatag_bool"
+          "name": "metakey_bool"
         }
       ]
     },
-    "blockmetapair": {
+    "pair": {
       "type": "CHOICE",
       "members": [
         {
@@ -1766,11 +1796,11 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_text"
+              "name": "metakey_text"
             },
             {
               "type": "SYMBOL",
-              "name": "metavalue_text"
+              "name": "metaval_text"
             }
           ]
         },
@@ -1779,11 +1809,11 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_any"
+              "name": "metakey_any"
             },
             {
               "type": "SYMBOL",
-              "name": "metavalue_any"
+              "name": "metaval_any"
             }
           ]
         },
@@ -1792,21 +1822,21 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "metatag_list"
+              "name": "metakey_list"
             },
             {
               "type": "SYMBOL",
-              "name": "metavalue_list"
+              "name": "metaval_list"
             }
           ]
         },
         {
           "type": "SYMBOL",
-          "name": "metatag_bool"
+          "name": "metakey_bool"
         }
       ]
     },
-    "metavalue_any": {
+    "metaval_any": {
       "type": "ALIAS",
       "content": {
         "type": "TOKEN",
@@ -1818,7 +1848,7 @@
       "named": false,
       "value": "text"
     },
-    "metavalue_any_inline": {
+    "metaval_any_inline": {
       "type": "ALIAS",
       "content": {
         "type": "TOKEN",
@@ -1830,7 +1860,7 @@
       "named": false,
       "value": "text"
     },
-    "metavalue_text": {
+    "metaval_text": {
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
@@ -1839,16 +1869,16 @@
       "named": false,
       "value": "text"
     },
-    "metavalue_text_inline": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "upto_brace_or_comma_text"
-        }
-      ]
+    "metaval_text_inline": {
+      "type": "ALIAS",
+      "content": {
+        "type": "SYMBOL",
+        "name": "upto_brace_or_comma_text"
+      },
+      "named": false,
+      "value": "text"
     },
-    "metavalue_list": {
+    "metaval_list": {
       "type": "CHOICE",
       "members": [
         {
@@ -1870,7 +1900,7 @@
                       "name": "upto_brace_or_comma_text"
                     },
                     "named": true,
-                    "value": "metavalue_list_item"
+                    "value": "metaval_list_item"
                   },
                   {
                     "type": "STRING",
@@ -1886,7 +1916,7 @@
                 "name": "upto_brace_or_comma_text"
               },
               "named": true,
-              "value": "metavalue_list_item"
+              "value": "metaval_list_item"
             },
             {
               "type": "STRING",
@@ -1901,11 +1931,11 @@
             "name": "text"
           },
           "named": true,
-          "value": "metavalue_list_item"
+          "value": "metaval_list_item"
         }
       ]
     },
-    "metavalue_list_inline": {
+    "metaval_list_inline": {
       "type": "CHOICE",
       "members": [
         {
@@ -1927,7 +1957,7 @@
                       "name": "upto_brace_or_comma_text"
                     },
                     "named": true,
-                    "value": "metavalue_list_item"
+                    "value": "metaval_list_item"
                   },
                   {
                     "type": "STRING",
@@ -1943,7 +1973,7 @@
                 "name": "upto_brace_or_comma_text"
               },
               "named": true,
-              "value": "metavalue_list_item"
+              "value": "metaval_list_item"
             },
             {
               "type": "STRING",
@@ -1958,7 +1988,7 @@
             "name": "upto_brace_or_comma_text"
           },
           "named": true,
-          "value": "metavalue_list_item"
+          "value": "metaval_list_item"
         }
       ]
     },
@@ -2622,7 +2652,7 @@
         }
       ]
     },
-    "metatag_text": {
+    "metakey_text": {
       "type": "CHOICE",
       "members": [
         {
@@ -2681,7 +2711,7 @@
         }
       ]
     },
-    "metatag_bool": {
+    "metakey_bool": {
       "type": "CHOICE",
       "members": [
         {
@@ -2722,7 +2752,7 @@
         }
       ]
     },
-    "metatag_list": {
+    "metakey_list": {
       "type": "CHOICE",
       "members": [
         {
@@ -2754,7 +2784,7 @@
         }
       ]
     },
-    "metatag_any": {
+    "metakey_any": {
       "type": "CHOICE",
       "members": [
         {
@@ -2857,7 +2887,10 @@
       "name": "paragraph_end"
     }
   ],
-  "inline": [],
+  "inline": [
+    "blocktag",
+    "inlinetag"
+  ],
   "supertypes": []
 }
 

@@ -14,6 +14,9 @@ module.exports = grammar({
 	$.paragraph_end,
     ],
 
+    // inline: $ => [$.blocktag, $.inlinetag, $.metakey_text, $.metakey_bool, $.metakey_list, $.metakey_any],
+    inline: $ => [$.blocktag, $.inlinetag],
+
     extras: $ => [
 	$.comment,
 	/\s/,
@@ -227,50 +230,50 @@ module.exports = grammar({
 	    // an inline meta either contains a single pair, or a sequence of pairs with
 	    // an ending comma plus a final pair without comma
 	    choice(
-		$.inlinemetapair,
-		seq(repeat1(seq($.inlinemetapair, ',')),
-		    $.inlinemetapair)),
+		alias($.inlinemetapair, $.pair),
+		seq(repeat1(seq(alias($.inlinemetapair, $.pair), ',')),
+		    alias($.inlinemetapair, $.pair))),
 	    '}'),
 
-	blockmeta: $ => seq(repeat1($.blockmetapair)),
+	blockmeta: $ => repeat1(alias($.pair, $.pair)),
 
 	inlinemetapair: $ => choice(
-	    seq($.metatag_text, $.metavalue_text_inline),
-	    seq($.metatag_any, $.metavalue_any_inline),
-            seq($.metatag_list, $.metavalue_list_inline),
-	    $.metatag_bool),
+	    seq($.metakey_text, alias($.metaval_text_inline, $.metaval_text)),
+	    seq($.metakey_any, alias($.metaval_any_inline, $.metaval_any)),
+            seq($.metakey_list, alias($.metaval_list_inline, $.metaval_list)),
+	    $.metakey_bool),
 
-	blockmetapair: $ => choice(
-	    seq($.metatag_text, $.metavalue_text),
-	    seq($.metatag_any, $.metavalue_any),
-            seq($.metatag_list, $.metavalue_list),
-	    $.metatag_bool),
+	pair: $ => choice(
+	    seq($.metakey_text, $.metaval_text),
+	    seq($.metakey_any, $.metaval_any),
+            seq($.metakey_list, $.metaval_list),
+	    $.metakey_bool),
 
 	/////////////////////////////////////////////////////////////
 	// Meta pair types
 	/////////////////////////////////////////////////////////////
-	metavalue_any: $ => alias(token(/[^\S\r\n]*.+?\n/), 'text'),
+	metaval_any: $ => alias(token(/[^\S\r\n]*.+?\n/), 'text'),
 
-	metavalue_any_inline: $ => alias(token(/[^\S\r\n]*[^,}\n]+?\n/), 'text'),
+	metaval_any_inline: $ => alias(token(/[^\S\r\n]*[^,}\n]+?\n/), 'text'),
 
-	metavalue_text: $ => alias($.text, 'text'),
+	metaval_text: $ => alias($.text, 'text'),
 
-	metavalue_text_inline: $ => seq($.upto_brace_or_comma_text),
+	metaval_text_inline: $ => alias($.upto_brace_or_comma_text, 'text'),
 
-        metavalue_list: $ => choice(
+        metaval_list: $ => choice(
 	    seq('{',
-                repeat1(seq(alias($.upto_brace_or_comma_text, $.metavalue_list_item), ',')),
-                alias($.upto_brace_or_comma_text, $.metavalue_list_item),
+                repeat1(seq(alias($.upto_brace_or_comma_text, $.metaval_list_item), ',')),
+                alias($.upto_brace_or_comma_text, $.metaval_list_item),
                 '}'),
-	    alias($.text, $.metavalue_list_item)
+	    alias($.text, $.metaval_list_item)
         ),
 
-	metavalue_list_inline: $ => choice(
+	metaval_list_inline: $ => choice(
             seq('{',
-                repeat1(seq(alias($.upto_brace_or_comma_text, $.metavalue_list_item), ',')),
-                alias($.upto_brace_or_comma_text, $.metavalue_list_item),
+                repeat1(seq(alias($.upto_brace_or_comma_text, $.metaval_list_item), ',')),
+                alias($.upto_brace_or_comma_text, $.metaval_list_item),
                 '}'),
-	    alias($.upto_brace_or_comma_text, $.metavalue_list_item),
+	    alias($.upto_brace_or_comma_text, $.metaval_list_item),
 	),
 
 	/////////////////////////////////////////////////////////////
@@ -362,7 +365,7 @@ module.exports = grammar({
 	    alias(':theorem:', $.theorem),
 	),
 
-	metatag_text: $ => choice(
+	metakey_text: $ => choice(
 	    alias(':affiliation:', $.affiliation),
 	    alias(':email:', $.email),
 	    alias(':label:', $.label),
@@ -371,20 +374,20 @@ module.exports = grammar({
 	    alias(':title:', $.title),
 	),
 
-	metatag_bool: $ => choice(
+	metakey_bool: $ => choice(
 	    alias(':nonum:', $.nonum),
 	    alias(':strong:', $.strong),
 	    alias(':emphas:', $.emphas),
             alias(':isclaim:', $.isclaim),
 	),
 
-        metatag_list: $ => choice(
+        metakey_list: $ => choice(
 	    alias(':keywords:', $.keywords),
 	    alias(':MSC:', $.MSC),
 	    alias(':types:', $.types),
 	),
 
-	metatag_any: $ => choice(
+	metakey_any: $ => choice(
 	    alias(':date:', $.date),
 	    alias(':path:', $.path),
             alias(':scale:', $.scale),

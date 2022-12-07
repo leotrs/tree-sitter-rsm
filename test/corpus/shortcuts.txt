@@ -84,15 +84,13 @@ Code block with shortcut and meta
   (specialblock
     tag: (codeblock)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_list
-          (types))
-        (metavalue_list
-	  (metavalue_list_item))))
+      (pair
+	(metakey_text (label))
+        (metaval_text))
+      (pair
+	(metakey_list (types))
+        (metaval_list
+	  (metaval_list_item))))
     (asis_text)))
 
 
@@ -144,15 +142,13 @@ $$
   (specialblock
     tag: (mathblock)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_list
-          (types))
-        (metavalue_list
-	  (metavalue_list_item))))
+      (pair
+	(metakey_text (label))
+        (metaval_text))
+      (pair
+	(metakey_list (types))
+        (metaval_list
+	  (metaval_list_item))))
     (asis_text)))
 
 
@@ -172,8 +168,7 @@ Math inside claim with shortcut
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -196,8 +191,7 @@ Math inside claim with shortcut no space
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -253,13 +247,11 @@ Foo.
     tag: (section)
     title: (text)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_bool
-          (nonum))))
+      (pair
+        (metakey_text (label))
+        (metaval_text))
+      (pair
+        (metakey_bool (nonum))))
     (paragraph
       (text))))
 
@@ -287,8 +279,7 @@ Foo.
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (section))
+    tag: (section)
     (specialblock
       tag: (subsection)
       title: (text)
@@ -297,7 +288,7 @@ Foo.
 
 
 ================================================================================
-Section with shortcut and meta
+Subsection with shortcut and meta
 ================================================================================
 
 :manuscript:
@@ -321,19 +312,16 @@ Foo.
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (section))
+    tag: (section)
     (specialblock
       tag: (subsection)
       title: (text)
       meta: (blockmeta
-        (blockmetapair
-          (metatag_text
-            (label))
-          (metavalue_text))
-        (blockmetapair
-          (metatag_bool
-            (nonum))))
+        (pair
+	  (metakey_text (label))
+          (metaval_text))
+        (pair
+	  (metakey_bool (nonum))))
       (paragraph
         (text)))))
 

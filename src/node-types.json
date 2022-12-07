@@ -88,7 +88,75 @@
         "required": true,
         "types": [
           {
-            "type": "blocktag",
+            "type": "abstract",
+            "named": true
+          },
+          {
+            "type": "author",
+            "named": true
+          },
+          {
+            "type": "definition",
+            "named": true
+          },
+          {
+            "type": "enumerate",
+            "named": true
+          },
+          {
+            "type": "figure",
+            "named": true
+          },
+          {
+            "type": "itemize",
+            "named": true
+          },
+          {
+            "type": "lemma",
+            "named": true
+          },
+          {
+            "type": "proof",
+            "named": true
+          },
+          {
+            "type": "proposition",
+            "named": true
+          },
+          {
+            "type": "remark",
+            "named": true
+          },
+          {
+            "type": "section",
+            "named": true
+          },
+          {
+            "type": "sketch",
+            "named": true
+          },
+          {
+            "type": "step",
+            "named": true
+          },
+          {
+            "type": "subproof",
+            "named": true
+          },
+          {
+            "type": "subsection",
+            "named": true
+          },
+          {
+            "type": "subsubsection",
+            "named": true
+          },
+          {
+            "type": "subsubsubsection",
+            "named": true
+          },
+          {
+            "type": "theorem",
             "named": true
           }
         ]
@@ -122,129 +190,7 @@
       "required": true,
       "types": [
         {
-          "type": "blockmetapair",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "blockmetapair",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "metatag_any",
-          "named": true
-        },
-        {
-          "type": "metatag_bool",
-          "named": true
-        },
-        {
-          "type": "metatag_list",
-          "named": true
-        },
-        {
-          "type": "metatag_text",
-          "named": true
-        },
-        {
-          "type": "metavalue_any",
-          "named": true
-        },
-        {
-          "type": "metavalue_list",
-          "named": true
-        },
-        {
-          "type": "metavalue_text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "blocktag",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "abstract",
-          "named": true
-        },
-        {
-          "type": "author",
-          "named": true
-        },
-        {
-          "type": "definition",
-          "named": true
-        },
-        {
-          "type": "enumerate",
-          "named": true
-        },
-        {
-          "type": "figure",
-          "named": true
-        },
-        {
-          "type": "itemize",
-          "named": true
-        },
-        {
-          "type": "lemma",
-          "named": true
-        },
-        {
-          "type": "proof",
-          "named": true
-        },
-        {
-          "type": "proposition",
-          "named": true
-        },
-        {
-          "type": "remark",
-          "named": true
-        },
-        {
-          "type": "section",
-          "named": true
-        },
-        {
-          "type": "sketch",
-          "named": true
-        },
-        {
-          "type": "step",
-          "named": true
-        },
-        {
-          "type": "subproof",
-          "named": true
-        },
-        {
-          "type": "subsection",
-          "named": true
-        },
-        {
-          "type": "subsubsection",
-          "named": true
-        },
-        {
-          "type": "subsubsubsection",
-          "named": true
-        },
-        {
-          "type": "theorem",
+          "type": "pair",
           "named": true
         }
       ]
@@ -303,7 +249,19 @@
         "required": true,
         "types": [
           {
-            "type": "inlinetag",
+            "type": "claim",
+            "named": true
+          },
+          {
+            "type": "draft",
+            "named": true
+          },
+          {
+            "type": "note",
+            "named": true
+          },
+          {
+            "type": "span",
             "named": true
           }
         ]
@@ -337,73 +295,7 @@
       "required": true,
       "types": [
         {
-          "type": "inlinemetapair",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "inlinemetapair",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "metatag_any",
-          "named": true
-        },
-        {
-          "type": "metatag_bool",
-          "named": true
-        },
-        {
-          "type": "metatag_list",
-          "named": true
-        },
-        {
-          "type": "metatag_text",
-          "named": true
-        },
-        {
-          "type": "metavalue_any_inline",
-          "named": true
-        },
-        {
-          "type": "metavalue_list_inline",
-          "named": true
-        },
-        {
-          "type": "metavalue_text_inline",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "inlinetag",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "claim",
-          "named": true
-        },
-        {
-          "type": "draft",
-          "named": true
-        },
-        {
-          "type": "note",
-          "named": true
-        },
-        {
-          "type": "span",
+          "type": "pair",
           "named": true
         }
       ]
@@ -444,7 +336,7 @@
     }
   },
   {
-    "type": "metatag_any",
+    "type": "metakey_any",
     "named": true,
     "fields": {},
     "children": {
@@ -467,7 +359,7 @@
     }
   },
   {
-    "type": "metatag_bool",
+    "type": "metakey_bool",
     "named": true,
     "fields": {},
     "children": {
@@ -494,7 +386,7 @@
     }
   },
   {
-    "type": "metatag_list",
+    "type": "metakey_list",
     "named": true,
     "fields": {},
     "children": {
@@ -517,7 +409,7 @@
     }
   },
   {
-    "type": "metatag_text",
+    "type": "metakey_text",
     "named": true,
     "fields": {},
     "children": {
@@ -552,17 +444,12 @@
     }
   },
   {
-    "type": "metavalue_any",
+    "type": "metaval_any",
     "named": true,
     "fields": {}
   },
   {
-    "type": "metavalue_any_inline",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "metavalue_list",
+    "type": "metaval_list",
     "named": true,
     "fields": {},
     "children": {
@@ -570,14 +457,19 @@
       "required": true,
       "types": [
         {
-          "type": "metavalue_list_item",
+          "type": "metaval_list_item",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "metavalue_list_inline",
+    "type": "metaval_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "pair",
     "named": true,
     "fields": {},
     "children": {
@@ -585,27 +477,31 @@
       "required": true,
       "types": [
         {
-          "type": "metavalue_list_item",
+          "type": "metakey_any",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "metavalue_text",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "metavalue_text_inline",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
+        },
         {
-          "type": "upto_brace_or_comma_text",
+          "type": "metakey_bool",
+          "named": true
+        },
+        {
+          "type": "metakey_list",
+          "named": true
+        },
+        {
+          "type": "metakey_text",
+          "named": true
+        },
+        {
+          "type": "metaval_any",
+          "named": true
+        },
+        {
+          "type": "metaval_list",
+          "named": true
+        },
+        {
+          "type": "metaval_text",
           "named": true
         }
       ]
@@ -1336,11 +1232,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "mathblock",
@@ -1351,7 +1247,7 @@
     "named": true
   },
   {
-    "type": "metavalue_list_item",
+    "type": "metaval_list_item",
     "named": true
   },
   {
@@ -1460,11 +1356,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "theorem",
@@ -1484,10 +1380,6 @@
   },
   {
     "type": "types",
-    "named": true
-  },
-  {
-    "type": "upto_brace_or_comma_text",
     "named": true
   },
   {

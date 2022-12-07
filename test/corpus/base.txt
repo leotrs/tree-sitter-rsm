@@ -102,10 +102,9 @@ Lorem ipsum.
 (source_file
   tag: (manuscript)
   meta: (blockmeta
-    (blockmetapair
-      (metatag_text
-        (title))
-      (metavalue_text)))
+    (pair
+      (metakey_text (title))
+      (metaval_text)))
   (paragraph
     (text)))
 
@@ -124,10 +123,9 @@ Manuscript with title
 (source_file
   tag: (manuscript)
   meta: (blockmeta
-    (blockmetapair
-      (metatag_text
-        (title))
-      (metavalue_text))))
+    (pair
+      (metakey_text (title))
+      (metaval_text))))
 
 
 ================================================================================
@@ -145,18 +143,15 @@ Manuscript with title and meta
 (source_file
   tag: (manuscript)
   meta: (blockmeta
-    (blockmetapair
-      (metatag_text
-        (label))
-      (metavalue_text))
-    (blockmetapair
-      (metatag_text
-        (title))
-      (metavalue_text))
-    (blockmetapair
-      (metatag_any
-        (date))
-      (metavalue_any))))
+    (pair
+      (metakey_text (label))
+      (metaval_text))
+    (pair
+      (metakey_text (title))
+      (metaval_text))
+    (pair
+      (metakey_any (date))
+      (metaval_any))))
 
 
 ================================================================================
@@ -178,8 +173,7 @@ Section
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (section))
+    tag: (section)
     (paragraph
       (text))))
 
@@ -204,13 +198,11 @@ Section with title
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (section))
+    tag: (section)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (title))
-        (metavalue_text)))
+      (pair
+        (metakey_text (title))
+        (metaval_text)))
     (paragraph
       (text))))
 
@@ -236,19 +228,16 @@ Section with meta
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (section))
+    tag: (section)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (title))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_list
-          (types))
-        (metavalue_list
-          (metavalue_list_item)
-          (metavalue_list_item))))
+      (pair
+        (metakey_text (title))
+        (metaval_text))
+      (pair
+        (metakey_list (types))
+        (metaval_list
+          (metaval_list_item)
+          (metaval_list_item))))
     (paragraph
       (text))))
 
@@ -288,53 +277,43 @@ Author and abstract
 (source_file
   tag: (manuscript)
   meta: (blockmeta
-    (blockmetapair
-      (metatag_text
-        (label))
-      (metavalue_text))
-    (blockmetapair
-      (metatag_text
-        (title))
-      (metavalue_text))
-    (blockmetapair
-      (metatag_any
-        (date))
-      (metavalue_any)))
+    (pair
+      (metakey_text (label))
+      (metaval_text))
+    (pair
+      (metakey_text (title))
+      (metaval_text))
+    (pair
+      (metakey_any (date))
+      (metaval_any)))
   (block
-    tag: (blocktag
-      (author))
+    tag: (author)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (name))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_text
-          (affiliation))
-        (metavalue_text))
-      (blockmetapair
-        (metatag_text
-          (email))
-        (metavalue_text))))
+      (pair
+        (metakey_text (name))
+        (metaval_text))
+      (pair
+        (metakey_text (affiliation))
+        (metaval_text))
+      (pair
+        (metakey_text (email))
+        (metaval_text))))
   (block
-    tag: (blocktag
-      (abstract))
+    tag: (abstract)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_list
-          (keywords))
-        (metavalue_list
-          (metavalue_list_item)
-          (metavalue_list_item)
-          (metavalue_list_item)))
-      (blockmetapair
-        (metatag_list
-          (MSC))
-        (metavalue_list
-          (metavalue_list_item)
-          (metavalue_list_item)
-          (metavalue_list_item)
-          (metavalue_list_item))))
+      (pair
+        (metakey_list (keywords))
+        (metaval_list
+          (metaval_list_item)
+          (metaval_list_item)
+          (metaval_list_item)))
+      (pair
+        (metakey_list (MSC))
+        (metaval_list
+          (metaval_list_item)
+          (metaval_list_item)
+          (metaval_list_item)
+          (metaval_list_item))))
     (paragraph
       (text)
       (text)
@@ -361,14 +340,11 @@ Foo :claim: {:label:lbl} bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -390,14 +366,11 @@ Foo :claim: { :label:lbl} bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -419,14 +392,11 @@ Foo :claim: {:label:lbl } bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -448,14 +418,11 @@ Foo :claim: {:label: lbl} bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -477,14 +444,11 @@ Foo :claim: { :label: lbl } bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -506,14 +470,11 @@ Foo :claim:{:label: lbl} bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -535,14 +496,11 @@ Foo :claim: {:label: lbl}bar::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+   (metakey_text (label))
+          (metaval_text)))
       (text))
     (text)))
 
@@ -633,15 +591,13 @@ Block code no shortcut and meta
   (specialblock
     tag: (codeblock)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-	  (label))
-	  (metavalue_text))
-      (blockmetapair
-        (metatag_list
-	  (types))
-	(metavalue_list
-	  (metavalue_list_item))))
+      (pair
+        (metakey_text (label))
+   (metaval_text))
+      (pair
+        (metakey_list (types))
+        (metaval_list
+          (metaval_list_item))))
     (asis_text)))
 
 
@@ -661,8 +617,7 @@ Math inside claim
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -685,8 +640,7 @@ Math inside claim no space
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -709,14 +663,11 @@ Claim with meta and math
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (claim))
+      tag: (claim)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_text
-            (label))
-          (metavalue_text_inline
-            (upto_brace_or_comma_text))))
+        (pair
+          (metakey_text (label))
+          (metaval_text)))
       (text)
       (specialinline
         tag: (math)
@@ -749,8 +700,7 @@ Enumerate
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (enumerate))
+    tag: (enumerate)
     (paragraph
       (item
         (text)))
@@ -776,8 +726,7 @@ Enumerate no space before Halmos
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (enumerate))
+    tag: (enumerate)
     (paragraph
       (item
         (text)))))
@@ -804,25 +753,20 @@ Enumerate items with label
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (enumerate))
+    tag: (enumerate)
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
-              (upto_brace_or_comma_text))))
+          (pair
+            (metakey_text (label))
+            (metaval_text)))
         (text)))
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
-              (upto_brace_or_comma_text))))
+          (pair
+            (metakey_text (label))
+            (metaval_text)))
         (text)))))
 
 
@@ -847,8 +791,7 @@ Itemize
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (itemize))
+    tag: (itemize)
     (paragraph
       (item
         (text)))
@@ -874,8 +817,7 @@ Itemize no space before Halmos
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (itemize))
+    tag: (itemize)
     (paragraph
       (item
         (text)))))
@@ -902,25 +844,20 @@ Itemize items with label
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (itemize))
+    tag: (itemize)
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
-              (upto_brace_or_comma_text))))
+          (pair
+            (metakey_text (label))
+            (metaval_text)))
         (text)))
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
-              (upto_brace_or_comma_text))))
+          (pair
+            (metakey_text (label))
+            (metaval_text)))
         (text)))))
 
 ================================================================================
@@ -942,8 +879,7 @@ Proof with no steps
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (proof))
+    tag: (proof)
     (paragraph
       (text))))
 
@@ -967,11 +903,9 @@ Proof with one step
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (proof))
+    tag: (proof)
     (block
-      tag: (blocktag
-        (step))
+      tag: (step)
       (paragraph
         (text)))))
 
@@ -1006,26 +940,21 @@ Proof with three steps
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (theorem))
+    tag: (theorem)
     (paragraph
       (text)))
   (block
-    tag: (blocktag
-      (proof))
+    tag: (proof)
     (block
-      tag: (blocktag
-        (step))
+      tag: (step)
       (paragraph
         (text)))
     (block
-      tag: (blocktag
-        (step))
+      tag: (step)
       (paragraph
         (text)))
     (block
-      tag: (blocktag
-        (step))
+      tag: (step)
       (paragraph
         (text)))))
 
@@ -1056,21 +985,17 @@ Proof with sub-step and sub-proof
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (proof))
+    tag: (proof)
     (block
-      tag: (blocktag
-        (step))
+      tag: (step)
       (paragraph
         (text))
       (block
-        tag: (blocktag
-          (step))
+        tag: (step)
         (paragraph
           (text))
         (block
-          tag: (blocktag
-            (subproof))
+          tag: (subproof)
           (paragraph
             (text)))))))
 
@@ -1091,12 +1016,10 @@ Span strong
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_bool
-            (strong))))
+        (pair
+          (metakey_bool (strong))))
       (text))
     (text)))
 
@@ -1117,12 +1040,10 @@ Span emphas
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_bool
-            (emphas))))
+        (pair
+          (metakey_bool (emphas))))
       (text))
     (text)))
 
@@ -1143,15 +1064,12 @@ Span strong and emphas
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_bool
-            (strong)))
-	(inlinemetapair
-          (metatag_bool
-            (emphas))))
+        (pair
+          (metakey_bool (strong)))
+        (pair
+          (metakey_bool (emphas))))
       (text))
     (text)))
 
@@ -1173,12 +1091,10 @@ Bo:span:{:strong:}ld::.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_bool
-            (strong))))
+        (pair
+          (metakey_bool (strong))))
       (text))
     (text)))
 
@@ -1208,10 +1124,9 @@ Reference
     tag: (section)
     title: (text)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text)))
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
     (paragraph
       (text)))
   (paragraph
@@ -1246,10 +1161,9 @@ Reference with space
     tag: (section)
     title: (text)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text)))
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
     (paragraph
       (text)))
   (paragraph
@@ -1284,10 +1198,9 @@ Reference with reftext
     tag: (section)
     title: (text)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text)))
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
     (paragraph
       (text)))
   (paragraph
@@ -1323,10 +1236,9 @@ Reference with reftext with space
     tag: (section)
     title: (text)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_text
-          (label))
-        (metavalue_text)))
+      (pair
+        (metakey_text (label))
+        (metaval_text)))
     (paragraph
       (text)))
   (paragraph
@@ -1371,8 +1283,7 @@ Escaped colon inside span
   tag: (manuscript)
   (paragraph
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       (text))
     (text)))
 
@@ -1431,8 +1342,7 @@ Figure
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-    (figure))))
+    tag: (figure)))
 
 
 ================================================================================
@@ -1455,13 +1365,11 @@ Figure with meta and caption
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (figure))
+    tag: (figure)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_any
-          (path))
-        (metavalue_any)))
+      (pair
+        (metakey_any (path))
+        (metaval_any)))
     (paragraph
       (caption
         (text)))))
@@ -1510,15 +1418,13 @@ Foo :span: {:types: {t1, t2}} bar :: baz.
   (paragraph
     (text)
     (inline
-      tag: (inlinetag
-        (span))
+      tag: (span)
       meta: (inlinemeta
-        (inlinemetapair
-          (metatag_list
-            (types))
-          (metavalue_list_inline
-            (metavalue_list_item)
-            (metavalue_list_item))))
+        (pair
+          (metakey_list (types))
+          (metaval_list
+            (metaval_list_item)
+            (metaval_list_item))))
       (text))
     (text)))
 
@@ -1584,15 +1490,13 @@ Claimshort within item with meta
 (source_file
   tag: (manuscript)
   (block
-    tag: (blocktag
-      (enumerate))
+    tag: (enumerate)
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
+          (pair
+     (metakey_text (label))
+            (metaval_text_inline
               (upto_brace_or_comma_text))))
         (specialinline
           tag: (claimshort)
@@ -1603,10 +1507,9 @@ Claimshort within item with meta
     (paragraph
       (item
         meta: (inlinemeta
-          (inlinemetapair
-            (metatag_text
-              (label))
-            (metavalue_text_inline
+          (pair
+     (metakey_text (label))
+            (metaval_text_inline
               (upto_brace_or_comma_text))))
         (specialinline
           tag: (claimshort)
@@ -1675,7 +1578,7 @@ paragraph freak out on the first letter for some reason.
 
 $$
 2+2
-$$ 
+$$
 
 x
 
@@ -1717,14 +1620,12 @@ $$
   (specialblock
     tag: (mathblock)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_bool
-          (isclaim))))
+      (pair
+        (metakey_bool (isclaim))))
     (asis_text))
   (specialblock
     tag: (mathblock)
     meta: (blockmeta
-      (blockmetapair
-        (metatag_bool
-          (isclaim))))
+      (pair
+        (metakey_bool (isclaim))))
     (asis_text)))
