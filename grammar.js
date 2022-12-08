@@ -14,8 +14,14 @@ module.exports = grammar({
 	$.paragraph_end,
     ],
 
-    // inline: $ => [$.blocktag, $.inlinetag, $.metakey_text, $.metakey_bool, $.metakey_list, $.metakey_any],
-    inline: $ => [$.blocktag, $.inlinetag],
+    inline: $ => [
+	$.blocktag,
+	$.inlinetag,
+	$.constructtag,
+	$.blockcontent,
+	$.paragraphcontent,
+	$.inlinecontent,
+    ],
 
     extras: $ => [
 	$.comment,
@@ -29,37 +35,36 @@ module.exports = grammar({
 	source_file: $ => seq(
 	    field('tag', alias(':manuscript:', $.manuscript)),
 	    field('meta', optional($.blockmeta)),
-	    repeat(choice($.specialblock, $.block, $.paragraph)),
+	    repeat($.blockcontent),
 	    '::',
 	    optional($.bibtex)),
 
 	block: $ => prec(1, seq(
 	    field('tag', $.blocktag),
 	    field('meta', optional($.blockmeta)),
-	    repeat(choice(
-		prec(2, $.specialblock),
-		prec(1, $.block),
-		prec(0, $.paragraph))),
+	    repeat($.blockcontent),
 	    '::')),
 
 	paragraph: $ => choice(
 	    $.item,
 	    $.caption,
-	    seq(
-		optional(seq(
+	    seq(optional(seq(
 		    field('tag', ':paragraph:'),
 		    field('meta', $.inlinemeta))),
-		repeat1(choice($.specialinline, $.inline, $.text)),
+		repeat1($.paragraphcontent),
 		alias($.paragraph_end, 'paragraph_end'))),
 
 	inline: $ => prec(0, seq(
 	    field('tag', $.inlinetag),
 	    field('meta', optional($.inlinemeta)),
-	    repeat(choice(
-		prec(2, $.specialinline),
-                prec(1, $.inline),
-                prec(0, $.text))),
+	    repeat($.inlinecontent),
 	    '::')),
+
+	construct: $ => seq(
+	    field('tag', $.constructtag),
+	    field('meta', optional($.inlinemeta)),
+	    repeat($.inlinecontent),
+	    '::'),
 
 	////////////////////////////////////////////////////////////////////////
 	// Special blocks, paragraphs, and inlines
@@ -142,13 +147,13 @@ module.exports = grammar({
 	caption: $ => seq(
 	    token(':caption:'),
 	    optional(field('meta', $.inlinemeta)),
-	    repeat1(choice($.specialinline, $.inline, $.text)),
+	    repeat1(choice($.specialinline, $.inline, $.construct, $.text)),
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	item: $ => seq(
 	    token(':item:'),
 	    optional(field('meta', $.inlinemeta)),
-	    repeat1(choice($.specialinline, $.inline, $.text)),
+	    repeat1(choice($.specialinline, $.inline, $.construct,  $.text)),
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
@@ -335,8 +340,33 @@ module.exports = grammar({
 	    '}'),
 
 	/////////////////////////////////////////////////////////////
+	// Content choices
+	/////////////////////////////////////////////////////////////
+	blockcontent: $ => choice($.specialblock, $.block, $.paragraph),
+
+	paragraphcontent: $ => choice($.specialinline, $.inline, $.construct, $.text),
+
+	inlinecontent: $ => choice($.specialinline, $.inline, $.construct, $.text),
+
+	/////////////////////////////////////////////////////////////
 	// Tag choices
 	/////////////////////////////////////////////////////////////
+	constructtag: $ => choice(
+	    alias(':assume:', $.assume),
+	    alias(':suppose:', $.suppose),
+	    alias(':prove:', $.prove),
+	    alias(':then:', $.then),
+	    alias(':new:', $.new),
+	    alias(':let:', $.let),
+	    alias(':case:', $.case),
+	    alias(':define:', $.define),
+	    alias(':write:', $.write),
+	    alias(':wlog:', $.wlog),
+	    alias(':suffices:', $.suffices),
+	    // alias(':pick:', $.span), // needs SUCH THAT
+	    // alias(':qed:', $.span), // should be a stamp
+	),
+
 	inlinetag: $ => choice(
 	    alias(':claim:', $.claim),
 	    alias(':draft:', $.draft),
@@ -372,6 +402,7 @@ module.exports = grammar({
 	    alias(':name:', $.name),
 	    alias(':reftext:', $.reftext),
 	    alias(':title:', $.title),
+	    alias(':goal:', $.goal),
 	),
 
 	metakey_bool: $ => choice(

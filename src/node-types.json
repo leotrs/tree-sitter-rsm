@@ -216,6 +216,98 @@
       "required": true,
       "types": [
         {
+          "type": "construct",
+          "named": true
+        },
+        {
+          "type": "inline",
+          "named": true
+        },
+        {
+          "type": "specialinline",
+          "named": true
+        },
+        {
+          "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "construct",
+    "named": true,
+    "fields": {
+      "meta": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "inlinemeta",
+            "named": true
+          }
+        ]
+      },
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "assume",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": true
+          },
+          {
+            "type": "define",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "new",
+            "named": true
+          },
+          {
+            "type": "prove",
+            "named": true
+          },
+          {
+            "type": "suffices",
+            "named": true
+          },
+          {
+            "type": "suppose",
+            "named": true
+          },
+          {
+            "type": "then",
+            "named": true
+          },
+          {
+            "type": "wlog",
+            "named": true
+          },
+          {
+            "type": "write",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "construct",
+          "named": true
+        },
+        {
           "type": "inline",
           "named": true
         },
@@ -272,6 +364,10 @@
       "required": false,
       "types": [
         {
+          "type": "construct",
+          "named": true
+        },
+        {
           "type": "inline",
           "named": true
         },
@@ -320,6 +416,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "construct",
+          "named": true
+        },
         {
           "type": "inline",
           "named": true
@@ -422,6 +522,10 @@
         },
         {
           "type": "email",
+          "named": true
+        },
+        {
+          "type": "goal",
           "named": true
         },
         {
@@ -538,6 +642,10 @@
       "types": [
         {
           "type": "caption",
+          "named": true
+        },
+        {
+          "type": "construct",
           "named": true
         },
         {
@@ -1139,11 +1247,19 @@
     "named": true
   },
   {
+    "type": "assume",
+    "named": true
+  },
+  {
     "type": "author",
     "named": true
   },
   {
     "type": "bibliography",
+    "named": true
+  },
+  {
+    "type": "case",
     "named": true
   },
   {
@@ -1175,6 +1291,10 @@
     "named": true
   },
   {
+    "type": "define",
+    "named": true
+  },
+  {
     "type": "definition",
     "named": true
   },
@@ -1196,6 +1316,10 @@
   },
   {
     "type": "figure",
+    "named": true
+  },
+  {
+    "type": "goal",
     "named": true
   },
   {
@@ -1227,24 +1351,28 @@
     "named": true
   },
   {
+    "type": "let",
+    "named": true
+  },
+  {
     "type": "manuscript",
     "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
-  },
-  {
-    "type": "mathblock",
-    "named": false
+    "named": true
   },
   {
     "type": "mathblock",
     "named": true
+  },
+  {
+    "type": "mathblock",
+    "named": false
   },
   {
     "type": "metaval_list_item",
@@ -1252,6 +1380,10 @@
   },
   {
     "type": "name",
+    "named": true
+  },
+  {
+    "type": "new",
     "named": true
   },
   {
@@ -1292,6 +1424,10 @@
   },
   {
     "type": "proposition",
+    "named": true
+  },
+  {
+    "type": "prove",
     "named": true
   },
   {
@@ -1355,12 +1491,24 @@
     "named": true
   },
   {
+    "type": "suffices",
+    "named": true
+  },
+  {
+    "type": "suppose",
+    "named": true
+  },
+  {
     "type": "text",
     "named": true
   },
   {
     "type": "text",
     "named": false
+  },
+  {
+    "type": "then",
+    "named": true
   },
   {
     "type": "theorem",
@@ -1388,6 +1536,14 @@
   },
   {
     "type": "value",
+    "named": true
+  },
+  {
+    "type": "wlog",
+    "named": true
+  },
+  {
+    "type": "write",
     "named": true
   },
   {

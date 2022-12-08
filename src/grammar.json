@@ -36,21 +36,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "specialblock"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "block"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "paragraph"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "blockcontent"
           }
         },
         {
@@ -104,33 +91,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PREC",
-                  "value": 2,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "specialblock"
-                  }
-                },
-                {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "block"
-                  }
-                },
-                {
-                  "type": "PREC",
-                  "value": 0,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "paragraph"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "blockcontent"
             }
           },
           {
@@ -186,21 +148,8 @@
             {
               "type": "REPEAT1",
               "content": {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "specialinline"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "inline"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "text"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "paragraphcontent"
               }
             },
             {
@@ -249,33 +198,8 @@
           {
             "type": "REPEAT",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PREC",
-                  "value": 2,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "specialinline"
-                  }
-                },
-                {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "inline"
-                  }
-                },
-                {
-                  "type": "PREC",
-                  "value": 0,
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "text"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "inlinecontent"
             }
           },
           {
@@ -284,6 +208,46 @@
           }
         ]
       }
+    },
+    "construct": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "tag",
+          "content": {
+            "type": "SYMBOL",
+            "name": "constructtag"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "meta",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "inlinemeta"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "inlinecontent"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "::"
+        }
+      ]
     },
     "specialblock": {
       "type": "CHOICE",
@@ -877,6 +841,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "construct"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "text"
               }
             ]
@@ -931,6 +899,10 @@
               {
                 "type": "SYMBOL",
                 "name": "inline"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "construct"
               },
               {
                 "type": "SYMBOL",
@@ -2444,6 +2416,169 @@
         }
       ]
     },
+    "blockcontent": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "specialblock"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "paragraph"
+        }
+      ]
+    },
+    "paragraphcontent": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "specialinline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "construct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        }
+      ]
+    },
+    "inlinecontent": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "specialinline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "construct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "text"
+        }
+      ]
+    },
+    "constructtag": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":assume:"
+          },
+          "named": true,
+          "value": "assume"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":suppose:"
+          },
+          "named": true,
+          "value": "suppose"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":prove:"
+          },
+          "named": true,
+          "value": "prove"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":then:"
+          },
+          "named": true,
+          "value": "then"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":new:"
+          },
+          "named": true,
+          "value": "new"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":let:"
+          },
+          "named": true,
+          "value": "let"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":case:"
+          },
+          "named": true,
+          "value": "case"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":define:"
+          },
+          "named": true,
+          "value": "define"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":write:"
+          },
+          "named": true,
+          "value": "write"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":wlog:"
+          },
+          "named": true,
+          "value": "wlog"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":suffices:"
+          },
+          "named": true,
+          "value": "suffices"
+        }
+      ]
+    },
     "inlinetag": {
       "type": "CHOICE",
       "members": [
@@ -2708,6 +2843,15 @@
           },
           "named": true,
           "value": "title"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":goal:"
+          },
+          "named": true,
+          "value": "goal"
         }
       ]
     },
@@ -2889,7 +3033,11 @@
   ],
   "inline": [
     "blocktag",
-    "inlinetag"
+    "inlinetag",
+    "constructtag",
+    "blockcontent",
+    "paragraphcontent",
+    "inlinecontent"
   ],
   "supertypes": []
 }
