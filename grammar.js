@@ -8,8 +8,6 @@ module.exports = grammar({
 	$.asis_backtick_text,
 	$.asis_three_backticks_text,
 	$.asis_halmos_text,
-	$.turnstile,
-	$.turnstile_end,
 	$.text,
 	$.paragraph_end,
     ],
@@ -86,32 +84,22 @@ module.exports = grammar({
 
 	    // Sections have a special opening using hashtags, but their content is
 	    // parsed just like any other block's.
-	    seq(
-		field('tag', alias(/# /, $.section)),
+	    seq(field('tag', alias(/# /, $.section)),
 		field('title', $.text),
 		field('meta', optional($.blockmeta)),
-		repeat(choice(
-		    prec(2, $.specialblock),
-		    prec(1, $.block),
-		    prec(0, $.paragraph))),
+		repeat($.blockcontent),
 		'::'),
 	    seq(
 		field('tag', alias(/## /, $.subsection)),
 		field('title', $.text),
 		field('meta', optional($.blockmeta)),
-		repeat(choice(
-		    prec(2, $.specialblock),
-		    prec(1, $.block),
-		    prec(0, $.paragraph))),
+		repeat($.blockcontent),
 		'::'),
 	    seq(
 		field('tag', alias(/### /, $.subsubsection)),
 		field('title', $.text),
 		field('meta', optional($.blockmeta)),
-		repeat(choice(
-		    prec(2, $.specialblock),
-		    prec(1, $.block),
-		    prec(0, $.paragraph))),
+		repeat($.blockcontent),
 		'::'),
 
 	    // Math and code blocks have special open and close delimiters ($$) and
@@ -147,25 +135,16 @@ module.exports = grammar({
 	caption: $ => seq(
 	    token(':caption:'),
 	    optional(field('meta', $.inlinemeta)),
-	    repeat1(choice($.specialinline, $.inline, $.construct, $.text)),
+	    repeat1($.paragraphcontent),
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	item: $ => seq(
 	    token(':item:'),
 	    optional(field('meta', $.inlinemeta)),
-	    repeat1(choice($.specialinline, $.inline, $.construct,  $.text)),
+	    repeat1($.paragraphcontent),
 	    alias($.paragraph_end, 'paragraph_end')),
 
 	specialinline: $ => choice(
-	    // Turnstile characters start a claim until a period is found
-	    prec(1,
-		 seq(field('tag', alias($.turnstile, $.claimshort)),
-		     repeat(choice(
-			 prec(2, $.specialinline),
-			 prec(1, $.inline),
-			 prec(0, $.text))),
-		     alias($.turnstile_end, 'turnstile_end'))),
-
 	    // Prev* are special bc they have no content and no Halmos (they are stamps)
 	    alias(token(':prev:'), $.prev),
 	    alias(token(':prev2:'), $.prev2),
@@ -194,17 +173,11 @@ module.exports = grammar({
 	    // recursive parsing.  Note *foo* is equivalent to :span:{:strong:}foo::.
 	    prec.right(
 		seq(field('tag', alias(token(/\*/), $.spanstrong)),
-		    repeat(choice(
-			prec(2, $.specialinline),
-			prec(1, $.inline),
-			prec(0, $.text))),
+		    repeat($.inlinecontent),
 		    token('*'))),
 	    prec.right(
 		seq(field('tag', alias(token(/\//), $.spanemphas)),
-		    repeat(choice(
-			prec(2, $.specialinline),
-			prec(1, $.inline),
-			prec(0, $.text))),
+		    repeat($.inlinecontent),
 		    token('/'))),
 
 	    // References (including 'previous'), citations, and URLs have standard
@@ -225,6 +198,11 @@ module.exports = grammar({
 		field('targetlabels', alias(token(/[^:]+/), $.text)),
 		optional(seq(',', field('reftext', $.text))),
 		'::'),
+	),
+
+	specialconstruct: $ => choice(
+	    // stamp
+	    alias(field("tag", ':qed:'), $.qed),
 	),
 
 	/////////////////////////////////////////////////////////////
@@ -309,11 +287,7 @@ module.exports = grammar({
 	    $.tdcontent,
 	    '::'),
 
-	tdcontent: $ =>
-	    repeat1(choice(
-		prec(2, $.specialinline),
-		prec(1, $.inline),
-		prec(0, $.text))),
+	tdcontent: $ => repeat1($.inlinecontent),
 
 
 	/////////////////////////////////////////////////////////////
@@ -344,9 +318,9 @@ module.exports = grammar({
 	/////////////////////////////////////////////////////////////
 	blockcontent: $ => choice($.specialblock, $.block, $.paragraph),
 
-	paragraphcontent: $ => choice($.specialinline, $.inline, $.construct, $.text),
+	paragraphcontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
-	inlinecontent: $ => choice($.specialinline, $.inline, $.construct, $.text),
+	inlinecontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
 	/////////////////////////////////////////////////////////////
 	// Tag choices
@@ -363,12 +337,14 @@ module.exports = grammar({
 	    alias(':write:', $.write),
 	    alias(':wlog:', $.wlog),
 	    alias(':suffices:', $.suffices),
+	    alias(':claim:', $.claim),
+	    alias(':|-:', $.claim),
+	    alias(':⊢:', $.claim),
 	    // alias(':pick:', $.span), // needs SUCH THAT
 	    // alias(':qed:', $.span), // should be a stamp
 	),
 
 	inlinetag: $ => choice(
-	    alias(':claim:', $.claim),
 	    alias(':draft:', $.draft),
 	    alias(':note:', $.note),
 	    alias(':span:', $.span),

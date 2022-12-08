@@ -167,7 +167,7 @@ Math inside claim with shortcut
 (source_file
   tag: (manuscript)
   (paragraph
-    (inline
+    (construct
       tag: (claim)
       (specialinline
         tag: (math)
@@ -190,7 +190,7 @@ Math inside claim with shortcut no space
 (source_file
   tag: (manuscript)
   (paragraph
-    (inline
+    (construct
       tag: (claim)
       (specialinline
         tag: (math)
@@ -442,7 +442,7 @@ Turnstile
 
 :manuscript:
 
-Foo |- bar. Baz.
+Foo :|-: bar::. Baz.
 
 ::
 
@@ -452,8 +452,8 @@ Foo |- bar. Baz.
   tag: (manuscript)
   (paragraph
     (text)
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (text))
     (text)))
 
@@ -464,7 +464,7 @@ Turnstile with math inside
 
 :manuscript:
 
-Foo |- $2+2=4$. Baz.
+Foo :|-: $2+2=4$::. Baz.
 
 ::
 
@@ -474,8 +474,8 @@ Foo |- $2+2=4$. Baz.
   tag: (manuscript)
   (paragraph
     (text)
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -488,7 +488,7 @@ Paragraph starts with turnstile
 
 :manuscript:
 
-|- A claim.
+:|-: A claim::.
 
 ::
 
@@ -497,15 +497,10 @@ Paragraph starts with turnstile
 (source_file
   tag: (manuscript)
   (paragraph
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (text))
     (text)))
-
-
-
-
-
 
 
 ================================================================================
@@ -514,7 +509,7 @@ Turnstile unicode
 
 :manuscript:
 
-Foo ⊢ bar. Baz.
+Foo :⊢: bar::. Baz.
 
 ::
 
@@ -524,8 +519,8 @@ Foo ⊢ bar. Baz.
   tag: (manuscript)
   (paragraph
     (text)
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (text))
     (text)))
 
@@ -536,7 +531,7 @@ Turnstile unicode with math inside
 
 :manuscript:
 
-Foo ⊢ $2+2=4$. Baz.
+Foo :⊢: $2+2=4$::. Baz.
 
 ::
 
@@ -546,8 +541,8 @@ Foo ⊢ $2+2=4$. Baz.
   tag: (manuscript)
   (paragraph
     (text)
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (specialinline
         tag: (math)
         (asis_text)))
@@ -560,7 +555,7 @@ Paragraph starts with turnstile unicode
 
 :manuscript:
 
-⊢ A claim.
+:⊢: A claim::.
 
 ::
 
@@ -569,7 +564,7 @@ Paragraph starts with turnstile unicode
 (source_file
   tag: (manuscript)
   (paragraph
-    (specialinline
-      tag: (claimshort)
+    (construct
+      tag: (claim)
       (text))
     (text)))

@@ -339,7 +339,7 @@ Foo :claim: {:label:lbl} bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -365,7 +365,7 @@ Foo :claim: { :label:lbl} bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -391,7 +391,7 @@ Foo :claim: {:label:lbl } bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -417,7 +417,7 @@ Foo :claim: {:label: lbl} bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -443,7 +443,7 @@ Foo :claim: { :label: lbl } bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -469,7 +469,7 @@ Foo :claim:{:label: lbl} bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -495,7 +495,7 @@ Foo :claim: {:label: lbl}bar::.
   tag: (manuscript)
   (paragraph
     (text)
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -616,7 +616,7 @@ Math inside claim
 (source_file
   tag: (manuscript)
   (paragraph
-    (inline
+    (construct
       tag: (claim)
       (specialinline
         tag: (math)
@@ -639,7 +639,7 @@ Math inside claim no space
 (source_file
   tag: (manuscript)
   (paragraph
-    (inline
+    (construct
       tag: (claim)
       (specialinline
         tag: (math)
@@ -662,7 +662,7 @@ Claim with meta and math
 (source_file
   tag: (manuscript)
   (paragraph
-    (inline
+    (construct
       tag: (claim)
       meta: (inlinemeta
         (pair
@@ -1300,11 +1300,12 @@ Bo*ld.
 
 --------------------------------------------------------------------------------
 
-(ERROR
+(source_file
   (manuscript)
+  (ERROR
     (text)
     (spanstrong)
-    (text))
+    (text)))
 
 
 ================================================================================
@@ -1477,9 +1478,9 @@ Claimshort within item with meta
 
 :enumerate:
 
-  :item: {:label: one} ⊢ $2+2=4$.
+  :item: {:label: one} :⊢: $2+2=4$::.
 
-  :item: {:label: two} ⊢ $3+3=6$.
+  :item: {:label: two} :⊢: $3+3=6$::.
 
 ::
 
@@ -1495,11 +1496,10 @@ Claimshort within item with meta
       (item
         meta: (inlinemeta
           (pair
-     (metakey_text (label))
-            (metaval_text_inline
-              (upto_brace_or_comma_text))))
-        (specialinline
-          tag: (claimshort)
+            (metakey_text (label))
+            (metaval_text)))
+        (construct
+          tag: (claim)
           (specialinline
             tag: (math)
             (asis_text)))
@@ -1508,11 +1508,10 @@ Claimshort within item with meta
       (item
         meta: (inlinemeta
           (pair
-     (metakey_text (label))
-            (metaval_text_inline
-              (upto_brace_or_comma_text))))
-        (specialinline
-          tag: (claimshort)
+            (metakey_text (label))
+            (metaval_text)))
+        (construct
+          tag: (claim)
           (specialinline
             tag: (math)
             (asis_text)))
@@ -1578,7 +1577,7 @@ paragraph freak out on the first letter for some reason.
 
 $$
 2+2
-$$
+$$ 
 
 x
 
@@ -1588,6 +1587,9 @@ x
 
 (source_file
   tag: (manuscript)
+  (paragraph
+    (text)
+    (text))
   (specialblock
     tag: (mathblock)
     (asis_text))

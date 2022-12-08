@@ -224,6 +224,10 @@
           "named": true
         },
         {
+          "type": "specialconstruct",
+          "named": true
+        },
+        {
           "type": "specialinline",
           "named": true
         },
@@ -258,6 +262,10 @@
           },
           {
             "type": "case",
+            "named": true
+          },
+          {
+            "type": "claim",
             "named": true
           },
           {
@@ -312,6 +320,10 @@
           "named": true
         },
         {
+          "type": "specialconstruct",
+          "named": true
+        },
+        {
           "type": "specialinline",
           "named": true
         },
@@ -341,10 +353,6 @@
         "required": true,
         "types": [
           {
-            "type": "claim",
-            "named": true
-          },
-          {
             "type": "draft",
             "named": true
           },
@@ -369,6 +377,10 @@
         },
         {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
           "named": true
         },
         {
@@ -422,6 +434,10 @@
         },
         {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
           "named": true
         },
         {
@@ -657,6 +673,10 @@
           "named": true
         },
         {
+          "type": "specialconstruct",
+          "named": true
+        },
+        {
           "type": "specialinline",
           "named": true
         },
@@ -810,6 +830,22 @@
     }
   },
   {
+    "type": "specialconstruct",
+    "named": true,
+    "fields": {
+      "tag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "qed",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "specialinline",
     "named": true,
     "fields": {
@@ -839,10 +875,6 @@
         "types": [
           {
             "type": "cite",
-            "named": true
-          },
-          {
-            "type": "claimshort",
             "named": true
           },
           {
@@ -905,6 +937,10 @@
           "named": true
         },
         {
+          "type": "construct",
+          "named": true
+        },
+        {
           "type": "inline",
           "named": true
         },
@@ -918,6 +954,10 @@
         },
         {
           "type": "prev3",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
           "named": true
         },
         {
@@ -1062,7 +1102,15 @@
       "required": true,
       "types": [
         {
+          "type": "construct",
+          "named": true
+        },
+        {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "specialconstruct",
           "named": true
         },
         {
@@ -1271,10 +1319,6 @@
     "named": true
   },
   {
-    "type": "claimshort",
-    "named": true
-  },
-  {
     "type": "code",
     "named": true
   },
@@ -1431,6 +1475,10 @@
     "named": true
   },
   {
+    "type": "qed",
+    "named": true
+  },
+  {
     "type": "ref",
     "named": true
   },
@@ -1500,6 +1548,10 @@
   },
   {
     "type": "text",
+    "named": false
+  },
+  {
+    "type": "text",
     "named": true
   },
   {
@@ -1521,10 +1573,6 @@
   {
     "type": "toc",
     "named": true
-  },
-  {
-    "type": "turnstile_end",
-    "named": false
   },
   {
     "type": "types",

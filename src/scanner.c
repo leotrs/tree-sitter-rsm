@@ -10,8 +10,6 @@ enum TokenType {
   ASIS_BACKTICK_TEXT,
   ASIS_THREE_BACKTICKS_TEXT,
   ASIS_HALMOS_TEXT,
-  TURNSTILE,
-  TURNSTILE_END,
   TEXT,
   PARAGRAPH_END,
   // Since the first one is assigned to zero and they are assigned consecutive integers,
@@ -84,12 +82,6 @@ void show_beginning_debug_message(const bool *valid_symbols) {
   }
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
     printf("ASIS_HALMOS_TEXT ");
-  }
-  if (valid_symbols[TURNSTILE]) {
-    printf("TURNSTILE ");
-  }
-  if (valid_symbols[TURNSTILE_END]) {
-    printf("TURNSTILE_END ");
   }
   if (valid_symbols[TEXT]) {
     printf("TEXT ");
@@ -190,55 +182,12 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool at_turnstile(TSLexer *lexer) {
-  if (lexer->lookahead == 0x22A2) { // hex value of turnstile unicode char
-    return true;
-  }
-
-  if (lexer->lookahead == '|') {
-    lexer->mark_end(lexer);
-    lexer->advance(lexer, false);
-    if (lexer->lookahead == '-') {
-      return true;
-    }
-  }
-  return false;
-}
-
-bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile) {
+bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   struct ScannerState *state = (struct ScannerState *)payload;
-
-  if (look_for_turnstile) {
-    debug_log("trying TEXT or TURNSTILE or TURNSTILE_END");
-  } else {
-    debug_log("trying TEXT");
-  }
-  if (state->within_turnstile) {
-    debug_log("(we are within a turnstile)");
-  }
 
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   while (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
-  }
-
-  if (at_turnstile(lexer)) {
-    debug_log("found turnstile at beginning, stopping");
-    lexer->advance(lexer, false);
-    lexer->mark_end(lexer);
-    if (look_for_turnstile) {
-      state->within_turnstile = true;
-      return success(lexer, TURNSTILE);
-    } else {
-      return failure(lexer);	// only looking for text but found turnstile
-    }
-  }
-
-  if (state->within_turnstile && lexer->lookahead == '.') {
-    lexer->mark_end(lexer);
-    state->within_turnstile = false;
-    debug_log("found end of turnstile");
-    return success(lexer, TURNSTILE_END);
   }
 
   int count = 0;
@@ -257,14 +206,8 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer, bool look_for_turnstile)
 	  && lexer->lookahead != '#'  // section header
 	  && lexer->lookahead != '%'  // comment
 	  && lexer->lookahead != '\0' // EOF
-	  // stop before a period, but only if inside a turnstile
-	  && (!state->within_turnstile || lexer->lookahead != '.')
 	  )
 	 ) {
-    if (at_turnstile(lexer)) {
-      debug_log("found turnstile, stopping");
-      break;
-    }
     if (!iswspace(lexer->lookahead)) count++;
     escape_next = lexer->lookahead == '\\';
     lexer->advance(lexer, false);
@@ -408,7 +351,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   if (looking_for_everything(valid_symbols)) {
     // Sometimes the parser freaks out and wants to see if there is *any* token at the
     // current point.  In this case, just look for arbitrary TEXT.
-    return scan_arbitrary_text(payload, lexer, true);
+    return scan_arbitrary_text(payload, lexer);
   }
 
   if (valid_symbols[ASIS_DOLLAR_TEXT]) {
@@ -435,7 +378,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
     if (lexer->lookahead == ':') {
       return scan_paragraph_end(payload, lexer);
     } else {
-      return scan_paragraph_end(payload, lexer) || scan_arbitrary_text(payload, lexer, valid_symbols[TURNSTILE]);
+      return scan_paragraph_end(payload, lexer) || scan_arbitrary_text(payload, lexer);
     }
   }
 
@@ -460,7 +403,7 @@ bool tree_sitter_rsm_external_scanner_scan(void *payload, TSLexer *lexer, const 
   }
 
   if (valid_symbols[TEXT]) {
-    return scan_arbitrary_text(payload, lexer, valid_symbols[TURNSTILE]);
+    return scan_arbitrary_text(payload, lexer);
   }
 
   debug_log("Reached the bottom!");
