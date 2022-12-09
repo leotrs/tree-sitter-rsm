@@ -101,30 +101,18 @@ void show_lookahead(TSLexer *lexer) {
   }
 }
 
-struct ScannerState {
-  bool within_turnstile;
-};
-
 void *tree_sitter_rsm_external_scanner_create() {
-  struct ScannerState *state = calloc(0, sizeof(struct ScannerState));
-  state->within_turnstile = false;
-  return state;
+  return NULL;
 }
 
 void tree_sitter_rsm_external_scanner_destroy(void *p) {
-  free(p);
 }
 
 unsigned tree_sitter_rsm_external_scanner_serialize(void *p, char *buffer) {
-  struct ScannerState *state = (struct ScannerState *)p;
-  buffer[0] = state->within_turnstile;
-  return 1;
+  return 0;
 }
 
 void tree_sitter_rsm_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
-  if (n != 1) {return;}
-  struct ScannerState *state = (struct ScannerState *)p;
-  state->within_turnstile = buffer[0];
 }
 
 void debug_log(const char *msg) {
@@ -183,8 +171,6 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
 }
 
 bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
-  struct ScannerState *state = (struct ScannerState *)payload;
-
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   while (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
