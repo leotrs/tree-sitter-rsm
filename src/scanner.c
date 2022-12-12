@@ -25,7 +25,7 @@ bool looking_for(const bool *valid_symbols, enum TokenType type) {
 }
 
 bool looking_for_everything(const bool *valid_symbols) {
-  for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
+  for (int i = 0; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (!valid_symbols[i]) {
       return false;
     }
@@ -34,7 +34,7 @@ bool looking_for_everything(const bool *valid_symbols) {
 }
 
 bool looking_for_paragraph_end_only(const bool *valid_symbols) {
-  for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
+  for (int i = 0; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (i == PARAGRAPH_END) {
       continue;
     }
@@ -50,7 +50,7 @@ bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   if (!valid_symbols[PARAGRAPH_END]) {
     return false;
   }
-  for (int i; i<NUMBER_OF_TOKEN_TYPES; i++) {
+  for (int i = 0; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (i == PARAGRAPH_END) {
       continue;
     }
