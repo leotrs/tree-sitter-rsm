@@ -46,7 +46,6 @@ bool looking_for_paragraph_end_only(const bool *valid_symbols) {
 }
 
 bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
-  bool result = false;
   if (!valid_symbols[PARAGRAPH_END]) {
     return false;
   }
