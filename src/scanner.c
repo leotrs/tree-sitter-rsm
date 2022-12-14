@@ -180,7 +180,7 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
 
 bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
-  while (lexer->lookahead == '\n') {
+  while (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
     lexer->advance(lexer, true);
   }
 
@@ -191,6 +191,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
 	 (
 	  lexer->lookahead != ':'     // delimiter
 	  && lexer->lookahead != '\n' // newline
+	  && lexer->lookahead != '\r' // windows
 	  && lexer->lookahead != '{'  // inline meta
 	  && lexer->lookahead != '}'  // inline meta
 	  && lexer->lookahead != '$'  // math region
