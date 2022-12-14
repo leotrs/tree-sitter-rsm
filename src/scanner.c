@@ -135,13 +135,23 @@ void skip_whitespace(TSLexer *lexer) {
   }
 }
 
+
+void skip_carriage_return(TSLexer *lexer) {
+  if (lexer->lookahead == '\r') {
+    lexer->advance(lexer, true);
+  }
+}
+
 bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n"), or in the Halmos of the enclosing
   // block ("::").  In the latter case, make sure to use mark_end() to not consume the
   // Halmos, as it will be consumed elsewhere.
+
+  skip_carriage_return(lexer);
   if (lexer->lookahead == '\n') {
     lexer->advance(lexer, true);
+    skip_carriage_return(lexer);
     if (lexer->lookahead == '\n') {
       return success(lexer, PARAGRAPH_END);
     } else {
