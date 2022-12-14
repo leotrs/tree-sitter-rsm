@@ -1,7 +1,6 @@
 #include <tree_sitter/parser.h>
 #include <stdio.h>
 #include <wctype.h>
-#include <unistd.h>
 
 enum TokenType {
   UPTO_BRACE_OR_COMMA_TEXT = 0,
