@@ -270,11 +270,20 @@ module.exports = grammar({
 	    field('caption', optional($.caption)),
 	    '::'),
 
-	thead: $ => seq(field('tag', ':thead:'), repeat1(choice($.tr, $.trshort)), '::'),
+	thead: $ => seq(
+	    field('tag', ':thead:'),
+	    repeat1(choice($.tr, $.trshort)),
+	    '::'),
 
-	tbody: $ => seq(field('tag', ':tbody:'), repeat1(choice($.tr, $.trshort)), '::'),
+	tbody: $ => seq(
+	    field('tag', ':tbody:'),
+	    repeat1(choice($.tr, $.trshort)),
+	    '::'),
 
-	tr: $ => seq(field('tag', ':tr:'), repeat1($.td), '::'),
+	tr: $ => seq(
+	    field('tag', ':tr:'),
+	    repeat1($.td),
+	    '::'),
 
 	trshort: $ => prec(1,
 			   seq(field('tag', ':tr:'),
@@ -340,8 +349,8 @@ module.exports = grammar({
 	    alias(':claim:', $.claim),
 	    alias(':|-:', $.claim),
 	    alias(':⊢:', $.claim),
-	    // alias(':pick:', $.span), // needs SUCH THAT
-	    // alias(':qed:', $.span), // should be a stamp
+	    // alias(':pick:', $.pick), // needs SUCH THAT
+	    // alias(':qed:', $.qed), // should be a stamp
 	),
 
 	inlinetag: $ => choice(
