@@ -510,11 +510,11 @@
       "required": true,
       "types": [
         {
-          "type": "MSC",
+          "type": "keywords",
           "named": true
         },
         {
-          "type": "keywords",
+          "type": "msc",
           "named": true
         },
         {
@@ -1271,10 +1271,6 @@
     "named": false
   },
   {
-    "type": "MSC",
-    "named": true
-  },
-  {
     "type": "abstract",
     "named": true
   },
@@ -1412,14 +1408,18 @@
   },
   {
     "type": "mathblock",
-    "named": true
-  },
-  {
-    "type": "mathblock",
     "named": false
   },
   {
+    "type": "mathblock",
+    "named": true
+  },
+  {
     "type": "metaval_list_item",
+    "named": true
+  },
+  {
+    "type": "msc",
     "named": true
   },
   {

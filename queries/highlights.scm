@@ -1,27 +1,24 @@
 ;; Labels
 (blockmeta
- (blockmetapair
-  (metatag_text
-   (label))
-  (metavalue_text) @label))
+ (pair
+  (metakey_text (label))
+  (metaval_text) @rsm-label))
 (inlinemeta
- (inlinemetapair
-  (metatag_text
-   (label))
-  (metavalue_text_inline
-   (upto_brace_or_comma_text)) @label))
+ (pair
+  (metakey_text (label))
+  (metaval_text) @rsm-label))
 (specialinline
  tag: (ref)
- target: (text) @label
+ target: (text) @rsm-label
  reftext: (text))
 (specialinline
  tag: (ref)
- target: (text) @label)
+ target: (text) @rsm-label)
 (specialinline
  tag: (cite)
- targetlabels: (text) @label)
+ targetlabels: (text) @rsm-label)
 (bibitem
- (label) @label)
+ (label) @rsm-label)
 
 ;; Tags
 [
@@ -38,7 +35,6 @@
  (sketch)
  (bibliography)
  (figure)
- (claimblock)
  (algorithm)
  (enumerate)
  (itemize)
@@ -73,7 +69,7 @@
  (strong)
  (emphas)
  (keywords)
- (MSC)
+ (msc)
  ] @meta-tag
 
 (paragraph (":paragraph:") @inline-tag)
@@ -117,9 +113,6 @@
 ;; [(code) "code"] @special-delim
 (inlinemeta ("{") @meta-delim)
 (inlinemeta ("}") @meta-delim)
-((specialinline
-  (claimshort) @inline-tag)
- (text) @inline-halmos)
 
 ;; Span properties
 (specialinline (spanemphas) (text)) @emphas
@@ -130,7 +123,7 @@
 (specialblock
  tag: [(section) (subsection) (subsubsection)]
  title: (text) @heading)
-((metatag_text (title)) (metavalue_text) @heading)
+((metakey_text (title)) (metaval_text) @heading)
 (specialblock [(section) (subsection) (subsubsection)] @heading)
 
 ;; Halmos
@@ -143,9 +136,8 @@
 
 ;; Draft
 (inline
- (inlinetag
-  (draft))
- (text) @draft)
+  (draft)
+  (text) @draft)
 
 ;; Comments
 (comment) @comment

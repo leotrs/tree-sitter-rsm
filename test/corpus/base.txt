@@ -259,7 +259,7 @@ Author and abstract
 
 :abstract:
   :keywords: {spectral graph theory, non-backtracking, interlacing}
-  :MSC: {05C50, 05C82, 15A18, 15B99}
+  :msc: {05C50, 05C82, 15A18, 15B99}
 
   Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
   ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem ipsum. Lorem
@@ -308,7 +308,7 @@ Author and abstract
           (metaval_list_item)
           (metaval_list_item)))
       (pair
-        (metakey_list (MSC))
+        (metakey_list (msc))
         (metaval_list
           (metaval_list_item)
           (metaval_list_item)
@@ -1577,7 +1577,7 @@ paragraph freak out on the first letter for some reason.
 
 $$
 2+2
-$$ 
+$$
 
 x
 

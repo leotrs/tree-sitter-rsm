@@ -2709,10 +2709,10 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":MSC:"
+            "value": ":msc:"
           },
           "named": true,
-          "value": "MSC"
+          "value": "msc"
         },
         {
           "type": "ALIAS",

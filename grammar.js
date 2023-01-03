@@ -399,7 +399,7 @@ module.exports = grammar({
 
         metakey_list: $ => choice(
 	    alias(':keywords:', $.keywords),
-	    alias(':MSC:', $.MSC),
+	    alias(':msc:', $.msc),
 	    alias(':types:', $.types),
 	),
 
