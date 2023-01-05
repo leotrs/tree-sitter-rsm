@@ -388,6 +388,7 @@ module.exports = grammar({
 	    alias(':reftext:', $.reftext),
 	    alias(':title:', $.title),
 	    alias(':goal:', $.goal),
+            alias(':lang:', $.lang),
 	),
 
 	metakey_bool: $ => choice(
