@@ -2649,6 +2649,15 @@
           },
           "named": true,
           "value": "goal"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":lang:"
+          },
+          "named": true,
+          "value": "lang"
         }
       ]
     },

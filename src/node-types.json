@@ -549,6 +549,10 @@
           "named": true
         },
         {
+          "type": "lang",
+          "named": true
+        },
+        {
           "type": "name",
           "named": true
         },
@@ -1384,6 +1388,10 @@
   },
   {
     "type": "label",
+    "named": true
+  },
+  {
+    "type": "lang",
     "named": true
   },
   {
