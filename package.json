@@ -1,18 +1,41 @@
 {
-    "devDependencies": {
-	"tree-sitter-cli": "^0.19.5"
-    },
-    "main": "bindings/node",
-    "dependencies": {
-	"tree-sitter": "^0.20.1"
-    },
-    "tree-sitter": [
-	{
-	    "scope": "source.rsm",
-	    "file-types": [
-		"rsm"
-	    ],
-	    "first-line-regex": ":manuscript:"
-	}
-    ]
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.2",
+    "prebuildify": "^6.0.0"
+  },
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "dependencies": {
+    "tree-sitter": "^0.21.1",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.1"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.rsm",
+      "file-types": [
+        "rsm"
+      ],
+      "first-line-regex": ":manuscript:"
+    }
+  ],
+  "scripts": {
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ]
 }

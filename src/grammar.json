@@ -2382,6 +2382,24 @@
           },
           "named": true,
           "value": "claim"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":pick:"
+          },
+          "named": true,
+          "value": "pick"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":st:"
+          },
+          "named": true,
+          "value": "st"
         }
       ]
     },
@@ -2839,4 +2857,3 @@
   ],
   "supertypes": []
 }
-

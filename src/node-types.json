@@ -281,7 +281,15 @@
             "named": true
           },
           {
+            "type": "pick",
+            "named": true
+          },
+          {
             "type": "prove",
+            "named": true
+          },
+          {
+            "type": "st",
             "named": true
           },
           {
@@ -1455,6 +1463,10 @@
     "named": true
   },
   {
+    "type": "pick",
+    "named": true
+  },
+  {
     "type": "prev",
     "named": true
   },
@@ -1523,6 +1535,10 @@
     "named": true
   },
   {
+    "type": "st",
+    "named": true
+  },
+  {
     "type": "step",
     "named": true
   },
@@ -1553,10 +1569,6 @@
   {
     "type": "suppose",
     "named": true
-  },
-  {
-    "type": "text",
-    "named": false
   },
   {
     "type": "text",

@@ -349,7 +349,8 @@ module.exports = grammar({
 	    alias(':claim:', $.claim),
 	    alias(':|-:', $.claim),
 	    alias(':⊢:', $.claim),
-	    // alias(':pick:', $.pick), // needs SUCH THAT
+	    alias(':pick:', $.pick),
+	    alias(':st:', $.st),
 	    // alias(':qed:', $.qed), // should be a stamp
 	),
 
