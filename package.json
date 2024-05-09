@@ -7,7 +7,7 @@
   "types": "bindings/node",
   "dependencies": {
     "tree-sitter": "^0.21.1",
-    "node-gyp-build": "^4.8.0"
+    "node-gyp-build": "^4.8.1"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.1"
