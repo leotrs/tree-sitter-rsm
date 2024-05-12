@@ -1631,3 +1631,62 @@ $$
       (pair
         (metakey_bool (isclaim))))
     (asis_text)))
+
+
+================================================================================
+Whitespace after block halmos
+================================================================================
+
+:manuscript:
+
+:theorem:
+
+  Note the trailing whitespace after the Halmos!
+
+::
+
+foo.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (manuscript)
+  (block
+    (theorem)
+    (paragraph
+      (text)
+      (paragraph_end)))
+  (paragraph
+    (text)
+    (paragraph_end)))
+
+
+================================================================================
+QED inside step
+================================================================================
+
+:manuscript:
+
+:proof:
+
+  :step: :qed: ::
+
+::
+
+::
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (manuscript)
+  (block
+    (proof)
+    (block
+      (step)
+      (paragraph
+        (specialconstruct
+          (qed))
+        (paragraph_end)))))

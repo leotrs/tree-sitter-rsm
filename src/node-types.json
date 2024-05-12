@@ -96,11 +96,19 @@
             "named": true
           },
           {
+            "type": "corollary",
+            "named": true
+          },
+          {
             "type": "definition",
             "named": true
           },
           {
             "type": "enumerate",
+            "named": true
+          },
+          {
+            "type": "example",
             "named": true
           },
           {
@@ -1339,6 +1347,10 @@
     "named": true
   },
   {
+    "type": "corollary",
+    "named": true
+  },
+  {
     "type": "date",
     "named": true
   },
@@ -1364,6 +1376,10 @@
   },
   {
     "type": "enumerate",
+    "named": true
+  },
+  {
+    "type": "example",
     "named": true
   },
   {
@@ -1424,11 +1440,11 @@
   },
   {
     "type": "mathblock",
-    "named": false
+    "named": true
   },
   {
     "type": "mathblock",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",

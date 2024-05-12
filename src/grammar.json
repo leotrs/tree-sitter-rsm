@@ -2469,10 +2469,28 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":corollary:"
+          },
+          "named": true,
+          "value": "corollary"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":enumerate:"
           },
           "named": true,
           "value": "enumerate"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":example:"
+          },
+          "named": true,
+          "value": "example"
         },
         {
           "type": "ALIAS",
