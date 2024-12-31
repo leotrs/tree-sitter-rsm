@@ -1656,11 +1656,9 @@ foo.
   (block
     (theorem)
     (paragraph
-      (text)
-      (paragraph_end)))
+      (text)))
   (paragraph
-    (text)
-    (paragraph_end)))
+    (text)))
 
 
 ================================================================================
@@ -1688,5 +1686,73 @@ QED inside step
       (step)
       (paragraph
         (specialconstruct
-          (qed))
-        (paragraph_end)))))
+          (qed))))))
+
+
+================================================================================
+Section with two icons
+================================================================================
+
+:manuscript:
+
+:section:
+  :title: Section title
+  :icons: {like, fave}
+
+  Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (section)
+    meta: (blockmeta
+      (pair
+        (metakey_text (title))
+        (metaval_text))
+      (pair
+        (metakey_list (icons))
+        (metaval_list
+          (metaval_list_item)
+          (metaval_list_item))))
+    (paragraph
+      (text))))
+
+
+================================================================================
+Section with one icon
+================================================================================
+
+:manuscript:
+
+:section:
+  :title: Section title
+  :icons: bookmark
+
+  Foo.
+
+::
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (block
+    tag: (section)
+    meta: (blockmeta
+      (pair
+        (metakey_text (title))
+        (metaval_text))
+      (pair
+        (metakey_list (icons))
+        (metaval_list
+          (metaval_list_item))))
+    (paragraph
+      (text))))

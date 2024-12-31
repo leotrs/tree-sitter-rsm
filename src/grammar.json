@@ -2767,6 +2767,15 @@
           },
           "named": true,
           "value": "types"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":icons:"
+          },
+          "named": true,
+          "value": "icons"
         }
       ]
     },

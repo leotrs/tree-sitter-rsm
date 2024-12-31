@@ -526,6 +526,10 @@
       "required": true,
       "types": [
         {
+          "type": "icons",
+          "named": true
+        },
+        {
           "type": "keywords",
           "named": true
         },
@@ -1391,6 +1395,10 @@
     "named": true
   },
   {
+    "type": "icons",
+    "named": true
+  },
+  {
     "type": "isclaim",
     "named": true
   },
@@ -1440,11 +1448,11 @@
   },
   {
     "type": "mathblock",
-    "named": true
+    "named": false
   },
   {
     "type": "mathblock",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
@@ -1585,6 +1593,10 @@
   {
     "type": "suppose",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",
