@@ -47,9 +47,10 @@ module.exports = grammar({
 	    $.item,
 	    $.caption,
 	    seq(optional(seq(
-		    field('tag', ':paragraph:'),
-		    field('meta', $.inlinemeta))),
-		repeat1($.paragraphcontent),
+		field('tag', ':paragraph:'),
+		field('meta', $.inlinemeta))),
+                $._paragraphcontent_no_special,
+		repeat($.paragraphcontent),
 		alias($.paragraph_end, 'paragraph_end'))),
 
 	inline: $ => prec(0, seq(
@@ -70,6 +71,16 @@ module.exports = grammar({
 	// Special blocks/inlines look just like normal blocks/inlines except that they
 	// have some special parsing rule.  For example, $foo$ has the same meaning as
 	// :math:foo::.
+
+        mathblock: $ => choice(
+            seq(token(/\$\$/),
+		field('meta', optional($.blockmeta)),
+		alias($.asis_two_dollars_text, $.asis_text),
+		token(/\$\$/)),
+	    seq(token(':mathblock:'),
+		field('meta', optional($.blockmeta)),
+		alias($.asis_halmos_text, $.asis_text),
+		'::')),
 
 	specialblock: $ => choice(
 	    $.table,
@@ -105,18 +116,12 @@ module.exports = grammar({
 	    // Math and code blocks have special open and close delimiters ($$) and
 	    // (```) respesctively AND their content is taken as-is, i.e. they do not
 	    // support recursive parsing.
-	    seq(field('tag', alias(token(/\$\$/), $.mathblock)),
-		field('meta', optional($.blockmeta)),
-		alias($.asis_two_dollars_text, $.asis_text),
-		alias(/\$\$/, "mathblock")),
+
+
 	    seq(field('tag', alias(token(/```/), $.codeblock)),
 		field('meta', optional($.blockmeta)),
 		alias($.asis_three_backticks_text, $.asis_text),
 		/```/),
-	    seq(field('tag', alias(token(':mathblock:'), $.mathblock)),
-		field('meta', optional($.blockmeta)),
-		alias($.asis_halmos_text, $.asis_text),
-		'::'),
 	    seq(field('tag', alias(token(':codeblock:'), $.codeblock)),
 		field('meta', optional($.blockmeta)),
 		alias($.asis_halmos_text, $.asis_text),
@@ -325,9 +330,11 @@ module.exports = grammar({
 	/////////////////////////////////////////////////////////////
 	// Content choices
 	/////////////////////////////////////////////////////////////
-	blockcontent: $ => choice($.specialblock, $.block, $.paragraph),
+	blockcontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph),
 
-	paragraphcontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
+        _paragraphcontent_no_special: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
+
+ 	paragraphcontent: $ => choice($.mathblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
 	inlinecontent: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
@@ -392,6 +399,7 @@ module.exports = grammar({
 	    alias(':title:', $.title),
 	    alias(':goal:', $.goal),
             alias(':lang:', $.lang),
+	    alias(':icon:', $.icon),
 	),
 
 	metakey_bool: $ => choice(
@@ -405,7 +413,6 @@ module.exports = grammar({
 	    alias(':keywords:', $.keywords),
 	    alias(':msc:', $.msc),
 	    alias(':types:', $.types),
-	    alias(':icons:', $.icons),
 	),
 
 	metakey_any: $ => choice(

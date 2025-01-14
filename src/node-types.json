@@ -179,6 +179,10 @@
           "named": true
         },
         {
+          "type": "mathblock",
+          "named": true
+        },
+        {
           "type": "paragraph",
           "named": true
         },
@@ -229,6 +233,10 @@
         },
         {
           "type": "inline",
+          "named": true
+        },
+        {
+          "type": "mathblock",
           "named": true
         },
         {
@@ -453,6 +461,10 @@
           "named": true
         },
         {
+          "type": "mathblock",
+          "named": true
+        },
+        {
           "type": "specialconstruct",
           "named": true
         },
@@ -462,6 +474,32 @@
         },
         {
           "type": "text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "mathblock",
+    "named": true,
+    "fields": {
+      "meta": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "blockmeta",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "asis_text",
           "named": true
         }
       ]
@@ -526,10 +564,6 @@
       "required": true,
       "types": [
         {
-          "type": "icons",
-          "named": true
-        },
-        {
           "type": "keywords",
           "named": true
         },
@@ -562,6 +596,10 @@
         },
         {
           "type": "goal",
+          "named": true
+        },
+        {
+          "type": "icon",
           "named": true
         },
         {
@@ -697,6 +735,10 @@
           "named": true
         },
         {
+          "type": "mathblock",
+          "named": true
+        },
+        {
           "type": "specialconstruct",
           "named": true
         },
@@ -714,6 +756,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -746,6 +789,10 @@
         },
         {
           "type": "block",
+          "named": true
+        },
+        {
+          "type": "mathblock",
           "named": true
         },
         {
@@ -787,10 +834,6 @@
           },
           {
             "type": "codeblock",
-            "named": true
-          },
-          {
-            "type": "mathblock",
             "named": true
           },
           {
@@ -836,6 +879,10 @@
         },
         {
           "type": "block",
+          "named": true
+        },
+        {
+          "type": "mathblock",
           "named": true
         },
         {
@@ -1263,6 +1310,10 @@
     "named": false
   },
   {
+    "type": ":mathblock:",
+    "named": false
+  },
+  {
     "type": ":paragraph:",
     "named": false
   },
@@ -1395,7 +1446,7 @@
     "named": true
   },
   {
-    "type": "icons",
+    "type": "icon",
     "named": true
   },
   {
@@ -1440,19 +1491,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
-  },
-  {
-    "type": "mathblock",
     "named": false
-  },
-  {
-    "type": "mathblock",
-    "named": true
   },
   {
     "type": "metaval_list_item",

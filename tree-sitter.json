@@ -1,0 +1,36 @@
+{
+  "grammars": [
+    {
+      "name": "rsm",
+      "camelcase": "Rsm",
+      "scope": "source.rsm",
+      "file-types": [
+        ".rsm"
+      ],
+      "injection-regex": "^rsm$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "rsm mark-up language",
+    "authors": [
+      {
+        "name": "leotrs",
+        "email": "leo@leotrs.com",
+        "url": "https://leotrs.com/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/leotrs/tree-sitter-rsm"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

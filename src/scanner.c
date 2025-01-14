@@ -19,11 +19,11 @@ enum TokenType {
 };
 
 
-bool looking_for(const bool *valid_symbols, enum TokenType type) {
+static bool looking_for(const bool *valid_symbols, enum TokenType type) {
   return valid_symbols[type];
 }
 
-bool looking_for_everything(const bool *valid_symbols) {
+static bool looking_for_everything(const bool *valid_symbols) {
   for (int i = 0; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (!valid_symbols[i]) {
       return false;
@@ -32,7 +32,7 @@ bool looking_for_everything(const bool *valid_symbols) {
   return true;
 }
 
-bool looking_for_paragraph_end_only(const bool *valid_symbols) {
+static bool looking_for_paragraph_end_only(const bool *valid_symbols) {
   for (int i = 0; i<NUMBER_OF_TOKEN_TYPES; i++) {
     if (i == PARAGRAPH_END) {
       continue;
@@ -44,7 +44,7 @@ bool looking_for_paragraph_end_only(const bool *valid_symbols) {
   return valid_symbols[PARAGRAPH_END];
 }
 
-bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
+static bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   if (!valid_symbols[PARAGRAPH_END]) {
     return false;
   }
@@ -59,7 +59,7 @@ bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   return false;
 }
 
-void show_beginning_debug_message(const bool *valid_symbols) {
+static void show_beginning_debug_message(const bool *valid_symbols) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
 
   printf("--> external scanner looking for: ");
@@ -90,7 +90,7 @@ void show_beginning_debug_message(const bool *valid_symbols) {
   printf("\n");
 }
 
-void show_lookahead(TSLexer *lexer) {
+static void show_lookahead(TSLexer *lexer) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
   if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
     printf("--> lookahead: '%c'\n", lexer->lookahead);
@@ -113,36 +113,36 @@ unsigned tree_sitter_rsm_external_scanner_serialize(void *p, char *buffer) {
 void tree_sitter_rsm_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
 }
 
-void debug_log(const char *msg) {
+static void debug_log(const char *msg) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
   printf("--> %s\n", msg);
 }
 
-bool success(TSLexer *lexer, enum TokenType type) {
+static bool success(TSLexer *lexer, enum TokenType type) {
   lexer->result_symbol = type;
   debug_log("SUCCESS");
   return true;
 }
 
-bool failure(TSLexer *lexer) {
+static bool failure(TSLexer *lexer) {
   debug_log("FAILURE");
   return false;
 }
 
-void skip_whitespace(TSLexer *lexer) {
+static void skip_whitespace(TSLexer *lexer) {
   while (iswspace(lexer->lookahead)) {
     lexer->advance(lexer, true);
   }
 }
 
 
-void skip_carriage_return(TSLexer *lexer) {
+static void skip_carriage_return(TSLexer *lexer) {
   if (lexer->lookahead == '\r') {
     lexer->advance(lexer, true);
   }
 }
 
-bool scan_paragraph_end(void *payload, TSLexer *lexer) {
+static bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   debug_log("trying PARAGRAPH_END");
   // A paragraph may end in a blank line ("\n\n"), or in the Halmos of the enclosing
   // block ("::").  In the latter case, make sure to use mark_end() to not consume the
@@ -178,7 +178,7 @@ bool scan_paragraph_end(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
+static bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   // DO NOT call skip_whitespace as we want to consume, not skip the whitespace
   while (lexer->lookahead == '\n' || lexer->lookahead == '\r') {
     lexer->advance(lexer, true);
@@ -215,7 +215,7 @@ bool scan_arbitrary_text(void *payload, TSLexer *lexer) {
   }
 }
 
-bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
+static bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
   debug_log("trying ASIS_TEXT\n");
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
@@ -237,7 +237,7 @@ bool scan_asis_text(void *payload, TSLexer *lexer, const char terminal) {
   return false;
 }
 
-bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
+static bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '$')) {
     return success(lexer, ASIS_DOLLAR_TEXT);
   } else {
@@ -245,7 +245,7 @@ bool scan_asis_dollar_text(void *payload, TSLexer *lexer) {
   }
 }
 
-bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
+static bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
   if (scan_asis_text(payload, lexer, '`')) {
     return success(lexer, ASIS_BACKTICK_TEXT);
   } else {
@@ -253,7 +253,7 @@ bool scan_asis_backtick_text(void *payload, TSLexer *lexer) {
   }
 }
 
-bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
+static bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
   // their block forms :mathblock: and :codeblock:.  It cannot start with an open brace
@@ -281,7 +281,7 @@ bool scan_asis_halmos_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
+static bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
   // their block forms :mathblock: and :codeblock:.  It cannot start with an open brace
@@ -309,7 +309,7 @@ bool scan_asis_two_dollars_text(void *payload, TSLexer *lexer) {
   return failure(lexer);
 }
 
-bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
+static bool scan_asis_three_backticks_text(void *payload, TSLexer *lexer) {
   skip_whitespace(lexer);
   // ASIS_TEXT usually occurs in the content of special tags such as :math:, :code: or
   // their block forms :mathblock: and :codeblock:.  It cannot start with an open brace

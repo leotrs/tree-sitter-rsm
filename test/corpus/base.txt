@@ -1300,12 +1300,11 @@ Bo*ld.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(ERROR
   (manuscript)
-  (ERROR
-    (text)
-    (spanstrong)
-    (text)))
+  (text)
+  (spanstrong)
+  (text))
 
 
 ================================================================================
@@ -1590,8 +1589,7 @@ x
   (paragraph
     (text)
     (text))
-  (specialblock
-    tag: (mathblock)
+  (mathblock
     (asis_text))
   (paragraph
     (text)))
@@ -1619,14 +1617,12 @@ $$
 
 (source_file
   tag: (manuscript)
-  (specialblock
-    tag: (mathblock)
+  (mathblock
     meta: (blockmeta
       (pair
         (metakey_bool (isclaim))))
     (asis_text))
-  (specialblock
-    tag: (mathblock)
+  (mathblock
     meta: (blockmeta
       (pair
         (metakey_bool (isclaim))))
@@ -1690,14 +1686,14 @@ QED inside step
 
 
 ================================================================================
-Section with two icons
+Section with icon
 ================================================================================
 
 :manuscript:
 
 :section:
   :title: Section title
-  :icons: {like, fave}
+  :icon: bookmark
 
   Foo.
 
@@ -1716,27 +1712,23 @@ Section with two icons
         (metakey_text (title))
         (metaval_text))
       (pair
-        (metakey_list (icons))
-        (metaval_list
-          (metaval_list_item)
-          (metaval_list_item))))
+        (metakey_text (icon))
+        (metaval_text)))
     (paragraph
       (text))))
 
 
 ================================================================================
-Section with one icon
+Paragraph does not end at mathblock
 ================================================================================
 
 :manuscript:
 
-:section:
-  :title: Section title
-  :icons: bookmark
-
-  Foo.
-
-::
+Foo.
+$$
+2+2=4,
+$$
+bar.
 
 ::
 
@@ -1744,15 +1736,8 @@ Section with one icon
 
 (source_file
   tag: (manuscript)
-  (block
-    tag: (section)
-    meta: (blockmeta
-      (pair
-        (metakey_text (title))
-        (metaval_text))
-      (pair
-        (metakey_list (icons))
-        (metaval_list
-          (metaval_list_item))))
-    (paragraph
-      (text))))
+  (paragraph
+    (text)
+    (mathblock
+      (asis_text))
+    (text)))
