@@ -756,7 +756,6 @@
   {
     "type": "source_file",
     "named": true,
-    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -1491,11 +1490,11 @@
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "metaval_list_item",
