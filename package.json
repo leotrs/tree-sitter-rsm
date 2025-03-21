@@ -6,11 +6,11 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "dependencies": {
-    "tree-sitter": "^0.21.1",
+    "tree-sitter": "^0.22.4",
     "node-gyp-build": "^4.8.1"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.1"
+    "tree-sitter": "^0.22.4"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
