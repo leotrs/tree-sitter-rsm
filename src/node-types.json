@@ -756,6 +756,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "meta": {
         "multiple": false,
@@ -1398,7 +1399,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "corollary",
@@ -1490,11 +1492,11 @@
   },
   {
     "type": "math",
-    "named": false
+    "named": true
   },
   {
     "type": "math",
-    "named": true
+    "named": false
   },
   {
     "type": "metaval_list_item",
