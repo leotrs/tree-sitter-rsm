@@ -9,9 +9,18 @@ permissions:
   id-token: write
   attestations: write
 
+
+
+
+
+
+
+
+
 jobs:
   github:
     uses: tree-sitter/workflows/.github/workflows/release.yml@main
+
     with:
       generate: true
       attestations: true
@@ -28,10 +37,9 @@ jobs:
   #   with:
   #     generate: true
   pypi:
-    uses: tree-sitter/workflows/.github/workflows/package-pypi.yml@main
+    uses: ./.github/workflows/package-pypi.yml  # ######
     secrets:
       PYPI_API_TOKEN: ${{secrets.PYPI_API_TOKEN}}
     with:
       generate: true
-    env:
-      CIBW_BUILD: "cp39-*"
+      CIBW_BUILD: "cp39-*"  # ######
