@@ -62,40 +62,40 @@ static bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
 static void show_beginning_debug_message(const bool *valid_symbols) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
 
-  printf("--> external scanner looking for: ");
+  fprintf(stderr, "--> external scanner looking for: ");
   if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    printf("UPTO_BRACE_OR_COMMA_TEXT ");
+    fprintf(stderr, "UPTO_BRACE_OR_COMMA_TEXT ");
   }
   if (valid_symbols[ASIS_DOLLAR_TEXT]) {
-    printf("ASIS_DOLLAR_TEXT ");
+    fprintf(stderr, "ASIS_DOLLAR_TEXT ");
   }
   if (valid_symbols[ASIS_TWO_DOLLARS_TEXT]) {
-    printf("ASIS_TWO_DOLLARS_TEXT ");
+    fprintf(stderr, "ASIS_TWO_DOLLARS_TEXT ");
   }
   if (valid_symbols[ASIS_BACKTICK_TEXT]) {
-    printf("ASIS_BACKTICK_TEXT ");
+    fprintf(stderr, "ASIS_BACKTICK_TEXT ");
   }
   if (valid_symbols[ASIS_THREE_BACKTICKS_TEXT]) {
-    printf("ASIS_THREE_BACKTICKS_TEXT");
+    fprintf(stderr, "ASIS_THREE_BACKTICKS_TEXT");
   }
   if (valid_symbols[ASIS_HALMOS_TEXT]) {
-    printf("ASIS_HALMOS_TEXT ");
+    fprintf(stderr, "ASIS_HALMOS_TEXT ");
   }
   if (valid_symbols[TEXT]) {
-    printf("TEXT ");
+    fprintf(stderr, "TEXT ");
   }
   if (valid_symbols[PARAGRAPH_END]) {
-    printf("PARAGRAPH_END ");
+    fprintf(stderr, "PARAGRAPH_END ");
   }
-  printf("\n");
+  fprintf(stderr, "\n");
 }
 
 static void show_lookahead(TSLexer *lexer) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
   if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
-    printf("--> lookahead: '%c'\n", lexer->lookahead);
+    fprintf(stderr, "--> lookahead: '%c'\n", lexer->lookahead);
   } else {
-    printf("--> lookahead: %d\n", lexer->lookahead);
+    fprintf(stderr, "--> lookahead: %d\n", lexer->lookahead);
   }
 }
 
@@ -115,7 +115,7 @@ void tree_sitter_rsm_external_scanner_deserialize(void *p, const char *buffer, u
 
 static void debug_log(const char *msg) {
   if (!getenv("TREE_SITTER_DEBUG")) { return; }
-  printf("--> %s\n", msg);
+  fprintf(stderr, "--> %s\n", msg);
 }
 
 static bool success(TSLexer *lexer, enum TokenType type) {
