@@ -104,3 +104,8 @@ Cargo.lock
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+# tree-sitter build artifacts
+rsm.dylib
+rsm.dylib.dSYM/
+rsm.so.dSYM/
