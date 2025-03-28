@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-rsm"
 description = "Rsm grammar for tree-sitter"
-version = "0.1.2"
+version = "0.1.3"
 keywords = ["incremental", "parsing", "tree-sitter", "rsm"]
 classifiers = [
   "Intended Audience :: Developers",
