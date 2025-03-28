@@ -18,6 +18,57 @@ enum TokenType {
   NUMBER_OF_TOKEN_TYPES,
 };
 
+/* WASM does not have access to prinft and other I/O functions as well as getenv(). */
+#ifdef __EMSCRIPTEN__
+    static void debug_log(const char *msg) {}
+    static void show_beginning_debug_message(const bool *valid_symbols) {}
+    static void show_lookahead(TSLexer *lexer) {}
+#else
+static void debug_log(const char *msg) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+  fprintf(stderr, "--> %s\n", msg);
+}
+static void show_beginning_debug_message(const bool *valid_symbols) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+
+  fprintf(stderr, "--> external scanner looking for: ");
+  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
+    fprintf(stderr, "UPTO_BRACE_OR_COMMA_TEXT ");
+  }
+  if (valid_symbols[ASIS_DOLLAR_TEXT]) {
+    fprintf(stderr, "ASIS_DOLLAR_TEXT ");
+  }
+  if (valid_symbols[ASIS_TWO_DOLLARS_TEXT]) {
+    fprintf(stderr, "ASIS_TWO_DOLLARS_TEXT ");
+  }
+  if (valid_symbols[ASIS_BACKTICK_TEXT]) {
+    fprintf(stderr, "ASIS_BACKTICK_TEXT ");
+  }
+  if (valid_symbols[ASIS_THREE_BACKTICKS_TEXT]) {
+    fprintf(stderr, "ASIS_THREE_BACKTICKS_TEXT");
+  }
+  if (valid_symbols[ASIS_HALMOS_TEXT]) {
+    fprintf(stderr, "ASIS_HALMOS_TEXT ");
+  }
+  if (valid_symbols[TEXT]) {
+    fprintf(stderr, "TEXT ");
+  }
+  if (valid_symbols[PARAGRAPH_END]) {
+    fprintf(stderr, "PARAGRAPH_END ");
+  }
+  fprintf(stderr, "\n");
+}
+
+static void show_lookahead(TSLexer *lexer) {
+  if (!getenv("TREE_SITTER_DEBUG")) { return; }
+  if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
+    fprintf(stderr, "--> lookahead: '%c'\n", lexer->lookahead);
+  } else {
+    fprintf(stderr, "--> lookahead: %d\n", lexer->lookahead);
+  }
+}
+#endif
+
 
 static bool looking_for(const bool *valid_symbols, enum TokenType type) {
   return valid_symbols[type];
@@ -59,46 +110,6 @@ static bool looking_for_paragraph_end_and_other(const bool *valid_symbols) {
   return false;
 }
 
-static void show_beginning_debug_message(const bool *valid_symbols) {
-  if (!getenv("TREE_SITTER_DEBUG")) { return; }
-
-  fprintf(stderr, "--> external scanner looking for: ");
-  if (valid_symbols[UPTO_BRACE_OR_COMMA_TEXT]) {
-    fprintf(stderr, "UPTO_BRACE_OR_COMMA_TEXT ");
-  }
-  if (valid_symbols[ASIS_DOLLAR_TEXT]) {
-    fprintf(stderr, "ASIS_DOLLAR_TEXT ");
-  }
-  if (valid_symbols[ASIS_TWO_DOLLARS_TEXT]) {
-    fprintf(stderr, "ASIS_TWO_DOLLARS_TEXT ");
-  }
-  if (valid_symbols[ASIS_BACKTICK_TEXT]) {
-    fprintf(stderr, "ASIS_BACKTICK_TEXT ");
-  }
-  if (valid_symbols[ASIS_THREE_BACKTICKS_TEXT]) {
-    fprintf(stderr, "ASIS_THREE_BACKTICKS_TEXT");
-  }
-  if (valid_symbols[ASIS_HALMOS_TEXT]) {
-    fprintf(stderr, "ASIS_HALMOS_TEXT ");
-  }
-  if (valid_symbols[TEXT]) {
-    fprintf(stderr, "TEXT ");
-  }
-  if (valid_symbols[PARAGRAPH_END]) {
-    fprintf(stderr, "PARAGRAPH_END ");
-  }
-  fprintf(stderr, "\n");
-}
-
-static void show_lookahead(TSLexer *lexer) {
-  if (!getenv("TREE_SITTER_DEBUG")) { return; }
-  if (32 <= lexer->lookahead && lexer->lookahead <= 127) {
-    fprintf(stderr, "--> lookahead: '%c'\n", lexer->lookahead);
-  } else {
-    fprintf(stderr, "--> lookahead: %d\n", lexer->lookahead);
-  }
-}
-
 void *tree_sitter_rsm_external_scanner_create() {
   return NULL;
 }
@@ -111,11 +122,6 @@ unsigned tree_sitter_rsm_external_scanner_serialize(void *p, char *buffer) {
 }
 
 void tree_sitter_rsm_external_scanner_deserialize(void *p, const char *buffer, unsigned n) {
-}
-
-static void debug_log(const char *msg) {
-  if (!getenv("TREE_SITTER_DEBUG")) { return; }
-  fprintf(stderr, "--> %s\n", msg);
 }
 
 static bool success(TSLexer *lexer, enum TokenType type) {
@@ -134,7 +140,6 @@ static void skip_whitespace(TSLexer *lexer) {
     lexer->advance(lexer, true);
   }
 }
-
 
 static void skip_carriage_return(TSLexer *lexer) {
   if (lexer->lookahead == '\r') {
