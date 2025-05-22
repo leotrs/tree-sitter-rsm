@@ -33,7 +33,7 @@ module.exports = grammar({
 	source_file: $ => seq(
 	    field('tag', alias(':manuscript:', $.manuscript)),
 	    field('meta', optional($.blockmeta)),
-	    repeat($.blockcontent),
+	    repeat(alias($.rsmcontent, 'rsmcontent')),
 	    '::',
 	    optional($.bibtex)),
 
@@ -65,13 +65,56 @@ module.exports = grammar({
 	    repeat($.inlinecontent),
 	    '::'),
 
+  ////////////////////////////////////////////////////////////////////////
+	// Sections
+	////////////////////////////////////////////////////////////////////////
+	// Sections are like blocks except that they do not need a Halmos.  Instead,
+	// a Section ends when another Section begins, or when the manuscript ends.
+  // A Subsection ends when another Subsection begins, or when the next Section
+  // begins.  A Subsubsection ends with another Subsubsection begins or when
+  // a new Section or Subsection begins.
+  // Sections may begin with hashtags like in Markdown or with :section: tags.
+
+      section: $ => prec.right(choice(
+        seq(field('tag', alias(/# /, $.section)),
+		        field('title', $.text),
+		        field('meta', optional($.blockmeta)),
+		        repeat(alias($.sectioncontent, 'sectioncontent')),
+		       ),
+        seq(field('tag', alias(':section:', $.section)),
+		        field('meta', optional($.blockmeta)),
+		        repeat(alias($.sectioncontent, 'sectioncontent')),
+		       ),
+      )),
+
+      subsection: $ => prec.right(choice(
+        seq(
+		      field('tag', alias(/## /, $.subsection)),
+		      field('title', $.text),
+		      field('meta', optional($.blockmeta)),
+		      repeat(alias($.subsectioncontent, 'subsectioncontent')),
+		    ),
+      )),
+
+      subsubsection: $ => prec.right(choice(
+	      seq(
+		      field('tag', alias(/### /, $.subsubsection)),
+		      field('title', $.text),
+		      field('meta', optional($.blockmeta)),
+		      repeat(alias($.subsubsectioncontent, 'subsubsectioncontent')),
+		    ))),
+
+      // The appendix essentially works as a section that does not allow content. The
+      // appendix is a 'stamp': it has no content and needs no Halmos.
+	    appendix: $ => field('tag', alias(':appendix:', $.appendix)),
+
+
 	////////////////////////////////////////////////////////////////////////
 	// Special blocks, paragraphs, and inlines
 	////////////////////////////////////////////////////////////////////////
 	// Special blocks/inlines look just like normal blocks/inlines except that they
 	// have some special parsing rule.  For example, $foo$ has the same meaning as
 	// :math:foo::.
-
         mathblock: $ => choice(
             seq(token(/\$\$/),
 		field('meta', optional($.blockmeta)),
@@ -82,57 +125,34 @@ module.exports = grammar({
 		alias($.asis_halmos_text, $.asis_text),
 		'::')),
 
-	specialblock: $ => choice(
-	    $.table,
-
-	    // The appendix is a 'stamp': it has no content and needs no Halmos
-	    alias(':appendix:', $.appendix),
-
-	    // The following are NOT stamps because they could have meta, though they
-	    // cannot have content
-	    seq(field('tag', alias(':bibliography:', $.bibliography)), '::'),
-	    seq(field('tag', alias(':toc:', $.toc)), '::'),
-
-	    // Sections have a special opening using hashtags, but their content is
-	    // parsed just like any other block's.
-	    seq(field('tag', alias(/# /, $.section)),
-		field('title', $.text),
-		field('meta', optional($.blockmeta)),
-		repeat($.blockcontent),
-		'::'),
-	    seq(
-		field('tag', alias(/## /, $.subsection)),
-		field('title', $.text),
-		field('meta', optional($.blockmeta)),
-		repeat($.blockcontent),
-		'::'),
-	    seq(
-		field('tag', alias(/### /, $.subsubsection)),
-		field('title', $.text),
-		field('meta', optional($.blockmeta)),
-		repeat($.blockcontent),
-		'::'),
-
-	    // Math and code blocks have special open and close delimiters ($$) and
-	    // (```) respesctively AND their content is taken as-is, i.e. they do not
-	    // support recursive parsing.
+	    specialblock: $ => prec.right(1, choice(
+	      $.table,
 
 
-	    seq(field('tag', alias(token(/```/), $.codeblock)),
-		field('meta', optional($.blockmeta)),
-		alias($.asis_three_backticks_text, $.asis_text),
-		/```/),
-	    seq(field('tag', alias(token(':codeblock:'), $.codeblock)),
-		field('meta', optional($.blockmeta)),
-		alias($.asis_halmos_text, $.asis_text),
-		'::'),
 
-	    // Algorithms have standard open and close delimiters and have as-is
-	    // (i.e. not recursive) content.
-	    seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
-		field('meta', optional($.blockmeta)),
-		alias($.asis_halmos_text, $.asis_text),
-		'::')),
+	      // The following are NOT stamps because they could have meta, though they
+	      // cannot have content
+	      seq(field('tag', alias(':bibliography:', $.bibliography)), '::'),
+	      seq(field('tag', alias(':toc:', $.toc)), '::'),
+
+	      // Math and code blocks have special open and close delimiters ($$) and
+	      // (```) respesctively AND their content is taken as-is, i.e. they do not
+	      // support recursive parsing.
+	      seq(field('tag', alias(token(/```/), $.codeblock)),
+		        field('meta', optional($.blockmeta)),
+		        alias($.asis_three_backticks_text, $.asis_text),
+		        /```/),
+	      seq(field('tag', alias(token(':codeblock:'), $.codeblock)),
+		        field('meta', optional($.blockmeta)),
+		        alias($.asis_halmos_text, $.asis_text),
+		        '::'),
+
+	      // Algorithms have standard open and close delimiters and have as-is
+	      // (i.e. not recursive) content.
+	      seq(field('tag', alias(token(":algorithm:"), $.algorithm)),
+		        field('meta', optional($.blockmeta)),
+		        alias($.asis_halmos_text, $.asis_text),
+		        '::'))),
 
 	// Special paragraphs are not grouped inside a single $.specialparagraph rule
 	// because they can only appear in certain places, and each is referred to
@@ -329,10 +349,18 @@ module.exports = grammar({
 
 	/////////////////////////////////////////////////////////////
 	// Content choices
-	/////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////
+  rsmcontent: $ => choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph),
+
+	sectioncontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection),
+
+  subsectioncontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection),
+
+  subsubsectioncontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph),
+
 	blockcontent: $ => choice($.specialblock, $.mathblock, $.block, $.paragraph),
 
-        _paragraphcontent_no_special: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
+  _paragraphcontent_no_special: $ => choice($.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
  	paragraphcontent: $ => choice($.mathblock, $.specialinline, $.inline, $.specialconstruct, $.construct, $.text),
 
@@ -381,11 +409,7 @@ module.exports = grammar({
 	    alias(':proof:', $.proof),
 	    alias(':proposition:', $.proposition),
 	    alias(':remark:', $.remark),
-	    alias(':section:', $.section),
 	    alias(':sketch:', $.sketch),
-	    alias(':subsection:', $.subsection),
-	    alias(':subsubsection:', $.subsubsection),
-	    alias(':subsubsubsection:', $.subsubsubsection),
 	    alias(':step:', $.step),
 	    alias(':theorem:', $.theorem),
 	),

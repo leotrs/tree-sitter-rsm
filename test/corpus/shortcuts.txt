@@ -95,7 +95,7 @@ Code block with shortcut and meta
 
 
 ================================================================================
-Math block with shortcut
+Mathblock with shortcut
 ================================================================================
 
 :manuscript:
@@ -117,7 +117,7 @@ $$
 
 
 ================================================================================
-Math block with shortcut and meta
+Mathblock with shortcut and meta
 ================================================================================
 
 :manuscript:
@@ -141,12 +141,12 @@ $$
   (mathblock
     meta: (blockmeta
       (pair
-	(metakey_text (label))
+        (metakey_text (label))
         (metaval_text))
       (pair
-	(metakey_list (types))
+        (metakey_list (types))
         (metaval_list
-	  (metaval_list_item))))
+          (metaval_list_item))))
     (asis_text)))
 
 
@@ -208,13 +208,11 @@ Foo.
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     (paragraph
@@ -235,13 +233,11 @@ Foo.
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     meta: (blockmeta
@@ -268,17 +264,13 @@ Foo.
 
 ::
 
-::
-
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
-    (specialblock
+    (subsection
       tag: (subsection)
       title: (text)
       (paragraph
@@ -301,17 +293,13 @@ Foo.
 
 ::
 
-::
-
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
-    (specialblock
+    (subsection
       tag: (subsection)
       title: (text)
       meta: (blockmeta

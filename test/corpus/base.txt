@@ -166,13 +166,11 @@ Section
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
     (paragraph
       (text))))
@@ -191,13 +189,11 @@ Section with title
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
     meta: (blockmeta
       (pair
@@ -221,13 +217,11 @@ Section with meta
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
     meta: (blockmeta
       (pair
@@ -1108,9 +1102,7 @@ Reference
 # Foo
   :label: lbl
 
-  Bar.
-
-::
+Bar.
 
 :ref:lbl::.
 
@@ -1120,7 +1112,7 @@ Reference
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     meta: (blockmeta
@@ -1128,12 +1120,12 @@ Reference
         (metakey_text (label))
         (metaval_text)))
     (paragraph
-      (text)))
-  (paragraph
-    (specialinline
-      tag: (ref)
-      target: (text))
-    (text)))
+      (text))
+    (paragraph
+      (specialinline
+        tag: (ref)
+        target: (text))
+      (text))))
 
 
 ================================================================================
@@ -1145,9 +1137,7 @@ Reference with space
 # Foo
   :label: lbl
 
-  Bar.
-
-::
+Bar.
 
 :ref: lbl ::.
 
@@ -1157,7 +1147,7 @@ Reference with space
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     meta: (blockmeta
@@ -1165,12 +1155,12 @@ Reference with space
         (metakey_text (label))
         (metaval_text)))
     (paragraph
-      (text)))
-  (paragraph
-    (specialinline
-      tag: (ref)
-      target: (text))
-    (text)))
+      (text))
+    (paragraph
+      (specialinline
+        tag: (ref)
+        target: (text))
+      (text))))
 
 
 ================================================================================
@@ -1182,9 +1172,7 @@ Reference with reftext
 # Foo
   :label: lbl
 
-  Bar.
-
-::
+Bar.
 
 :ref:lbl,the section::.
 
@@ -1194,7 +1182,7 @@ Reference with reftext
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     meta: (blockmeta
@@ -1202,13 +1190,13 @@ Reference with reftext
         (metakey_text (label))
         (metaval_text)))
     (paragraph
-      (text)))
-  (paragraph
-    (specialinline
-      tag: (ref)
-      target: (text)
-      reftext: (text))
-    (text)))
+      (text))
+    (paragraph
+      (specialinline
+        tag: (ref)
+        target: (text)
+        reftext: (text))
+      (text))))
 
 
 ================================================================================
@@ -1220,9 +1208,7 @@ Reference with reftext with space
 # Foo
   :label: lbl
 
-  Bar.
-
-::
+Bar.
 
 :ref: lbl , the section ::.
 
@@ -1232,7 +1218,7 @@ Reference with reftext with space
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     meta: (blockmeta
@@ -1240,13 +1226,13 @@ Reference with reftext with space
         (metakey_text (label))
         (metaval_text)))
     (paragraph
-      (text)))
-  (paragraph
-    (specialinline
-      tag: (ref)
-      target: (text)
-      reftext: (text))
-    (text)))
+      (text))
+    (paragraph
+      (specialinline
+        tag: (ref)
+        target: (text)
+        reftext: (text))
+      (text))))
 
 
 ================================================================================
@@ -1391,14 +1377,13 @@ Lorem ipsum :item: Foo bar.
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text)
     (paragraph
       (text)
       (ERROR)
-      (text)))
-  (MISSING "::"))
+      (text))))
 
 
 ================================================================================
@@ -1524,12 +1509,10 @@ Appendix
 :manuscript:
 
 # Foo
-::
 
 :appendix:
 
 # Bar
-::
 
 ::
 
@@ -1537,12 +1520,12 @@ Appendix
 
 (source_file
   tag: (manuscript)
-  (specialblock
+  (section
     tag: (section)
     title: (text))
-  (specialblock
-    (appendix))
-  (specialblock
+  (appendix
+    tag: (appendix))
+  (section
     tag: (section)
     title: (text)))
 
@@ -1596,7 +1579,7 @@ x
 
 
 ================================================================================
-Math block with isclaim meta
+Mathblock with isclaim meta
 ================================================================================
 
 :manuscript:
@@ -1648,9 +1631,9 @@ foo.
 --------------------------------------------------------------------------------
 
 (source_file
-  (manuscript)
+  tag: (manuscript)
   (block
-    (theorem)
+    tag: (theorem)
     (paragraph
       (text)))
   (paragraph
@@ -1665,7 +1648,9 @@ QED inside step
 
 :proof:
 
-  :step: :qed: ::
+  :step:
+    :qed:
+  ::
 
 ::
 
@@ -1675,14 +1660,14 @@ QED inside step
 --------------------------------------------------------------------------------
 
 (source_file
-  (manuscript)
+  tag: (manuscript)
   (block
-    (proof)
+    tag: (proof)
     (block
-      (step)
+      tag: (step)
       (paragraph
         (specialconstruct
-          (qed))))))
+          tag: (qed))))))
 
 
 ================================================================================
@@ -1699,13 +1684,11 @@ Section with icon
 
 ::
 
-::
-
 --------------------------------------------------------------------------------
 
 (source_file
   tag: (manuscript)
-  (block
+  (section
     tag: (section)
     meta: (blockmeta
       (pair
@@ -1741,3 +1724,56 @@ bar.
     (mathblock
       (asis_text))
     (text)))
+
+
+================================================================================
+Section ends when another begins
+================================================================================
+
+:manuscript:
+
+# Section 1
+
+# Section 2
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (section
+    tag: (section)
+    title: (text))
+  (section
+    tag: (section)
+    title: (text)))
+
+
+================================================================================
+Subsection ends when a section begins
+================================================================================
+
+:manuscript:
+
+# Section 1
+
+## Subsection
+
+# Section 2
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (section
+    tag: (section)
+    title: (text)
+    (subsection
+      tag: (subsection)
+      title: (text)))
+  (section
+    tag: (section)
+    title: (text)))
