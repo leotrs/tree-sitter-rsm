@@ -31,8 +31,9 @@ module.exports = grammar({
     // Main building blocks: manuscript, block, paragraph, inline
     ////////////////////////////////////////////////////////////////////////
     source_file: $ => seq(
-      field('tag', ':manuscript:'),
-      field('meta', optional($.blockmeta)),
+      field('tag', ':rsm:'),
+      optional(seq(field('tag', /# /), field('title', $.text))),
+      optional(field('meta', $.blockmeta)),
       repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph)),
       '::',
       optional($.bibtex)),
@@ -75,7 +76,7 @@ module.exports = grammar({
     // a new Section or Subsection begins.
     // Sections may begin with hashtags like in Markdown or with :section: tags.
     section: $ => prec.right(choice(
-      seq(field('tag', /# /),
+      seq(field('tag', /## /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection)),
@@ -88,7 +89,7 @@ module.exports = grammar({
 
     subsection: $ => prec.right(choice(
       seq(
-        field('tag', /## /),
+        field('tag', /### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection)),
@@ -102,7 +103,7 @@ module.exports = grammar({
 
     subsubsection: $ => prec.right(choice(
       seq(
-        field('tag', /### /),
+        field('tag', /#### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph)),

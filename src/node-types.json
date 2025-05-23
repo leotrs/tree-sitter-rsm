@@ -831,12 +831,22 @@
         ]
       },
       "tag": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": ":manuscript:",
+            "type": ":rsm:",
             "named": false
+          }
+        ]
+      },
+      "title": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "text",
+            "named": true
           }
         ]
       }
@@ -1462,15 +1472,15 @@
     "named": false
   },
   {
-    "type": ":manuscript:",
-    "named": false
-  },
-  {
     "type": ":mathblock:",
     "named": false
   },
   {
     "type": ":paragraph:",
+    "named": false
+  },
+  {
+    "type": ":rsm:",
     "named": false
   },
   {

@@ -2,7 +2,7 @@
 Table
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -35,7 +35,7 @@ Table
 Table with header
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -86,7 +86,7 @@ Table with header
 Table with math in header
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -128,7 +128,7 @@ Table with math in header
 Table with caption
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -163,7 +163,7 @@ Table with caption
 Table with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -194,7 +194,7 @@ Table with shortcut
 Table with header with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -239,7 +239,7 @@ Table with header with shortcut
 Table with math in header with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 
@@ -278,7 +278,7 @@ Table with math in header with shortcut
 Table with caption with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :table:
 

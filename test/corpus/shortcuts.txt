@@ -2,7 +2,7 @@
 Inline math with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 $X$.
 
@@ -22,7 +22,7 @@ $X$.
 Inline code with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 `X`.
 
@@ -42,7 +42,7 @@ Inline code with shortcut
 Code block with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 ```
   comp = [abs(x) for x in range(10)]
@@ -62,7 +62,7 @@ Code block with shortcut
 Code block with shortcut and meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 ```
   :label: some-code
@@ -94,7 +94,7 @@ Code block with shortcut and meta
 Mathblock with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 $$
   \int_a^bu\frac{d^2v}{dx^2}\,dx
@@ -115,7 +115,7 @@ $$
 Mathblock with shortcut and meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 $$
   :label: some-math
@@ -148,7 +148,7 @@ $$
 Math inside claim with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :claim: $2+2=4$ ::.
 
@@ -170,7 +170,7 @@ Math inside claim with shortcut
 Math inside claim with shortcut no space
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :claim:$2+2=4$::.
 
@@ -192,9 +192,9 @@ Math inside claim with shortcut no space
 Section with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Title
+## Title
 
 Foo.
 
@@ -213,9 +213,9 @@ Foo.
 Section with shortcut and meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Title
+## Title
   :label: sec
   :nonum:
 
@@ -242,11 +242,11 @@ Foo.
 Subsection with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
 
-## Title
+### Title
 
 Foo.
 
@@ -266,11 +266,11 @@ Foo.
 Subsection with shortcut and meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
 
-## Title
+### Title
   :label: sub
   :nonum:
 
@@ -298,7 +298,7 @@ Foo.
 Span strong with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 *shortcut*.
 
@@ -318,7 +318,7 @@ Span strong with shortcut
 Span emphas with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 /shortcut/.
 
@@ -338,7 +338,7 @@ Span emphas with shortcut
 Span strong and emphas with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 */shortcut/*.
 
@@ -360,7 +360,7 @@ Span strong and emphas with shortcut
 Span strong and emphas with shortcut reversed
 ================================================================================
 
-:manuscript:
+:rsm:
 
 /*shortcut*/.
 
@@ -382,7 +382,7 @@ Span strong and emphas with shortcut reversed
 Strong half word with shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Bo*ld*.
 
@@ -403,7 +403,7 @@ Bo*ld*.
 Turnstile
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :|-: bar::. Baz.
 
@@ -424,7 +424,7 @@ Foo :|-: bar::. Baz.
 Turnstile with math inside
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :|-: $2+2=4$::. Baz.
 
@@ -447,7 +447,7 @@ Foo :|-: $2+2=4$::. Baz.
 Paragraph starts with turnstile
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :|-: A claim::.
 
@@ -467,7 +467,7 @@ Paragraph starts with turnstile
 Turnstile unicode
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :⊢: bar::. Baz.
 
@@ -488,7 +488,7 @@ Foo :⊢: bar::. Baz.
 Turnstile unicode with math inside
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :⊢: $2+2=4$::. Baz.
 
@@ -511,7 +511,7 @@ Foo :⊢: $2+2=4$::. Baz.
 Paragraph starts with turnstile unicode
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :⊢: A claim::.
 

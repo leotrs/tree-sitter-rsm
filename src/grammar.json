@@ -10,24 +10,53 @@
           "name": "tag",
           "content": {
             "type": "STRING",
-            "value": ":manuscript:"
+            "value": ":rsm:"
           }
         },
         {
-          "type": "FIELD",
-          "name": "meta",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "tag",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "# "
+                  }
+                },
+                {
+                  "type": "FIELD",
+                  "name": "title",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "text"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "meta",
+              "content": {
                 "type": "SYMBOL",
                 "name": "blockmeta"
-              },
-              {
-                "type": "BLANK"
               }
-            ]
-          }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -288,7 +317,7 @@
                 "name": "tag",
                 "content": {
                   "type": "PATTERN",
-                  "value": "# "
+                  "value": "## "
                 }
               },
               {
@@ -419,7 +448,7 @@
                 "name": "tag",
                 "content": {
                   "type": "PATTERN",
-                  "value": "## "
+                  "value": "### "
                 }
               },
               {
@@ -542,7 +571,7 @@
                 "name": "tag",
                 "content": {
                   "type": "PATTERN",
-                  "value": "### "
+                  "value": "#### "
                 }
               },
               {

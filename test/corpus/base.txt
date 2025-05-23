@@ -2,7 +2,7 @@
 Empty manuscript with newline
 ================================================================================
 
-:manuscript:
+:rsm:
 
 ::
 
@@ -15,7 +15,7 @@ Empty manuscript with newline
 Empty manuscript with space
 ================================================================================
 
-:manuscript: ::
+:rsm: ::
 
 --------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ Empty manuscript with space
 Empty manuscript with nothing
 ================================================================================
 
-:manuscript:::
+:rsm:::
 
 --------------------------------------------------------------------------------
 
@@ -34,10 +34,29 @@ Empty manuscript with nothing
 
 
 ================================================================================
+Manuscript with title
+================================================================================
+
+:rsm:
+# Title
+
+Lorem ipsum.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  title: (text)
+  (paragraph
+    (text)))
+
+
+================================================================================
 Manuscript with one paragraph with newline
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Lorem ipsum.
 
@@ -54,7 +73,7 @@ Lorem ipsum.
 Manuscript with one paragraph with space
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Lorem ipsum. ::
 
@@ -69,7 +88,7 @@ Lorem ipsum. ::
 Manuscript with one paragraph with nothing
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Lorem ipsum.::
 
@@ -84,7 +103,7 @@ Lorem ipsum.::
 Manuscript with title and paragraph
 ================================================================================
 
-:manuscript:
+:rsm:
   :title: My Title
 
 Lorem ipsum.
@@ -106,7 +125,7 @@ Lorem ipsum.
 Manuscript with title
 ================================================================================
 
-:manuscript:
+:rsm:
   :title: My Title
 
 ::
@@ -124,7 +143,7 @@ Manuscript with title
 Manuscript with title and meta
 ================================================================================
 
-:manuscript:
+:rsm:
   :label: mylbl
   :title: My Title
   :date: 2022-03-29
@@ -150,7 +169,7 @@ Manuscript with title and meta
 Section
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
 
@@ -170,7 +189,7 @@ Section
 Section with title
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
   :title: Section title
@@ -195,7 +214,7 @@ Section with title
 Section with meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
   :title: Section title
@@ -226,7 +245,7 @@ Section with meta
 Author and abstract
 ================================================================================
 
-:manuscript:
+:rsm:
 :label: mylbl
 :title: The Perron non-backtracking eigenvalue after node addition
 :date: 2022-03-29
@@ -306,7 +325,7 @@ Author and abstract
 Inline meta no space
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: {:label:lbl} bar::.
 
@@ -331,7 +350,7 @@ Foo :claim: {:label:lbl} bar::.
 Inline meta space before
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: { :label:lbl} bar::.
 
@@ -356,7 +375,7 @@ Foo :claim: { :label:lbl} bar::.
 Inline meta space after
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: {:label:lbl } bar::.
 
@@ -381,7 +400,7 @@ Foo :claim: {:label:lbl } bar::.
 Inline meta space between
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: {:label: lbl} bar::.
 
@@ -406,7 +425,7 @@ Foo :claim: {:label: lbl} bar::.
 Inline meta space all
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: { :label: lbl } bar::.
 
@@ -431,7 +450,7 @@ Foo :claim: { :label: lbl } bar::.
 Inline meta no space after tag
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim:{:label: lbl} bar::.
 
@@ -456,7 +475,7 @@ Foo :claim:{:label: lbl} bar::.
 Inline meta no space after meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :claim: {:label: lbl}bar::.
 
@@ -481,7 +500,7 @@ Foo :claim: {:label: lbl}bar::.
 Inline math no shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :math:X::.
 
@@ -501,7 +520,7 @@ Inline math no shortcut
 Inline code no shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :code:X::.
 
@@ -521,7 +540,7 @@ Inline code no shortcut
 Block code no shortcut
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :codeblock:
   comp = [abs(x) for x in range(10)]
@@ -541,7 +560,7 @@ Block code no shortcut
 Block code no shortcut and meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :codeblock:
   :label: some-code
@@ -573,7 +592,7 @@ Block code no shortcut and meta
 Math inside claim
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :claim: :math:2+2=4:: ::.
 
@@ -595,7 +614,7 @@ Math inside claim
 Math inside claim no space
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :claim::math:2+2=4::::.
 
@@ -617,7 +636,7 @@ Math inside claim no space
 Claim with meta and math
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :claim: {:label: lbl} all $X$ are $Y$::.
 
@@ -648,7 +667,7 @@ Claim with meta and math
 Enumerate
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :enumerate:
 
@@ -677,7 +696,7 @@ Enumerate
 Enumerate no space before Halmos
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :enumerate:
 
@@ -699,7 +718,7 @@ Enumerate no space before Halmos
 Enumerate items with label
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :enumerate:
 
@@ -736,7 +755,7 @@ Enumerate items with label
 Itemize
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :itemize:
 
@@ -765,7 +784,7 @@ Itemize
 Itemize no space before Halmos
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :itemize:
 
@@ -787,7 +806,7 @@ Itemize no space before Halmos
 Itemize items with label
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :itemize:
 
@@ -823,7 +842,7 @@ Itemize items with label
 Proof with no steps
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :proof:
 
@@ -846,7 +865,7 @@ Proof with no steps
 Proof with one step
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :proof:
 
@@ -872,7 +891,7 @@ Proof with one step
 Proof with three steps
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :theorem:
 
@@ -919,7 +938,7 @@ Proof with three steps
 Proof with sub-step and sub-proof
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :proof:
 
@@ -959,7 +978,7 @@ Proof with sub-step and sub-proof
 Span strong
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :span: {:strong:}shortcut::.
 
@@ -982,7 +1001,7 @@ Span strong
 Span emphas
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :span: {:emphas:}shortcut::.
 
@@ -1005,7 +1024,7 @@ Span emphas
 Span strong and emphas
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :span: {:strong:, :emphas:}shortcut::.
 
@@ -1030,7 +1049,7 @@ Span strong and emphas
 Strong half word
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Bo:span:{:strong:}ld::.
 
@@ -1054,9 +1073,9 @@ Bo:span:{:strong:}ld::.
 Reference
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Foo
+## Foo
   :label: lbl
 
 Bar.
@@ -1087,9 +1106,9 @@ Bar.
 Reference with space
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Foo
+## Foo
   :label: lbl
 
 Bar.
@@ -1120,9 +1139,9 @@ Bar.
 Reference with reftext
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Foo
+## Foo
   :label: lbl
 
 Bar.
@@ -1154,9 +1173,9 @@ Bar.
 Reference with reftext with space
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Foo
+## Foo
   :label: lbl
 
 Bar.
@@ -1188,7 +1207,7 @@ Bar.
 Escaped colon
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo\: bar.
 
@@ -1206,7 +1225,7 @@ Foo\: bar.
 Escaped colon inside span
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :span: Foo\: bar::.
 
@@ -1226,7 +1245,7 @@ Escaped colon inside span
 ERROR: unclosed strong region
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Bo*ld.
 
@@ -1245,7 +1264,7 @@ Bo*ld.
 Escaped star
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Bo\*ld.
 
@@ -1262,7 +1281,7 @@ Bo\*ld.
 Figure
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :figure:
 
@@ -1281,7 +1300,7 @@ Figure
 Figure with meta and caption
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :figure:
   :path: assets/example.png
@@ -1310,9 +1329,9 @@ Figure with meta and caption
 ERROR: item in the wrong place
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Some section
+## Some section
 
 Lorem ipsum :item: Foo bar.
 
@@ -1333,7 +1352,7 @@ Lorem ipsum :item: Foo bar.
 List meta pair inside inline meta region
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo :span: {:types: {t1, t2}} bar :: baz.
 
@@ -1360,7 +1379,7 @@ Foo :span: {:types: {t1, t2}} bar :: baz.
 Cite
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :cite:foo::
 
@@ -1379,7 +1398,7 @@ Cite
 Cite with multiple targets
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :cite:foo,bar::
 
@@ -1398,7 +1417,7 @@ Cite with multiple targets
 Claimshort within item with meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :enumerate:
 
@@ -1445,13 +1464,13 @@ Claimshort within item with meta
 Appendix
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Foo
+## Foo
 
 :appendix:
 
-# Bar
+## Bar
 
 ::
 
@@ -1469,7 +1488,7 @@ Appendix
 Table of Contents
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :toc: ::
 
@@ -1486,7 +1505,7 @@ Table of Contents
 Space after closing mathblock should be allowed
 ================================================================================
 
-:manuscript:
+:rsm:
 
 There is a single space after the closing double dollar sign, which makes the following
 paragraph freak out on the first letter for some reason.
@@ -1515,7 +1534,7 @@ x
 Mathblock with isclaim meta
 ================================================================================
 
-:manuscript:
+:rsm:
 
 $$
 :isclaim:
@@ -1548,7 +1567,7 @@ $$
 Whitespace after block halmos
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :theorem:
 
@@ -1575,7 +1594,7 @@ foo.
 QED inside step
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :proof:
 
@@ -1604,7 +1623,7 @@ QED inside step
 Section with icon
 ================================================================================
 
-:manuscript:
+:rsm:
 
 :section:
   :title: Section title
@@ -1633,7 +1652,7 @@ Section with icon
 Paragraph does not end at mathblock
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Foo.
 $$
@@ -1657,11 +1676,11 @@ bar.
 Section ends when another begins
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Section 1
+## Section 1
 
-# Section 2
+## Section 2
 
 ::
 
@@ -1678,13 +1697,13 @@ Section ends when another begins
 Subsection ends when a section begins
 ================================================================================
 
-:manuscript:
+:rsm:
 
-# Section 1
+## Section 1
 
-## Subsection
+### Subsection
 
-# Section 2
+## Section 2
 
 ::
 
@@ -1703,7 +1722,7 @@ Subsection ends when a section begins
 Manuscript with top level paragraph and section
 ================================================================================
 
-:manuscript:
+:rsm:
 
 Lorem ipsum.
 
