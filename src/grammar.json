@@ -9,13 +9,8 @@
           "type": "FIELD",
           "name": "tag",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "STRING",
-              "value": ":manuscript:"
-            },
-            "named": true,
-            "value": "manuscript"
+            "type": "STRING",
+            "value": ":manuscript:"
           }
         },
         {
@@ -292,13 +287,8 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "# "
-                  },
-                  "named": true,
-                  "value": "section"
+                  "type": "PATTERN",
+                  "value": "# "
                 }
               },
               {
@@ -362,13 +352,8 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "STRING",
-                    "value": ":section:"
-                  },
-                  "named": true,
-                  "value": "section"
+                  "type": "STRING",
+                  "value": ":section:"
                 }
               },
               {
@@ -433,13 +418,8 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "## "
-                  },
-                  "named": true,
-                  "value": "subsection"
+                  "type": "PATTERN",
+                  "value": "## "
                 }
               },
               {
@@ -503,29 +483,16 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "STRING",
-                    "value": ":subsection:"
-                  },
-                  "named": true,
-                  "value": "subsection"
+                  "type": "STRING",
+                  "value": ":subsection:"
                 }
               },
               {
                 "type": "FIELD",
                 "name": "meta",
                 "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "blockmeta"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "blockmeta"
                 }
               },
               {
@@ -574,13 +541,8 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "### "
-                  },
-                  "named": true,
-                  "value": "subsubsection"
+                  "type": "PATTERN",
+                  "value": "### "
                 }
               },
               {
@@ -640,13 +602,8 @@
                 "type": "FIELD",
                 "name": "tag",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "STRING",
-                    "value": ":subsubsection:"
-                  },
-                  "named": true,
-                  "value": "subsubsection"
+                  "type": "STRING",
+                  "value": ":subsubsection:"
                 }
               },
               {
@@ -698,13 +655,8 @@
       "type": "FIELD",
       "name": "tag",
       "content": {
-        "type": "ALIAS",
-        "content": {
-          "type": "STRING",
-          "value": ":appendix:"
-        },
-        "named": true,
-        "value": "appendix"
+        "type": "STRING",
+        "value": ":appendix:"
       }
     },
     "mathblock": {

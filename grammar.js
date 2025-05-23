@@ -31,7 +31,7 @@ module.exports = grammar({
     // Main building blocks: manuscript, block, paragraph, inline
     ////////////////////////////////////////////////////////////////////////
     source_file: $ => seq(
-      field('tag', alias(':manuscript:', $.manuscript)),
+      field('tag', ':manuscript:'),
       field('meta', optional($.blockmeta)),
       repeat(choice($.section, $.appendix, $.mathblock, $.specialblock, $.block, $.paragraph)),
       '::',
@@ -75,12 +75,12 @@ module.exports = grammar({
     // a new Section or Subsection begins.
     // Sections may begin with hashtags like in Markdown or with :section: tags.
     section: $ => prec.right(choice(
-      seq(field('tag', alias(/# /, $.section)),
+      seq(field('tag', /# /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection)),
       ),
-      seq(field('tag', alias(':section:', $.section)),
+      seq(field('tag', ':section:'),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsection)),
       ),
@@ -88,27 +88,27 @@ module.exports = grammar({
 
     subsection: $ => prec.right(choice(
       seq(
-        field('tag', alias(/## /, $.subsection)),
+        field('tag', /## /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection)),
       ),
       seq(
-        field('tag', alias(':subsection:', $.subsection)),
-        field('meta', optional($.blockmeta)),
+        field('tag', ':subsection:'),
+        field('meta', $.blockmeta),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph, $.subsubsection)),
       )
     )),
 
     subsubsection: $ => prec.right(choice(
       seq(
-        field('tag', alias(/### /, $.subsubsection)),
+        field('tag', /### /),
         field('title', $.text),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph)),
       ),
       seq(
-        field('tag', alias(':subsubsection:', $.subsubsection)),
+        field('tag', ':subsubsection:'),
         field('meta', optional($.blockmeta)),
         repeat(choice($.specialblock, $.mathblock, $.block, $.paragraph)),
       )
@@ -116,7 +116,7 @@ module.exports = grammar({
 
     // The appendix essentially works as a section that does not allow content. The
     // appendix is a 'stamp': it has no content and needs no Halmos.
-    appendix: $ => field('tag', alias(':appendix:', $.appendix)),
+    appendix: $ => field('tag', ':appendix:'),
 
 
     ////////////////////////////////////////////////////////////////////////

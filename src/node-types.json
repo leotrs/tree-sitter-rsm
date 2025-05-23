@@ -5,11 +5,11 @@
     "fields": {
       "tag": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "appendix",
-            "named": true
+            "type": ":appendix:",
+            "named": false
           }
         ]
       }
@@ -769,11 +769,11 @@
       },
       "tag": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "section",
-            "named": true
+            "type": ":section:",
+            "named": false
           }
         ]
       },
@@ -835,8 +835,8 @@
         "required": true,
         "types": [
           {
-            "type": "manuscript",
-            "named": true
+            "type": ":manuscript:",
+            "named": false
           }
         ]
       }
@@ -1086,11 +1086,11 @@
       },
       "tag": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "subsection",
-            "named": true
+            "type": ":subsection:",
+            "named": false
           }
         ]
       },
@@ -1148,11 +1148,11 @@
       },
       "tag": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
-            "type": "subsubsection",
-            "named": true
+            "type": ":subsubsection:",
+            "named": false
           }
         ]
       },
@@ -1446,6 +1446,10 @@
     "named": false
   },
   {
+    "type": ":appendix:",
+    "named": false
+  },
+  {
     "type": ":bibtex:",
     "named": false
   },
@@ -1458,11 +1462,27 @@
     "named": false
   },
   {
+    "type": ":manuscript:",
+    "named": false
+  },
+  {
     "type": ":mathblock:",
     "named": false
   },
   {
     "type": ":paragraph:",
+    "named": false
+  },
+  {
+    "type": ":section:",
+    "named": false
+  },
+  {
+    "type": ":subsection:",
+    "named": false
+  },
+  {
+    "type": ":subsubsection:",
     "named": false
   },
   {
@@ -1631,10 +1651,6 @@
     "named": true
   },
   {
-    "type": "manuscript",
-    "named": true
-  },
-  {
     "type": "math",
     "named": true
   },
@@ -1765,6 +1781,10 @@
   {
     "type": "suppose",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",
