@@ -37,13 +37,33 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "rsmcontent"
-            },
-            "named": false,
-            "value": "rsmcontent"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "section"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "appendix"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "mathblock"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "specialblock"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "block"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "paragraph"
+              }
+            ]
           }
         },
         {
@@ -308,13 +328,29 @@
               {
                 "type": "REPEAT",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "sectioncontent"
-                  },
-                  "named": false,
-                  "value": "sectioncontent"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "subsection"
+                    }
+                  ]
                 }
               }
             ]
@@ -354,13 +390,29 @@
               {
                 "type": "REPEAT",
                 "content": {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "sectioncontent"
-                  },
-                  "named": false,
-                  "value": "sectioncontent"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "subsection"
+                    }
+                  ]
                 }
               }
             ]
@@ -417,13 +469,91 @@
               {
                 "type": "REPEAT",
                 "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "subsubsection"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "subsectioncontent"
+                    "type": "STRING",
+                    "value": ":subsection:"
                   },
-                  "named": false,
-                  "value": "subsectioncontent"
+                  "named": true,
+                  "value": "subsection"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "meta",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "blockmeta"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "subsubsection"
+                    }
+                  ]
                 }
               }
             ]
@@ -480,13 +610,83 @@
               {
                 "type": "REPEAT",
                 "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "tag",
+                "content": {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "subsubsectioncontent"
+                    "type": "STRING",
+                    "value": ":subsubsection:"
                   },
-                  "named": false,
-                  "value": "subsubsectioncontent"
+                  "named": true,
+                  "value": "subsubsection"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "meta",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "blockmeta"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "specialblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "mathblock"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "block"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "paragraph"
+                    }
+                  ]
                 }
               }
             ]
@@ -2263,106 +2463,6 @@
         {
           "type": "STRING",
           "value": "}"
-        }
-      ]
-    },
-    "rsmcontent": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "section"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "appendix"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "mathblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "specialblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paragraph"
-        }
-      ]
-    },
-    "sectioncontent": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "specialblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "mathblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paragraph"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "subsection"
-        }
-      ]
-    },
-    "subsectioncontent": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "specialblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "mathblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paragraph"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "subsubsection"
-        }
-      ]
-    },
-    "subsubsectioncontent": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "specialblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "mathblock"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paragraph"
         }
       ]
     },

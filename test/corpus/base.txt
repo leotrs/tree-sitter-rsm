@@ -1777,3 +1777,34 @@ Subsection ends when a section begins
   (section
     tag: (section)
     title: (text)))
+
+
+================================================================================
+Manuscript with top level paragraph and section
+================================================================================
+
+:manuscript:
+
+Lorem ipsum.
+
+:section:
+  :title: section title
+
+Lorem ipsum.
+
+::
+
+--------------------------------------------------------------------------------
+
+(source_file
+  tag: (manuscript)
+  (paragraph
+    (text))
+  (section
+    tag: (section)
+    meta: (blockmeta
+      (pair
+        (metakey_text (title))
+        (metaval_text)))
+    (paragraph
+      (text))))
