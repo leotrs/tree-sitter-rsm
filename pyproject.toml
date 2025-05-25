@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-rsm"
 description = "RSM grammar for tree-sitter"
-version = "0.1.12"
+version = "0.1.13"
 keywords = ["incremental", "parsing", "tree-sitter", "rsm"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -30,7 +30,7 @@ build-frontend = "build"
 
 [tool.poetry]
 name = "tree-sitter-rsm"
-version = "0.1.12"
+version = "0.1.13"
 description = "ReStructured Manuscript (RSM) markup language"
 authors = ["leotrs <leo@leotrs.com>"]
 license = "MIT"
