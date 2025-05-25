@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: tree-sitter-rsm
-Version: 0.1.11
+Version: 0.1.12
 Summary: RSM grammar for tree-sitter
 License: MIT
 Project-URL: Homepage, https://github.com/leotrs/tree-sitter-rsm

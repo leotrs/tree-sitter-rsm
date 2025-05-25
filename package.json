@@ -17,15 +17,12 @@
       "optional": true
     }
   },
-  "tree-sitter": [
-    {
+  "tree-sitter": {
+      "name": "rsm",
       "scope": "source.rsm",
-      "file-types": [
-        "rsm"
-      ],
-      "first-line-regex": ":manuscript:"
-    }
-  ],
+      "file-types": ["rsm"],
+      "first-line-regex": ":rsm:"
+  },
   "scripts": {
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip"

@@ -4,10 +4,9 @@
       "name": "rsm",
       "camelcase": "Rsm",
       "scope": "source.rsm",
-      "file-types": [
-        ".rsm"
-      ],
-      "injection-regex": "^rsm$"
+      "file-types": ["rsm"],
+      "injection-regex": "^rsm$",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {
