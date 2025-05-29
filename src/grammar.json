@@ -2563,55 +2563,19 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":suppose:"
-          },
-          "named": true,
-          "value": "suppose"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":prove:"
-          },
-          "named": true,
-          "value": "prove"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":then:"
-          },
-          "named": true,
-          "value": "then"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":new:"
-          },
-          "named": true,
-          "value": "new"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":let:"
-          },
-          "named": true,
-          "value": "let"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
             "value": ":case:"
           },
           "named": true,
           "value": "case"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":claim:"
+          },
+          "named": true,
+          "value": "claim"
         },
         {
           "type": "ALIAS",
@@ -2626,19 +2590,46 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":write:"
+            "value": ":let:"
           },
           "named": true,
-          "value": "write"
+          "value": "let"
         },
         {
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":wlog:"
+            "value": ":new:"
           },
           "named": true,
-          "value": "wlog"
+          "value": "new"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":pick:"
+          },
+          "named": true,
+          "value": "pick"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":prove:"
+          },
+          "named": true,
+          "value": "prove"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":st:"
+          },
+          "named": true,
+          "value": "st"
         },
         {
           "type": "ALIAS",
@@ -2653,10 +2644,37 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":claim:"
+            "value": ":suppose:"
           },
           "named": true,
-          "value": "claim"
+          "value": "suppose"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":then:"
+          },
+          "named": true,
+          "value": "then"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":wlog:"
+          },
+          "named": true,
+          "value": "wlog"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":write:"
+          },
+          "named": true,
+          "value": "write"
         },
         {
           "type": "ALIAS",
@@ -2675,24 +2693,6 @@
           },
           "named": true,
           "value": "claim"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":pick:"
-          },
-          "named": true,
-          "value": "pick"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":st:"
-          },
-          "named": true,
-          "value": "st"
         }
       ]
     },
@@ -2753,19 +2753,19 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":definition:"
+            "value": ":corollary:"
           },
           "named": true,
-          "value": "definition"
+          "value": "corollary"
         },
         {
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":corollary:"
+            "value": ":definition:"
           },
           "named": true,
-          "value": "corollary"
+          "value": "definition"
         },
         {
           "type": "ALIAS",
@@ -2789,6 +2789,24 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":exercise:"
+          },
+          "named": true,
+          "value": "theorem"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":figure:"
+          },
+          "named": true,
+          "value": "figure"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":itemize:"
           },
           "named": true,
@@ -2807,19 +2825,28 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":figure:"
+            "value": ":p:"
           },
           "named": true,
-          "value": "figure"
+          "value": "subproof"
         },
         {
           "type": "ALIAS",
           "content": {
             "type": "STRING",
-            "value": ":p:"
+            "value": ":porism:"
           },
           "named": true,
-          "value": "subproof"
+          "value": "theorem"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":problem:"
+          },
+          "named": true,
+          "value": "theorem"
         },
         {
           "type": "ALIAS",
@@ -2902,10 +2929,37 @@
           "type": "ALIAS",
           "content": {
             "type": "STRING",
+            "value": ":goal:"
+          },
+          "named": true,
+          "value": "goal"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":icon:"
+          },
+          "named": true,
+          "value": "icon"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
             "value": ":label:"
           },
           "named": true,
           "value": "label"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":lang:"
+          },
+          "named": true,
+          "value": "lang"
         },
         {
           "type": "ALIAS",
@@ -2933,57 +2987,12 @@
           },
           "named": true,
           "value": "title"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":goal:"
-          },
-          "named": true,
-          "value": "goal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":lang:"
-          },
-          "named": true,
-          "value": "lang"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":icon:"
-          },
-          "named": true,
-          "value": "icon"
         }
       ]
     },
     "metakey_bool": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":nonum:"
-          },
-          "named": true,
-          "value": "nonum"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ":strong:"
-          },
-          "named": true,
-          "value": "strong"
-        },
         {
           "type": "ALIAS",
           "content": {
@@ -3001,6 +3010,24 @@
           },
           "named": true,
           "value": "isclaim"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":nonum:"
+          },
+          "named": true,
+          "value": "nonum"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ":strong:"
+          },
+          "named": true,
+          "value": "strong"
         }
       ]
     },
